@@ -6,19 +6,11 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-<meta name="color-scheme" content="dark">
-
-<meta name="theme-color" content="#000000">
+content="width=device-width, initial-scale=1.0">
 
 <title>VAREXON</title>
 
 <style>
-
-/* =========================
-   RESET
-========================= */
 
 *{
     margin:0;
@@ -27,33 +19,14 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 }
 
 html{
-    background:#000;
-    color-scheme:dark;
     scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
 }
 
 body{
     background:#000;
     color:#fff;
     font-family:Arial,sans-serif;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-}
-
-body.lock{
-    overflow:hidden;
-}
-
-img{
-    display:block;
-    max-width:100%;
-    height:auto;
-}
-
-button,
-input{
-    font:inherit;
+    min-height:100vh;
 }
 
 
@@ -62,169 +35,87 @@ input{
 ========================= */
 
 .header{
-    width:100%;
-    height:55px;
-
-    background:#000;
-
+    height:68px;
+    border-bottom:1px solid #1d1d1d;
     display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:0 15px;
-
-    position:relative;
-    z-index:100;
+    padding:0 24px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#000;
 }
 
-.menu-button{
-    width:25px;
-    height:25px;
-
+.menu-button,
+.cart-button,
+.search-button{
     background:none;
     border:none;
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-
-    gap:4px;
-
+    color:#fff;
     cursor:pointer;
 }
 
-.menu-button span{
-    width:19px;
+.menu-button{
+    width:35px;
+    text-align:left;
+}
+
+.menu-icon{
+    width:20px;
+    height:14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.menu-icon span{
+    width:100%;
     height:1px;
     background:#fff;
+    display:block;
 }
 
 .logo{
     position:absolute;
     left:50%;
     transform:translateX(-50%);
-
     font-family:Georgia,"Times New Roman",serif;
-
-    font-size:18px;
+    font-size:21px;
     font-weight:bold;
-
-    letter-spacing:5px;
-
-    color:#fff;
+    letter-spacing:7px;
+    white-space:nowrap;
 }
 
-.icons{
+.header-right{
     display:flex;
-    gap:13px;
-}
-
-.icon{
-    width:25px;
-    height:25px;
-
-    background:none;
-    border:none;
-
-    color:#fff;
-
-    cursor:pointer;
-}
-
-.icon svg{
-    width:21px;
-    height:21px;
-
-    stroke:#fff;
-    fill:none;
-
-    stroke-width:1.4;
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-.search{
-    display:none;
-
-    width:100%;
-    height:55px;
-
-    background:#000;
-
     align-items:center;
+    gap:18px;
+}
 
-    padding:0 15px;
+.search-button{
+    font-size:19px;
+}
 
-    gap:10px;
-
+.cart-button{
+    font-size:20px;
     position:relative;
-    z-index:110;
 }
 
-.search.active{
+.cart-count{
+    position:absolute;
+    top:-8px;
+    right:-9px;
+    min-width:15px;
+    height:15px;
+    border-radius:50%;
+    background:#fff;
+    color:#000;
+    font-size:8px;
     display:flex;
-}
-
-.search-close{
-    background:none;
-    border:none;
-
-    color:#fff;
-
-    font-size:26px;
-
-    cursor:pointer;
-}
-
-.search input{
-    flex:1;
-
-    height:38px;
-
-    background:#111;
-
-    border:1px solid #333;
-
-    color:#fff;
-
-    outline:none;
-
-    padding:0 12px;
-}
-
-.search input::placeholder{
-    color:#777;
-}
-
-
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay{
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.5);
-
-    backdrop-filter:blur(5px);
-    -webkit-backdrop-filter:blur(5px);
-
-    opacity:0;
-    visibility:hidden;
-
-    transition:.25s;
-
-    z-index:999;
-}
-
-.overlay.active{
-    opacity:1;
-    visibility:visible;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
 }
 
 
@@ -232,170 +123,366 @@ input{
    SIDE MENU
 ========================= */
 
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(4px);
+    z-index:1100;
+    display:none;
+}
+
+.overlay.active{
+    display:block;
+}
+
 .side-menu{
     position:fixed;
-
     top:0;
-    left:0;
-
-    width:40vw;
-    height:100dvh;
-
+    left:-340px;
+    width:340px;
+    max-width:82%;
+    height:100vh;
     background:#080808;
-
-    transform:translateX(-100%);
-
-    transition:.25s ease;
-
-    z-index:1000;
-
-    padding:70px 20px 30px;
-
-    overflow-y:auto;
+    border-right:1px solid #222;
+    z-index:1200;
+    transition:.3s ease;
+    padding:25px;
 }
 
 .side-menu.active{
-    transform:translateX(0);
+    left:0;
 }
 
-.user-name{
-    display:none;
-
-    font-family:Georgia,"Times New Roman",serif;
-
-    font-size:16px;
-    font-weight:bold;
-
-    margin-bottom:25px;
-
-    word-break:break-word;
-}
-
-.side-menu a{
-    display:block;
-
+.close-menu{
+    background:none;
+    border:none;
     color:#fff;
-
-    text-decoration:none;
-
-    font-size:13px;
-
-    padding:10px 0;
+    font-size:25px;
+    cursor:pointer;
+    margin-bottom:45px;
 }
 
-.menu-section{
-    padding-bottom:18px;
+.menu-logo{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:20px;
+    letter-spacing:6px;
+    font-weight:bold;
+    margin-bottom:45px;
+}
 
-    margin-bottom:18px;
+.menu-link{
+    display:block;
+    color:#fff;
+    text-decoration:none;
+    font-size:12px;
+    padding:16px 0;
+    border-bottom:1px solid #1d1d1d;
+}
 
-    border-bottom:1px solid #292929;
+.menu-link:hover{
+    color:#aaa;
 }
 
 
 /* =========================
-   HERO / SLIDER
+   SEARCH
+========================= */
+
+.search-panel{
+    position:fixed;
+    top:68px;
+    left:0;
+    width:100%;
+    background:#080808;
+    border-bottom:1px solid #222;
+    padding:20px;
+    z-index:900;
+    display:none;
+}
+
+.search-panel.active{
+    display:block;
+}
+
+.search-input{
+    width:100%;
+    max-width:600px;
+    display:block;
+    margin:auto;
+    height:45px;
+    background:#111;
+    border:1px solid #333;
+    color:#fff;
+    padding:0 15px;
+    outline:none;
+}
+
+.search-input:focus{
+    border-color:#666;
+}
+
+
+/* =========================
+   HERO
 ========================= */
 
 .hero{
+    width:100%;
+    height:580px;
     position:relative;
-
-    width:100%;
-
     overflow:hidden;
-
-    touch-action:pan-y;
-
-    background:#000;
+    background:#111;
 }
 
-.slider{
-    display:flex;
-
-    width:100%;
-
-    transition:transform .6s ease;
-
-    user-select:none;
-
-    -webkit-user-select:none;
+.hero-slide{
+    position:absolute;
+    inset:0;
+    opacity:0;
+    transition:opacity .7s ease;
 }
 
-.slide{
-    flex:0 0 100%;
+.hero-slide.active{
+    opacity:1;
+}
 
+.hero-slide img{
     width:100%;
-    height:auto;
-
-    display:block;
-
-    pointer-events:auto;
-
+    height:100%;
     object-fit:cover;
+}
 
-    cursor:pointer;
+.hero-content{
+    position:absolute;
+    left:7%;
+    bottom:10%;
+    z-index:5;
+}
 
-    touch-action:pan-y;
-
-    -webkit-user-drag:none;
+.hero-title{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:42px;
+    letter-spacing:5px;
+    margin-bottom:12px;
 }
 
 .hero-text{
-    position:absolute;
-
-    left:6%;
-    top:50%;
-
-    transform:translateY(-50%);
-
-    pointer-events:none;
-}
-
-.hero-text h1{
-    font-family:"Trebuchet MS",Arial,sans-serif;
-
-    font-size:27px;
-
-    font-style:italic;
-
-    letter-spacing:6px;
-}
-
-.hero-text p{
-    font-size:11px;
-
-    margin-top:8px;
-
+    color:#bbb;
+    font-size:12px;
     letter-spacing:1px;
 }
 
-.dots{
+.slider-dots{
     position:absolute;
-
-    bottom:13px;
+    bottom:25px;
     left:50%;
-
     transform:translateX(-50%);
-
     display:flex;
-
-    gap:5px;
+    gap:7px;
+    z-index:10;
 }
 
-.dot{
-    width:5px;
-    height:5px;
-
+.slider-dot{
+    width:6px;
+    height:6px;
     border-radius:50%;
-
-    background:#fff;
-
-    opacity:.35;
-
+    background:#666;
     cursor:pointer;
 }
 
-.dot.active{
-    opacity:1;
+.slider-dot.active{
+    background:#fff;
+}
+
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products-section{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 30px 90px;
+}
+
+.section-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:35px;
+}
+
+.section-title{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:25px;
+    letter-spacing:2px;
+}
+
+.section-subtitle{
+    color:#666;
+    font-size:10px;
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:55px 35px;
+}
+
+.product{
+    cursor:pointer;
+}
+
+.product-image{
+    width:100%;
+    aspect-ratio:3/4;
+    background:#090909;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:transform .4s ease;
+}
+
+.product:hover .product-image img{
+    transform:scale(1.03);
+}
+
+.product-name{
+    margin-top:16px;
+    font-size:12px;
+    letter-spacing:.7px;
+}
+
+.product-price{
+    margin-top:7px;
+    font-size:11px;
+    color:#aaa;
+}
+
+
+/* =========================
+   PRODUCT DETAIL MODAL
+========================= */
+
+.product-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    backdrop-filter:blur(5px);
+    z-index:1500;
+    display:none;
+    overflow:auto;
+    padding:30px 15px;
+}
+
+.product-modal.active{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.product-modal-box{
+    width:100%;
+    max-width:900px;
+    background:#080808;
+    border:1px solid #292929;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    position:relative;
+}
+
+.modal-image{
+    min-height:500px;
+    background:#111;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.modal-image img{
+    width:100%;
+    height:100%;
+    max-height:650px;
+    object-fit:contain;
+}
+
+.modal-info{
+    padding:45px;
+}
+
+.modal-close{
+    position:absolute;
+    right:18px;
+    top:12px;
+    background:none;
+    border:none;
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-name{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:25px;
+    margin-bottom:12px;
+}
+
+.modal-price{
+    font-size:15px;
+    color:#aaa;
+    margin-bottom:35px;
+}
+
+.modal-label{
+    font-size:9px;
+    color:#777;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+.size-list{
+    display:flex;
+    gap:8px;
+    margin-bottom:25px;
+}
+
+.size-button{
+    width:45px;
+    height:40px;
+    background:#111;
+    color:#fff;
+    border:1px solid #333;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.size-button.active{
+    background:#fff;
+    color:#000;
+    border-color:#fff;
+}
+
+.add-cart{
+    width:100%;
+    height:50px;
+    background:#fff;
+    color:#000;
+    border:none;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+    cursor:pointer;
+}
+
+.add-cart:active{
+    opacity:.7;
 }
 
 
@@ -403,324 +490,128 @@ input{
    CART
 ========================= */
 
-.cart{
+.cart-panel{
     position:fixed;
-
+    right:-420px;
     top:0;
-    right:0;
-
-    width:40vw;
-
-    min-width:300px;
-    max-width:430px;
-
-    height:100dvh;
-
+    width:420px;
+    max-width:92%;
+    height:100vh;
     background:#080808;
-
-    transform:translateX(100%);
-
+    border-left:1px solid #292929;
+    z-index:1300;
     transition:.3s ease;
-
-    z-index:2000;
-
-    display:grid;
-
-    grid-template-rows:58px minmax(0,1fr) auto;
-
-    overflow:hidden;
-
-    padding-bottom:env(safe-area-inset-bottom);
-}
-
-.cart.active{
-    transform:translateX(0);
-}
-
-.cart-head{
-    height:58px;
-    min-height:58px;
-
-    border-bottom:1px solid #292929;
-
     display:flex;
+    flex-direction:column;
+}
 
+.cart-panel.active{
+    right:0;
+}
+
+.cart-header{
+    height:70px;
+    border-bottom:1px solid #222;
+    display:flex;
     align-items:center;
     justify-content:space-between;
-
-    padding:0 17px;
+    padding:0 20px;
 }
 
-.cart-head span{
-    color:#fff;
-
-    font-size:13px;
-
-    font-weight:bold;
-
+.cart-title{
+    font-size:12px;
     letter-spacing:1px;
+    font-weight:bold;
 }
 
-.cart-close{
-    border:none;
-
+.close-cart{
     background:none;
-
+    border:none;
     color:#fff;
-
-    font-size:25px;
-
+    font-size:23px;
     cursor:pointer;
 }
 
-
-/* =========================
-   CART LIST
-========================= */
-
-.cart-list{
-    min-height:0;
-
-    overflow-y:auto;
-    overflow-x:hidden;
-
-    padding:12px;
-
-    -webkit-overflow-scrolling:touch;
+.cart-items{
+    flex:1;
+    overflow:auto;
+    padding:20px;
 }
 
-.empty{
+.empty-cart{
+    color:#666;
+    font-size:11px;
     text-align:center;
-
-    color:#777;
-
-    font-size:12px;
-
-    padding-top:50px;
+    padding-top:60px;
 }
-
-
-/* =========================
-   CART ITEM
-========================= */
 
 .cart-item{
     display:flex;
-
-    gap:8px;
-
-    min-width:0;
-
-    border-bottom:1px solid #252525;
-
-    padding-bottom:12px;
-
-    margin-bottom:12px;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #222;
 }
 
-.cart-image{
-    width:44px;
-    height:63px;
-
+.cart-item-image{
+    width:65px;
+    height:80px;
+    background:#111;
     object-fit:contain;
-    object-position:center;
-
-    background:#111;
-
-    display:block;
-
     flex-shrink:0;
-
-    filter:
-        saturate(1.18)
-        contrast(1.06)
-        brightness(.90);
 }
 
-.cart-info{
+.cart-item-info{
     flex:1;
-
-    min-width:0;
 }
 
-.cart-name{
-    color:#fff;
-
-    font-size:10px;
-
-    line-height:1.35;
+.cart-item-name{
+    font-size:11px;
+    margin-bottom:7px;
 }
 
-.cart-size{
-    color:#888;
-
-    font-size:9px;
-
-    margin-top:4px;
-}
-
-.cart-price{
-    color:#ddd;
-
-    font-size:10px;
-
-    margin-top:4px;
-}
-
-.cart-bottom{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-top:7px;
-}
-
-.quantity{
-    display:flex;
-
-    border:1px solid #333;
-}
-
-.quantity button{
-    width:21px;
-    height:21px;
-
-    border:none;
-
-    background:#111;
-
-    color:#fff;
-
-    cursor:pointer;
-}
-
-.quantity span{
-    width:22px;
-
-    text-align:center;
-
-    line-height:21px;
-
-    font-size:9px;
-
-    color:#fff;
-}
-
-.remove{
-    border:none;
-
-    background:none;
-
+.cart-item-detail{
     color:#777;
-
     font-size:9px;
-
-    cursor:pointer;
+    line-height:1.8;
 }
 
+.cart-item-price{
+    font-size:10px;
+    margin-top:6px;
+}
 
-/* =========================
-   CART FOOTER
-========================= */
+.remove-item{
+    background:none;
+    border:none;
+    color:#666;
+    cursor:pointer;
+    font-size:10px;
+}
 
 .cart-footer{
-    width:100%;
-
-    border-top:1px solid #292929;
-
-    padding:
-        13px
-        13px
-        calc(13px + env(safe-area-inset-bottom));
-
-    background:#080808;
-
-    position:relative;
-
-    z-index:10;
+    border-top:1px solid #222;
+    padding:20px;
 }
 
-.line{
+.cart-total{
     display:flex;
-
     justify-content:space-between;
-
-    align-items:center;
-
-    font-size:10px;
-
-    margin-bottom:8px;
-
-    color:#fff;
-}
-
-.line span:first-child{
-    color:#888;
-}
-
-.line span:last-child{
-    color:#fff;
-}
-
-.total{
-    border-top:1px solid #292929;
-
-    padding-top:10px;
-
-    margin-top:5px;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
     font-size:12px;
-
-    font-weight:bold;
+    margin-bottom:15px;
 }
 
-.total span{
-    color:#fff;
-}
-
-
-/* =========================
-   CHECKOUT
-========================= */
-
-.checkout{
-    width:100%;
-
-    height:42px;
-
-    margin-top:12px;
-
-    border:none;
-
-    background:#fff;
-
-    color:#000;
-
-    font-size:10px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
-    cursor:pointer;
-
+.checkout-button{
     display:block;
-
-    visibility:visible;
-
-    opacity:1;
-
-    position:relative;
-
-    z-index:20;
+    width:100%;
+    height:48px;
+    background:#fff;
+    color:#000;
+    text-decoration:none;
+    text-align:center;
+    line-height:48px;
+    font-size:10px;
+    font-weight:bold;
+    letter-spacing:1px;
 }
 
 
@@ -730,62 +621,40 @@ input{
 
 .footer{
     border-top:1px solid #222;
-
-    padding:35px 25px 25px;
-
+    padding:45px 30px;
+    max-width:1200px;
+    margin:auto;
     display:flex;
-
     justify-content:space-between;
-
-    background:#000;
-}
-
-.footer-column{
-    width:48%;
+    gap:30px;
 }
 
 .footer-title{
-    color:#fff;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    letter-spacing:1px;
-
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:17px;
+    letter-spacing:4px;
     margin-bottom:12px;
 }
 
-.footer-item{
-    color:#aaa;
-
-    font-size:11px;
-
+.footer-text{
+    color:#777;
+    font-size:10px;
     line-height:1.8;
 }
 
-.footer-item a{
+.footer-links{
+    display:flex;
+    gap:20px;
+}
+
+.footer-links a{
     color:#aaa;
-
     text-decoration:none;
+    font-size:10px;
 }
 
-.footer-bottom{
-    text-align:center;
-
-    padding:0 20px 25px;
-
-    background:#000;
-}
-
-.footer-logo{
-    color:#555;
-
-    font-family:Georgia,"Times New Roman",serif;
-
-    font-size:11px;
-
-    letter-spacing:4px;
+.footer-links a:hover{
+    color:#fff;
 }
 
 
@@ -795,57 +664,64 @@ input{
 
 @media(max-width:700px){
 
-    .side-menu{
-        width:40vw;
-
-        padding:65px 13px 25px;
+    .header{
+        height:62px;
+        padding:0 15px;
     }
 
-    .cart{
-        width:40vw;
-
-        min-width:0;
-
-        max-width:none;
+    .logo{
+        font-size:17px;
+        letter-spacing:5px;
     }
 
-    .user-name{
-        font-size:12px;
+    .hero{
+        height:500px;
     }
 
-    .side-menu a{
-        font-size:10px;
+    .hero-title{
+        font-size:30px;
     }
 
-    .cart-image{
-        width:44px;
-        height:63px;
+    .products-section{
+        padding:50px 15px 65px;
     }
 
-}
-
-
-/* =========================
-   SMALL
-========================= */
-
-@media(max-width:360px){
-
-    .cart{
-        width:45vw;
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:35px 15px;
     }
 
-    .cart-head{
-        padding:0 12px;
+    .section-title{
+        font-size:20px;
     }
 
-    .cart-list{
-        padding:10px;
+    .section-subtitle{
+        display:none;
     }
 
-    .cart-footer{
-        padding-left:10px;
-        padding-right:10px;
+    .product-modal-box{
+        grid-template-columns:1fr;
+        max-height:90vh;
+        overflow:auto;
+    }
+
+    .modal-image{
+        min-height:330px;
+        height:330px;
+    }
+
+    .modal-info{
+        padding:25px;
+    }
+
+    .footer{
+        padding:35px 15px;
+        flex-direction:column;
+    }
+
+    .cart-panel{
+        width:100%;
+        max-width:100%;
     }
 
 }
@@ -864,76 +740,55 @@ input{
 
 <header class="header">
 
-<button
-    class="menu-button"
-    id="menuButton"
-    type="button"
-    aria-label="Menü"
->
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+    >
 
-<span></span>
-<span></span>
-<span></span>
+        <span class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
 
-</button>
-
-
-<div class="logo">
-    VAREXON
-</div>
+    </button>
 
 
-<div class="icons">
-
-<button
-    class="icon"
-    id="searchButton"
-    type="button"
-    aria-label="Ara"
->
-
-<svg viewBox="0 0 24 24">
-
-<circle
-    cx="10.8"
-    cy="10.8"
-    r="6.5"
-></circle>
-
-<line
-    x1="16"
-    y1="16"
-    x2="21"
-    y2="21"
-></line>
-
-</svg>
-
-</button>
+    <div class="logo">
+        VAREXON
+    </div>
 
 
-<button
-    class="icon"
-    id="cartButton"
-    type="button"
-    aria-label="Sepet"
->
+    <div class="header-right">
 
-<svg viewBox="0 0 24 24">
+        <button
+            class="search-button"
+            id="searchButton"
+            type="button"
+        >
+            ⌕
+        </button>
 
-<path
-    d="M5 8h14l-1 12H6L5 8z"
-></path>
 
-<path
-    d="M9 8V6a3 3 0 0 1 6 0v2"
-></path>
+        <button
+            class="cart-button"
+            id="cartButton"
+            type="button"
+        >
 
-</svg>
+            🛒
 
-</button>
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
 
-</div>
+        </button>
+
+    </div>
 
 </header>
 
@@ -943,224 +798,97 @@ input{
 ========================= -->
 
 <div
-    class="search"
-    id="search"
+    class="search-panel"
+    id="searchPanel"
 >
 
-<button
-    class="search-close"
-    id="searchClose"
-    type="button"
->
-    ×
-</button>
-
-<input
-    id="searchInput"
-    type="text"
-    placeholder="Ürün ara..."
-    autocomplete="off"
->
+    <input
+        class="search-input"
+        id="searchInput"
+        type="text"
+        placeholder="Ürün ara..."
+    >
 
 </div>
-
-
-<!-- =========================
-     MENU OVERLAY
-========================= -->
-
-<div
-    class="overlay"
-    id="menuOverlay"
-></div>
 
 
 <!-- =========================
      SIDE MENU
 ========================= -->
 
-<nav
+<div
+    class="overlay"
+    id="overlay"
+></div>
+
+
+<aside
     class="side-menu"
     id="sideMenu"
 >
 
-<div
-    class="user-name"
-    id="userName"
-></div>
+    <button
+        class="close-menu"
+        id="closeMenu"
+        type="button"
+    >
+        ×
+    </button>
 
 
-<div class="menu-section">
-
-<a
-    href="giris.html"
-    id="loginLink"
->
-    Giriş Yap / Kaydol
-</a>
+    <div class="menu-logo">
+        VAREXON
+    </div>
 
 
-<a
-    href="hesabim.html"
-    id="accountLink"
-    style="display:none;"
->
-    Hesabım
-</a>
+    <a
+        href="giris.html"
+        class="menu-link"
+    >
+        GİRİŞ YAP
+    </a>
 
 
-<a
-    href="siparislerim.html"
-    id="ordersLink"
-    style="display:none;"
->
-    Siparişlerim
-</a>
+    <a
+        href="hesabim.html"
+        class="menu-link"
+    >
+        HESABIM
+    </a>
 
 
-<a
-    href="#"
-    id="logoutLink"
-    style="display:none;"
->
-    Çıkış Yap
-</a>
-
-</div>
+    <a
+        href="#urunler"
+        class="menu-link"
+        id="menuProducts"
+    >
+        ÜRÜNLER
+    </a>
 
 
-<div class="menu-section">
-
-<a href="#">
-    Tişört
-</a>
-
-<a href="#">
-    Şapka
-</a>
-
-<a href="#">
-    Atkı
-</a>
-
-<a href="#">
-    Sweatshirt
-</a>
-
-</div>
+    <a
+        href="favoriler.html"
+        class="menu-link"
+    >
+        FAVORİLER
+    </a>
 
 
-<div>
-
-<a href="favoriler.html">
-    Favoriler
-</a>
-
-<a href="#iletisim">
-    İletişim
-</a>
-
-<a href="#">
-    Hakkımızda
-</a>
-
-</div>
-
-</nav>
+    <a
+        href="#iletisim"
+        class="menu-link"
+        id="menuContact"
+    >
+        İLETİŞİM
+    </a>
 
 
-<!-- =========================
-     CART OVERLAY
-========================= -->
-
-<div
-    class="overlay"
-    id="cartOverlay"
-></div>
-
-
-<!-- =========================
-     CART
-========================= -->
-
-<aside
-    class="cart"
-    id="cart"
->
-
-<div class="cart-head">
-
-<span>
-    SEPET
-</span>
-
-<button
-    class="cart-close"
-    id="cartClose"
-    type="button"
->
-    ×
-</button>
-
-</div>
-
-
-<div
-    class="cart-list"
-    id="cartList"
-></div>
-
-
-<div class="cart-footer">
-
-<div class="line">
-
-<span>
-    Ara toplam
-</span>
-
-<span id="subtotal">
-    0 TL
-</span>
-
-</div>
-
-
-<div class="line">
-
-<span>
-    Kargo
-</span>
-
-<span id="shipping">
-    0 TL
-</span>
-
-</div>
-
-
-<div class="total">
-
-<span>
-    TOPLAM
-</span>
-
-<span id="total">
-    0 TL
-</span>
-
-</div>
-
-
-<button
-    class="checkout"
-    id="checkoutButton"
-    type="button"
->
-    SİPARİŞ VER
-</button>
-
-</div>
+    <a
+        href="hakkimizda.html"
+        class="menu-link"
+    >
+        HAKKIMIZDA
+    </a>
 
 </aside>
 
@@ -1171,372 +899,442 @@ input{
 
 <section class="hero">
 
-<div
-    class="slider"
-    id="slider"
->
 
-<img
-    class="slide"
-    src="manken.jpg"
-    alt="VAREXON"
-    data-page="#"
-    fetchpriority="high"
-    decoding="async"
->
+    <div class="hero-slide active">
 
+        <img
+            src="manken.jpg"
+            alt="VAREXON"
+        >
 
-<img
-    class="slide"
-    src="manken2.png"
-    alt="VAREXON"
-    data-page="#"
-    loading="lazy"
-    decoding="async"
->
+        <div class="hero-content">
+
+            <div class="hero-title">
+                VAREXON
+            </div>
+
+            <div class="hero-text">
+                YENİ SEZON
+            </div>
+
+        </div>
+
+    </div>
 
 
-<img
-    class="slide"
-    src="manken3.png"
-    alt="VAREXON"
-    data-page="#"
-    loading="lazy"
-    decoding="async"
->
+    <div class="hero-slide">
 
-</div>
+        <img
+            src="manken2.png"
+            alt="VAREXON"
+        >
+
+    </div>
 
 
-<div class="hero-text">
+    <div class="hero-slide">
 
-<h1>
-    VAREXON
-</h1>
+        <img
+            src="manken3.png"
+            alt="VAREXON"
+        >
 
-<p>
-    Sıradanlıktan uzak
-</p>
-
-</div>
+    </div>
 
 
-<div class="dots">
+    <div class="slider-dots">
 
-<span class="dot active"></span>
-<span class="dot"></span>
-<span class="dot"></span>
+        <span
+            class="slider-dot active"
+            data-slide="0"
+        ></span>
 
-</div>
+        <span
+            class="slider-dot"
+            data-slide="1"
+        ></span>
+
+        <span
+            class="slider-dot"
+            data-slide="2"
+        ></span>
+
+    </div>
 
 </section>
+
+
+<!-- =========================
+     PRODUCTS
+========================= -->
+
+<section
+    class="products-section"
+    id="urunler"
+>
+
+    <div class="section-heading">
+
+        <div class="section-title">
+            ÜRÜNLER
+        </div>
+
+        <div class="section-subtitle">
+            VAREXON COLLECTION
+        </div>
+
+    </div>
+
+
+    <div
+        class="products-grid"
+        id="productsGrid"
+    >
+
+
+        <!-- TEK ÖRNEK ÜRÜN -->
+
+        <article
+            class="product"
+            data-name="VAREXON Shadow T-Shirt"
+        >
+
+            <div class="product-image">
+
+                <img
+                    src="WhatsApp Image 2026-09-29 at 18.59.46.jpeg"
+                    alt="VAREXON Shadow T-Shirt"
+                >
+
+            </div>
+
+
+            <div class="product-name">
+                VAREXON SHADOW T-SHIRT
+            </div>
+
+
+            <div class="product-price">
+                499 TL
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
+
+<div
+    class="product-modal"
+    id="productModal"
+>
+
+    <div class="product-modal-box">
+
+
+        <button
+            class="modal-close"
+            id="modalClose"
+            type="button"
+        >
+            ×
+        </button>
+
+
+        <div class="modal-image">
+
+            <img
+                id="modalImage"
+                src=""
+                alt=""
+            >
+
+        </div>
+
+
+        <div class="modal-info">
+
+            <div
+                class="modal-name"
+                id="modalName"
+            >
+                VAREXON SHADOW T-SHIRT
+            </div>
+
+
+            <div
+                class="modal-price"
+                id="modalPrice"
+            >
+                499 TL
+            </div>
+
+
+            <div class="modal-label">
+                BEDEN
+            </div>
+
+
+            <div class="size-list">
+
+                <button
+                    class="size-button"
+                    data-size="S"
+                    type="button"
+                >
+                    S
+                </button>
+
+                <button
+                    class="size-button"
+                    data-size="M"
+                    type="button"
+                >
+                    M
+                </button>
+
+                <button
+                    class="size-button"
+                    data-size="L"
+                    type="button"
+                >
+                    L
+                </button>
+
+                <button
+                    class="size-button"
+                    data-size="XL"
+                    type="button"
+                >
+                    XL
+                </button>
+
+            </div>
+
+
+            <button
+                class="add-cart"
+                id="addCart"
+                type="button"
+            >
+                SEPETE EKLE
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     CART
+========================= -->
+
+<aside
+    class="cart-panel"
+    id="cartPanel"
+>
+
+    <div class="cart-header">
+
+        <div class="cart-title">
+            SEPET
+        </div>
+
+
+        <button
+            class="close-cart"
+            id="closeCart"
+            type="button"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    ></div>
+
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>
+                TOPLAM
+            </span>
+
+            <strong id="cartTotal">
+                0 TL
+            </strong>
+
+        </div>
+
+
+        <a
+            href="odeme.html"
+            class="checkout-button"
+        >
+            ÖDEMEYE GEÇ
+        </a>
+
+    </div>
+
+</aside>
 
 
 <!-- =========================
      FOOTER
 ========================= -->
 
-<footer id="iletisim">
-
-<div class="footer">
-
-<div class="footer-column">
-
-<div class="footer-title">
-    İLETİŞİM
-</div>
-
-<div class="footer-item">
-
-<a href="mailto:storevelron@gmail.com">
-    storevelron@gmail.com
-</a>
-
-</div>
-
-</div>
-
-
-<div class="footer-column">
-
-<div class="footer-title">
-    SOSYAL MEDYA
-</div>
-
-<div class="footer-item">
-
-<a
-    href="https://instagram.com/velron_store"
-    target="_blank"
-    rel="noopener"
+<footer
+    class="footer"
+    id="iletisim"
 >
-    Instagram: velron_store
-</a>
 
-</div>
+    <div>
 
+        <div class="footer-title">
+            VAREXON
+        </div>
 
-<div class="footer-item">
+        <div class="footer-text">
+            Minimal ve modern giyim.
+            <br>
+            Soruların için bizimle iletişime geçebilirsin.
+        </div>
 
-<a
-    href="https://www.tiktok.com/@velron.store"
-    target="_blank"
-    rel="noopener"
->
-    TikTok: velron.store
-</a>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 
-<div class="footer-bottom">
+    <div class="footer-links">
 
-<div class="footer-logo">
-    VAREXON
-</div>
+        <a href="mailto:storevelron@gmail.com">
+            E-POSTA
+        </a>
 
-</div>
+        <a
+            href="https://www.instagram.com/"
+            target="_blank"
+        >
+            INSTAGRAM
+        </a>
+
+        <a
+            href="https://www.tiktok.com/"
+            target="_blank"
+        >
+            TIKTOK
+        </a>
+
+    </div>
 
 </footer>
 
 
-<!-- =========================
-     FIREBASE
-========================= -->
-
-<script type="module">
-
-import {
-    initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-
-import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-}
-from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyD8osmrzNWj32T-1kNx-jmHlWcAm5_7xeg",
-
-    authDomain:
-    "velron-831db.firebaseapp.com",
-
-    projectId:
-    "velron-831db",
-
-    storageBucket:
-    "velron-831db.firebasestorage.app",
-
-    messagingSenderId:
-    "622435814773",
-
-    appId:
-    "1:622435814773:web:bd94aff51e78ba2a7c573c",
-
-    measurementId:
-    "G-74XHVN6V22"
-
-};
-
-
-const app =
-initializeApp(firebaseConfig);
-
-
-const auth =
-getAuth(app);
-
+<script>
 
 /* =========================
-   ACCOUNT
-========================= */
-
-const userName =
-document.getElementById("userName");
-
-const loginLink =
-document.getElementById("loginLink");
-
-const accountLink =
-document.getElementById("accountLink");
-
-const ordersLink =
-document.getElementById("ordersLink");
-
-const logoutLink =
-document.getElementById("logoutLink");
-
-
-let currentUser = null;
-
-
-onAuthStateChanged(
-    auth,
-    function(user){
-
-        currentUser = user;
-
-        if(user){
-
-            userName.textContent =
-                user.displayName ||
-                user.email ||
-                "Hesabım";
-
-            userName.style.display =
-                "block";
-
-            loginLink.style.display =
-                "none";
-
-            accountLink.style.display =
-                "block";
-
-            ordersLink.style.display =
-                "block";
-
-            logoutLink.style.display =
-                "block";
-
-        }else{
-
-            userName.style.display =
-                "none";
-
-            loginLink.style.display =
-                "block";
-
-            accountLink.style.display =
-                "none";
-
-            ordersLink.style.display =
-                "none";
-
-            logoutLink.style.display =
-                "none";
-
-        }
-
-    }
-);
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-logoutLink.addEventListener(
-    "click",
-    async function(event){
-
-        event.preventDefault();
-
-        try{
-
-            await signOut(auth);
-
-            window.location.reload();
-
-        }catch(error){
-
-            console.error(error);
-
-            alert(
-                "Çıkış yapılırken hata oluştu."
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================
-   MENU
+   MENÜ
 ========================= */
 
 const menuButton =
-document.getElementById("menuButton");
+    document.getElementById("menuButton");
+
+const closeMenu =
+    document.getElementById("closeMenu");
 
 const sideMenu =
-document.getElementById("sideMenu");
+    document.getElementById("sideMenu");
 
-const menuOverlay =
-document.getElementById("menuOverlay");
+const overlay =
+    document.getElementById("overlay");
 
 
 function openMenu(){
 
-    closeCart();
-    closeSearch();
-
     sideMenu.classList.add("active");
-
-    menuOverlay.classList.add("active");
-
-    document.body.classList.add("lock");
+    overlay.classList.add("active");
 
 }
 
 
-function closeMenu(){
+function closeSideMenu(){
 
     sideMenu.classList.remove("active");
-
-    menuOverlay.classList.remove("active");
-
-    document.body.classList.remove("lock");
+    overlay.classList.remove("active");
 
 }
 
 
 menuButton.addEventListener(
     "click",
+    openMenu
+);
+
+
+closeMenu.addEventListener(
+    "click",
+    closeSideMenu
+);
+
+
+overlay.addEventListener(
+    "click",
+    closeSideMenu
+);
+
+
+document.getElementById(
+    "menuProducts"
+).addEventListener(
+    "click",
     function(){
 
-        if(
-            sideMenu.classList.contains("active")
-        ){
+        closeSideMenu();
 
-            closeMenu();
+        setTimeout(
+            function(){
 
-        }else{
+                document.getElementById(
+                    "urunler"
+                ).scrollIntoView();
 
-            openMenu();
-
-        }
+            },
+            200
+        );
 
     }
 );
 
 
-menuOverlay.addEventListener(
+document.getElementById(
+    "menuContact"
+).addEventListener(
     "click",
-    closeMenu
-);
+    function(){
 
+        closeSideMenu();
 
-document
-.querySelectorAll(".side-menu a")
-.forEach(
-    function(link){
+        setTimeout(
+            function(){
 
-        link.addEventListener(
-            "click",
-            closeMenu
+                document.getElementById(
+                    "iletisim"
+                ).scrollIntoView();
+
+            },
+            200
         );
 
     }
@@ -1544,521 +1342,79 @@ document
 
 
 /* =========================
-   SEARCH
+   ARAMA
 ========================= */
 
 const searchButton =
-document.getElementById("searchButton");
+    document.getElementById("searchButton");
 
-const searchClose =
-document.getElementById("searchClose");
-
-const search =
-document.getElementById("search");
+const searchPanel =
+    document.getElementById("searchPanel");
 
 const searchInput =
-document.getElementById("searchInput");
-
-
-function openSearch(){
-
-    closeMenu();
-    closeCart();
-
-    search.classList.add("active");
-
-    searchInput.value = "";
-
-    searchInput.focus();
-
-}
-
-
-function closeSearch(){
-
-    search.classList.remove("active");
-
-}
+    document.getElementById("searchInput");
 
 
 searchButton.addEventListener(
     "click",
-    openSearch
-);
-
-
-searchClose.addEventListener(
-    "click",
-    closeSearch
-);
-
-
-/* =========================
-   CART
-========================= */
-
-const CART_KEY =
-    "velron_cart";
-
-
-const cartButton =
-document.getElementById("cartButton");
-
-const cartClose =
-document.getElementById("cartClose");
-
-const cart =
-document.getElementById("cart");
-
-const cartOverlay =
-document.getElementById("cartOverlay");
-
-const cartList =
-document.getElementById("cartList");
-
-const subtotal =
-document.getElementById("subtotal");
-
-const shipping =
-document.getElementById("shipping");
-
-const total =
-document.getElementById("total");
-
-const checkoutButton =
-document.getElementById("checkoutButton");
-
-
-function getCart(){
-
-    try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                CART_KEY
-            )
-        ) || [];
-
-    }catch(error){
-
-        return [];
-
-    }
-
-}
-
-
-function saveCart(items){
-
-    localStorage.setItem(
-        CART_KEY,
-        JSON.stringify(items)
-    );
-
-}
-
-
-function openCart(){
-
-    closeMenu();
-    closeSearch();
-
-    cart.classList.add("active");
-
-    cartOverlay.classList.add("active");
-
-    document.body.classList.add("lock");
-
-    renderCart();
-
-}
-
-
-function closeCart(){
-
-    cart.classList.remove("active");
-
-    cartOverlay.classList.remove("active");
-
-    document.body.classList.remove("lock");
-
-}
-
-
-cartButton.addEventListener(
-    "click",
-    openCart
-);
-
-
-cartClose.addEventListener(
-    "click",
-    closeCart
-);
-
-
-cartOverlay.addEventListener(
-    "click",
-    closeCart
-);
-
-
-/* =========================
-   SHIPPING
-========================= */
-
-function calculateShipping(
-    items,
-    quantity
-){
-
-    let allTshirts = true;
-
-
-    items.forEach(
-        function(item){
-
-            if(
-                item.category &&
-                item.category !== "tisort"
-            ){
-
-                allTshirts = false;
-
-            }
-
-        }
-    );
-
-
-    if(
-        allTshirts &&
-        quantity >= 2
-    ){
-
-        return 0;
-
-    }
-
-
-    return 50;
-
-}
-
-
-/* =========================
-   RENDER CART
-========================= */
-
-function renderCart(){
-
-    const items =
-        getCart();
-
-
-    cartList.innerHTML = "";
-
-
-    if(
-        items.length === 0
-    ){
-
-        cartList.innerHTML = `
-
-            <div class="empty">
-                Sepetin şu anda boş.
-            </div>
-
-        `;
-
-
-        subtotal.textContent =
-            "0 TL";
-
-        shipping.textContent =
-            "0 TL";
-
-        total.textContent =
-            "0 TL";
-
-        return;
-
-    }
-
-
-    let sum = 0;
-
-    let quantity = 0;
-
-
-    items.forEach(
-        function(item,index){
-
-            const price =
-                Number(item.price) || 0;
-
-            const count =
-                Number(item.quantity) || 1;
-
-
-            sum +=
-                price * count;
-
-            quantity +=
-                count;
-
-
-            const element =
-                document.createElement("div");
-
-
-            element.className =
-                "cart-item";
-
-
-            element.innerHTML = `
-
-                <img
-                    class="cart-image"
-                    src="${item.image || ""}"
-                    alt=""
-                    loading="eager"
-                    decoding="async"
-                >
-
-                <div class="cart-info">
-
-                    <div class="cart-name">
-                        ${item.name || "Ürün"}
-                    </div>
-
-                    <div class="cart-size">
-                        Beden: ${item.size || "-"}
-                    </div>
-
-                    <div class="cart-price">
-                        ${price} TL
-                    </div>
-
-                    <div class="cart-bottom">
-
-                        <div class="quantity">
-
-                            <button
-                                class="minus"
-                                type="button"
-                            >
-                                −
-                            </button>
-
-                            <span>
-                                ${count}
-                            </span>
-
-                            <button
-                                class="plus"
-                                type="button"
-                            >
-                                +
-                            </button>
-
-                        </div>
-
-                        <button
-                            class="remove"
-                            type="button"
-                        >
-                            Kaldır
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            element
-                .querySelector(".minus")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        changeQuantity(
-                            index,
-                            -1
-                        );
-
-                    }
-                );
-
-
-            element
-                .querySelector(".plus")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        changeQuantity(
-                            index,
-                            1
-                        );
-
-                    }
-                );
-
-
-            element
-                .querySelector(".remove")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        removeItem(index);
-
-                    }
-                );
-
-
-            cartList.appendChild(
-                element
-            );
-
-        }
-    );
-
-
-    const shippingPrice =
-        calculateShipping(
-            items,
-            quantity
-        );
-
-
-    subtotal.textContent =
-        sum + " TL";
-
-
-    shipping.textContent =
-        shippingPrice === 0
-        ? "Kargo Bedava"
-        : shippingPrice + " TL";
-
-
-    total.textContent =
-        (
-            sum +
-            shippingPrice
-        ) + " TL";
-
-}
-
-
-/* =========================
-   QUANTITY
-========================= */
-
-function changeQuantity(
-    index,
-    amount
-){
-
-    const items =
-        getCart();
-
-
-    if(
-        !items[index]
-    ){
-
-        return;
-
-    }
-
-
-    items[index].quantity =
-        (
-            Number(
-                items[index].quantity
-            ) || 1
-        ) + amount;
-
-
-    if(
-        items[index].quantity <= 0
-    ){
-
-        items.splice(
-            index,
-            1
-        );
-
-    }
-
-
-    saveCart(items);
-
-    renderCart();
-
-}
-
-
-function removeItem(index){
-
-    const items =
-        getCart();
-
-
-    items.splice(
-        index,
-        1
-    );
-
-
-    saveCart(items);
-
-    renderCart();
-
-}
-
-
-/* =========================
-   SİPARİŞ VER
-========================= */
-
-checkoutButton.addEventListener(
-    "click",
     function(){
 
-        const items =
-            getCart();
-
+        searchPanel.classList.toggle(
+            "active"
+        );
 
         if(
-            items.length === 0
+            searchPanel.classList.contains(
+                "active"
+            )
         ){
 
-            alert(
-                "Sepetin boş."
-            );
-
-            return;
+            searchInput.focus();
 
         }
 
-
-        if(!currentUser){
-
-            window.location.href =
-                "giris.html";
-
-            return;
-
-        }
+    }
+);
 
 
-        window.location.href =
-            "odeme.html";
+searchInput.addEventListener(
+    "input",
+    function(){
+
+        const text =
+            this.value
+            .toLowerCase()
+            .trim();
+
+
+        document.querySelectorAll(
+            ".product"
+        ).forEach(
+            function(product){
+
+                const name =
+                    product
+                    .dataset
+                    .name
+                    .toLowerCase();
+
+
+                if(
+                    name.includes(text)
+                ){
+
+                    product.style.display =
+                        "";
+
+                }else{
+
+                    product.style.display =
+                        "none";
+
+                }
+
+            }
+        );
 
     }
 );
@@ -2068,39 +1424,31 @@ checkoutButton.addEventListener(
    SLIDER
 ========================= */
 
-const slider =
-    document.getElementById("slider");
+const slides =
+    document.querySelectorAll(
+        ".hero-slide"
+    );
 
 const dots =
-    document.querySelectorAll(".dot");
+    document.querySelectorAll(
+        ".slider-dot"
+    );
 
 
 let currentSlide = 0;
 
-let touchStartX = 0;
 
-let touchStartY = 0;
+function showSlide(index){
 
-let touchEndX = 0;
+    slides.forEach(
+        function(slide){
 
-let touchMoved = false;
+            slide.classList.remove(
+                "active"
+            );
 
-let autoSlideTimer;
-
-
-/* =========================
-   SLIDE
-========================= */
-
-function goToSlide(index){
-
-    currentSlide = index;
-
-
-    slider.style.transform =
-        "translateX(-" +
-        currentSlide * 100 +
-        "%)";
+        }
+    );
 
 
     dots.forEach(
@@ -2114,229 +1462,207 @@ function goToSlide(index){
     );
 
 
-    if(
-        dots[currentSlide]
-    ){
-
-        dots[currentSlide]
-            .classList.add("active");
-
-    }
-
-}
-
-
-function nextSlide(){
-
-    currentSlide++;
-
-
-    if(
-        currentSlide >= 3
-    ){
-
-        currentSlide = 0;
-
-    }
-
-
-    goToSlide(
-        currentSlide
+    slides[index].classList.add(
+        "active"
     );
 
-}
-
-
-function previousSlide(){
-
-    currentSlide--;
-
-
-    if(
-        currentSlide < 0
-    ){
-
-        currentSlide = 2;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function startAutoSlide(){
-
-    clearInterval(
-        autoSlideTimer
+    dots[index].classList.add(
+        "active"
     );
 
 
-    autoSlideTimer =
-        setInterval(
-            nextSlide,
-            5000
-        );
+    currentSlide = index;
 
 }
 
-
-startAutoSlide();
-
-
-/* =========================
-   TOUCH SWIPE
-========================= */
-
-slider.addEventListener(
-    "touchstart",
-    function(event){
-
-        touchStartX =
-            event.touches[0].clientX;
-
-        touchStartY =
-            event.touches[0].clientY;
-
-        touchMoved = false;
-
-        clearInterval(
-            autoSlideTimer
-        );
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchmove",
-    function(event){
-
-        const currentX =
-            event.touches[0].clientX;
-
-        const currentY =
-            event.touches[0].clientY;
-
-
-        const differenceX =
-            currentX -
-            touchStartX;
-
-
-        const differenceY =
-            currentY -
-            touchStartY;
-
-
-        if(
-            Math.abs(differenceX) > 10 &&
-            Math.abs(differenceX) >
-            Math.abs(differenceY)
-        ){
-
-            touchMoved = true;
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchend",
-    function(event){
-
-        touchEndX =
-            event.changedTouches[0].clientX;
-
-
-        const difference =
-            touchStartX -
-            touchEndX;
-
-
-        if(
-            Math.abs(difference) >= 50
-        ){
-
-            if(
-                difference > 0
-            ){
-
-                nextSlide();
-
-            }else{
-
-                previousSlide();
-
-            }
-
-        }
-
-
-        startAutoSlide();
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-/* =========================
-   MANKENE TIKLAMA
-========================= */
-
-slider
-.querySelectorAll(".slide")
-.forEach(
-    function(slide){
-
-        slide.addEventListener(
-            "click",
-            function(){
-
-                if(touchMoved){
-
-                    return;
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================
-   DOTS
-========================= */
 
 dots.forEach(
-    function(dot,index){
+    function(dot){
 
         dot.addEventListener(
             "click",
-            function(event){
+            function(){
 
-                event.stopPropagation();
-
-                goToSlide(
-                    index
+                showSlide(
+                    Number(
+                        this.dataset.slide
+                    )
                 );
 
-                startAutoSlide();
+            }
+        );
+
+    }
+);
+
+
+setInterval(
+    function(){
+
+        currentSlide++;
+
+        if(
+            currentSlide >= slides.length
+        ){
+
+            currentSlide = 0;
+
+        }
+
+        showSlide(
+            currentSlide
+        );
+
+    },
+    5000
+);
+
+
+/* =========================
+   ÜRÜN
+========================= */
+
+const product =
+    document.querySelector(
+        ".product"
+    );
+
+
+const productModal =
+    document.getElementById(
+        "productModal"
+    );
+
+
+const modalClose =
+    document.getElementById(
+        "modalClose"
+    );
+
+
+const modalImage =
+    document.getElementById(
+        "modalImage"
+    );
+
+
+const modalName =
+    document.getElementById(
+        "modalName"
+    );
+
+
+const modalPrice =
+    document.getElementById(
+        "modalPrice"
+    );
+
+
+let selectedSize = "";
+
+
+product.addEventListener(
+    "click",
+    function(){
+
+        modalImage.src =
+            "WhatsApp Image 2026-09-29 at 18.59.46.jpeg";
+
+        modalName.textContent =
+            "VAREXON SHADOW T-SHIRT";
+
+        modalPrice.textContent =
+            "499 TL";
+
+
+        selectedSize = "";
+
+
+        document.querySelectorAll(
+            ".size-button"
+        ).forEach(
+            function(button){
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+        productModal.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+modalClose.addEventListener(
+    "click",
+    function(){
+
+        productModal.classList.remove(
+            "active"
+        );
+
+    }
+);
+
+
+productModal.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            productModal
+        ){
+
+            productModal.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   BEDEN SEÇİMİ
+========================= */
+
+document.querySelectorAll(
+    ".size-button"
+).forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                document.querySelectorAll(
+                    ".size-button"
+                ).forEach(
+                    function(item){
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+
+                selectedSize =
+                    this.dataset.size;
 
             }
         );
@@ -2346,36 +1672,343 @@ dots.forEach(
 
 
 /* =========================
-   ESC
+   SEPET
 ========================= */
 
-document.addEventListener(
-    "keydown",
-    function(event){
+const CART_KEY =
+    "velron_cart";
 
-        if(
-            event.key === "Escape"
-        ){
 
-            closeMenu();
+let cart = [];
 
-            closeCart();
 
-            closeSearch();
+try{
 
-        }
+    cart =
+        JSON.parse(
+            localStorage.getItem(
+                CART_KEY
+            )
+        ) || [];
+
+}catch(error){
+
+    cart = [];
+
+}
+
+
+const cartButton =
+    document.getElementById(
+        "cartButton"
+    );
+
+
+const cartPanel =
+    document.getElementById(
+        "cartPanel"
+    );
+
+
+const closeCart =
+    document.getElementById(
+        "closeCart"
+    );
+
+
+const cartItems =
+    document.getElementById(
+        "cartItems"
+    );
+
+
+const cartCount =
+    document.getElementById(
+        "cartCount"
+    );
+
+
+const cartTotal =
+    document.getElementById(
+        "cartTotal"
+    );
+
+
+cartButton.addEventListener(
+    "click",
+    function(){
+
+        cartPanel.classList.add(
+            "active"
+        );
+
+        overlay.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+closeCart.addEventListener(
+    "click",
+    function(){
+
+        cartPanel.classList.remove(
+            "active"
+        );
+
+        overlay.classList.remove(
+            "active"
+        );
 
     }
 );
 
 
 /* =========================
-   INITIAL
+   SEPETE EKLE
 ========================= */
+
+document.getElementById(
+    "addCart"
+).addEventListener(
+    "click",
+    function(){
+
+        if(!selectedSize){
+
+            alert(
+                "Lütfen bir beden seç."
+            );
+
+            return;
+
+        }
+
+
+        cart.push({
+
+            name:
+                "VAREXON Shadow T-Shirt",
+
+            price:
+                499,
+
+            size:
+                selectedSize,
+
+            quantity:
+                1,
+
+            category:
+                "tisort",
+
+            image:
+                "WhatsApp Image 2026-09-29 at 18.59.46.jpeg"
+
+        });
+
+
+        saveCart();
+
+
+        productModal.classList.remove(
+            "active"
+        );
+
+
+        cartPanel.classList.add(
+            "active"
+        );
+
+
+        overlay.classList.add(
+            "active"
+        );
+
+    }
+);
+
+
+/* =========================
+   SEPETİ KAYDET
+========================= */
+
+function saveCart(){
+
+    localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+    );
+
+    renderCart();
+
+}
+
+
+/* =========================
+   SEPETİ GÖSTER
+========================= */
+
+function renderCart(){
+
+    cartItems.innerHTML = "";
+
+
+    let total = 0;
+
+    let quantity = 0;
+
+
+    if(
+        cart.length === 0
+    ){
+
+        cartItems.innerHTML = `
+
+            <div class="empty-cart">
+                Sepetin şu anda boş.
+            </div>
+
+        `;
+
+    }
+
+
+    cart.forEach(
+        function(item,index){
+
+            const itemQuantity =
+                Number(
+                    item.quantity
+                ) || 1;
+
+
+            const itemPrice =
+                Number(
+                    item.price
+                ) || 0;
+
+
+            total +=
+                itemPrice *
+                itemQuantity;
+
+
+            quantity +=
+                itemQuantity;
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "cart-item";
+
+
+            element.innerHTML = `
+
+                <img
+                    class="cart-item-image"
+                    src="${item.image}"
+                    alt=""
+                >
+
+
+                <div class="cart-item-info">
+
+                    <div class="cart-item-name">
+                        ${item.name}
+                    </div>
+
+
+                    <div class="cart-item-detail">
+
+                        Beden:
+                        ${item.size}
+
+                        <br>
+
+                        Adet:
+                        ${itemQuantity}
+
+                    </div>
+
+
+                    <div class="cart-item-price">
+                        ${itemPrice * itemQuantity} TL
+                    </div>
+
+                </div>
+
+
+                <button
+                    class="remove-item"
+                    data-index="${index}"
+                    type="button"
+                >
+                    SİL
+                </button>
+
+            `;
+
+
+            cartItems.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    cartCount.textContent =
+        quantity;
+
+
+    cartTotal.textContent =
+        total + " TL";
+
+
+    document.querySelectorAll(
+        ".remove-item"
+    ).forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    const index =
+                        Number(
+                            this.dataset.index
+                        );
+
+
+                    cart.splice(
+                        index,
+                        1
+                    );
+
+
+                    saveCart();
+
+                }
+            );
+
+        }
+    );
+
+}
+
 
 renderCart();
 
 </script>
+
 
 </body>
 
