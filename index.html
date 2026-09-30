@@ -1,2295 +1,1047 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-<meta name="color-scheme" content="dark">
-
-<meta name="theme-color" content="#000000">
-
-<title>VAREXON</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    background:#000;
-    color-scheme:dark;
-    scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
-}
-
-body{
-    background:#000;
-    color:#fff;
-    font-family:Arial,sans-serif;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
-}
-
-body.lock{
-    overflow:hidden;
-}
-
-img{
-    display:block;
-    max-width:100%;
-    height:auto;
-}
-
-button,
-input{
-    font:inherit;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header{
-    width:100%;
-    height:55px;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 15px;
-    position:relative;
-    z-index:100;
-}
-
-.menu-button{
-    width:25px;
-    height:25px;
-    background:none;
-    border:none;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:4px;
-    cursor:pointer;
-}
-
-.menu-button span{
-    width:19px;
-    height:1px;
-    background:#fff;
-}
-
-.logo{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:18px;
-    font-weight:bold;
-    letter-spacing:5px;
-    color:#fff;
-}
-
-.icons{
-    display:flex;
-    gap:13px;
-}
-
-.icon{
-    width:25px;
-    height:25px;
-    background:none;
-    border:none;
-    color:#fff;
-    cursor:pointer;
-}
-
-.icon svg{
-    width:21px;
-    height:21px;
-    stroke:#fff;
-    fill:none;
-    stroke-width:1.4;
-}
-
-/* =========================
-   SEARCH
-========================= */
-
-.search{
-    display:none;
-    width:100%;
-    height:55px;
-    background:#000;
-    align-items:center;
-    padding:0 15px;
-    gap:10px;
-    position:relative;
-    z-index:110;
-}
-
-.search.active{
-    display:flex;
-}
-
-.search-close{
-    background:none;
-    border:none;
-    color:#fff;
-    font-size:26px;
-    cursor:pointer;
-}
-
-.search input{
-    flex:1;
-    height:38px;
-    background:#111;
-    border:1px solid #333;
-    color:#fff;
-    outline:none;
-    padding:0 12px;
-}
-
-.search input::placeholder{
-    color:#777;
-}
-
-.search-results{
-    display:none;
-    padding:20px 15px 40px;
-    background:#000;
-}
-
-.search-results.active{
-    display:block;
-}
-
-.search-title{
-    color:#888;
-    font-size:12px;
-    margin-bottom:15px;
-}
-
-.search-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px 10px;
-}
-
-.search-product{
-    cursor:pointer;
-}
-
-.search-product img{
-    width:100%;
-    border-radius:8px;
-}
-
-.search-product h3{
-    color:#fff;
-    font-size:11px;
-    font-weight:500;
-    margin-top:7px;
-}
-
-.search-product p{
-    color:#ccc;
-    font-size:11px;
-    margin-top:5px;
-}
-
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    backdrop-filter:blur(5px);
-    -webkit-backdrop-filter:blur(5px);
-    opacity:0;
-    visibility:hidden;
-    transition:.25s;
-    z-index:999;
-}
-
-.overlay.active{
-    opacity:1;
-    visibility:visible;
-}
-
-/* =========================
-   SIDE MENU
-========================= */
-
-.side-menu{
-    position:fixed;
-    top:0;
-    left:0;
-    width:40vw;
-    height:100dvh;
-    background:#080808;
-    transform:translateX(-100%);
-    transition:.25s ease;
-    z-index:1000;
-    padding:70px 20px 30px;
-    overflow-y:auto;
-}
-
-.side-menu.active{
-    transform:translateX(0);
-}
-
-.user-name{
-    display:none;
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:16px;
-    font-weight:bold;
-    margin-bottom:25px;
-    word-break:break-word;
-}
-
-.side-menu a{
-    display:block;
-    color:#fff;
-    text-decoration:none;
-    font-size:13px;
-    padding:10px 0;
-}
-
-.menu-section{
-    padding-bottom:18px;
-    margin-bottom:18px;
-    border-bottom:1px solid #292929;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-    background:#000;
-}
-
-.slider{
-    width:100%;
-}
-
-.slide{
-    width:100%;
-    height:auto;
-    display:block;
-    cursor:pointer;
-    pointer-events:auto;
-    object-fit:cover;
-    -webkit-user-drag:none;
-}
-
-.hero-text{
-    position:absolute;
-    left:6%;
-    top:50%;
-    transform:translateY(-50%);
-    pointer-events:none;
-}
-
-.hero-text h1{
-    font-family:"Trebuchet MS",Arial,sans-serif;
-    font-size:27px;
-    font-style:italic;
-    letter-spacing:6px;
-}
-
-.hero-text p{
-    font-size:11px;
-    margin-top:8px;
-    letter-spacing:1px;
-}
-
-.dots{
-    position:absolute;
-    bottom:13px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:5px;
-}
-
-.dot{
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#fff;
-}
-
-/* =========================
-   PRODUCTS
-========================= */
-
-.products{
-    padding:28px 15px 45px;
-    background:#000;
-}
-
-.main-title{
-    color:#fff;
-    font-size:22px;
-    font-weight:800;
-}
-
-.category-title{
-    color:#fff;
-    font-size:15px;
-    margin:14px 0;
-    margin-left:8px;
-}
-
-.product-scroll{
-    display:flex;
-    gap:10px;
-    overflow-x:auto;
-    scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
-}
-
-.product-scroll::-webkit-scrollbar{
-    display:none;
-}
-
-.product{
-    flex:0 0 37%;
-    min-width:0;
-    cursor:pointer;
-}
-
-.product img{
-    width:100%;
-    border-radius:8px;
-    filter:
-        saturate(1.20)
-        contrast(1.05);
-}
-
-.product h3{
-    color:#fff;
-    font-size:11px;
-    font-weight:500;
-    line-height:1.35;
-    margin-top:7px;
-}
-
-.product p{
-    text-align:center;
-    font-size:11px;
-    color:#ddd;
-    margin-top:5px;
-}
-
-/* =========================
-   CART
-========================= */
-
-.cart{
-    position:fixed;
-    top:0;
-    right:0;
-    width:40vw;
-    min-width:300px;
-    max-width:430px;
-    height:100dvh;
-    background:#080808;
-    transform:translateX(100%);
-    transition:.3s ease;
-    z-index:2000;
-    display:grid;
-    grid-template-rows:58px minmax(0,1fr) auto;
-    overflow:hidden;
-    padding-bottom:env(safe-area-inset-bottom);
-}
-
-.cart.active{
-    transform:translateX(0);
-}
-
-.cart-head{
-    height:58px;
-    min-height:58px;
-    border-bottom:1px solid #292929;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 17px;
-}
-
-.cart-head span{
-    color:#fff;
-    font-size:13px;
-    font-weight:bold;
-    letter-spacing:1px;
-}
-
-.cart-close{
-    border:none;
-    background:none;
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.cart-list{
-    min-height:0;
-    overflow-y:auto;
-    overflow-x:hidden;
-    padding:12px;
-    -webkit-overflow-scrolling:touch;
-}
-
-.empty{
-    text-align:center;
-    color:#777;
-    font-size:12px;
-    padding-top:50px;
-}
-
-.cart-item{
-    display:flex;
-    gap:8px;
-    min-width:0;
-    border-bottom:1px solid #252525;
-    padding-bottom:12px;
-    margin-bottom:12px;
-}
-
-.cart-image{
-    width:44px;
-    height:63px;
-    object-fit:contain;
-    object-position:center;
-    background:#111;
-    display:block;
-    flex-shrink:0;
-    border-radius:6px;
-    filter:
-        saturate(1.18)
-        contrast(1.06)
-        brightness(.90);
-}
-
-.cart-info{
-    flex:1;
-    min-width:0;
-}
-
-.cart-name{
-    color:#fff;
-    font-size:10px;
-    line-height:1.35;
-}
-
-.cart-size{
-    color:#888;
-    font-size:9px;
-    margin-top:4px;
-}
-
-.cart-price{
-    color:#ddd;
-    font-size:10px;
-    margin-top:4px;
-}
-
-.cart-bottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:7px;
-}
-
-.quantity{
-    display:flex;
-    border:1px solid #333;
-}
-
-.quantity button{
-    width:21px;
-    height:21px;
-    border:none;
-    background:#111;
-    color:#fff;
-    cursor:pointer;
-}
-
-.quantity span{
-    width:22px;
-    text-align:center;
-    line-height:21px;
-    font-size:9px;
-    color:#fff;
-}
-
-.remove{
-    border:none;
-    background:none;
-    color:#777;
-    font-size:9px;
-    cursor:pointer;
-}
-
-.cart-footer{
-    width:100%;
-    border-top:1px solid #292929;
-    padding:
-        13px
-        13px
-        calc(13px + env(safe-area-inset-bottom));
-    background:#080808;
-    position:relative;
-    z-index:10;
-}
-
-.line{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:10px;
-    margin-bottom:8px;
-    color:#fff;
-}
-
-.line span:first-child{
-    color:#888;
-}
-
-.line span:last-child{
-    color:#fff;
-}
-
-.total{
-    border-top:1px solid #292929;
-    padding-top:10px;
-    margin-top:5px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.total span{
-    color:#fff;
-}
-
-.checkout{
-    width:100%;
-    height:42px;
-    margin-top:12px;
-    border:none;
-    background:#fff;
-    color:#000;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:1px;
-    cursor:pointer;
-    display:block;
-    visibility:visible;
-    opacity:1;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer{
-    border-top:1px solid #222;
-    padding:35px 25px 25px;
-    display:flex;
-    justify-content:space-between;
-    background:#000;
-}
-
-.footer-column{
-    width:48%;
-}
-
-.footer-title{
-    color:#fff;
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:1px;
-    margin-bottom:12px;
-}
-
-.footer-item{
-    color:#aaa;
-    font-size:11px;
-    line-height:1.8;
-}
-
-.footer-item a{
-    color:#aaa;
-    text-decoration:none;
-}
-
-.footer-bottom{
-    text-align:center;
-    padding:0 20px 25px;
-    background:#000;
-}
-
-.footer-logo{
-    color:#555;
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:11px;
-    letter-spacing:4px;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px){
-
-    .side-menu{
-        width:40vw;
-        padding:65px 13px 25px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VAREXON</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .cart{
-        width:40vw;
-        min-width:0;
-        max-width:none;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .user-name{
-        font-size:12px;
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
     }
 
-    .side-menu a{
-        font-size:10px;
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      height: 66px;
+      background: #000;
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 1000;
     }
 
-    .cart-image{
-        width:44px;
-        height:63px;
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 31px;
+      letter-spacing: 7px;
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
     }
 
-}
-
-@media(max-width:360px){
-
-    .cart{
-        width:45vw;
+    .menu-btn {
+      position: absolute;
+      left: 27px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 37px;
+      height: 30px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 4px 0;
     }
 
-    .cart-head{
-        padding:0 12px;
+    .menu-btn span {
+      width: 37px;
+      height: 2px;
+      background: #fff;
+      display: block;
     }
 
-    .cart-list{
-        padding:10px;
+    .header-right {
+      position: absolute;
+      right: 27px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      gap: 25px;
     }
 
-    .cart-footer{
-        padding-left:10px;
-        padding-right:10px;
+    .search-btn,
+    .cart-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
     }
 
-}
+    .search-icon {
+      width: 25px;
+      height: 25px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      position: relative;
+      display: block;
+    }
 
-</style>
+    .search-icon::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 2px;
+      background: #fff;
+      right: -7px;
+      bottom: 0;
+      transform: rotate(48deg);
+      transform-origin: left center;
+    }
 
+    .cart-icon {
+      width: 25px;
+      height: 22px;
+      border: 2px solid #fff;
+      border-top: none;
+      display: block;
+      position: relative;
+    }
+
+    .cart-icon::before {
+      content: "";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      width: 27px;
+      height: 2px;
+      background: #fff;
+    }
+
+    .cart-count {
+      position: absolute;
+      right: -9px;
+      top: -10px;
+      background: #fff;
+      color: #000;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      font-size: 10px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* =========================
+       SIDE MENU
+    ========================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(5px);
+      z-index: 1900;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+
+    .side-menu {
+      position: fixed;
+      left: -360px;
+      top: 0;
+      width: 340px;
+      max-width: 80%;
+      height: 100vh;
+      background: #090909;
+      z-index: 2000;
+      transition: left .3s ease;
+      border-right: 1px solid #252525;
+      padding: 90px 35px 30px;
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .side-menu a {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+      font-size: 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid #222;
+    }
+
+    .side-menu .login-area {
+      margin-top: 35px;
+    }
+
+    .side-menu button {
+      width: 100%;
+      padding: 13px;
+      background: #fff;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-panel {
+      position: fixed;
+      top: 66px;
+      left: 0;
+      right: 0;
+      background: #050505;
+      border-bottom: 1px solid #222;
+      padding: 20px;
+      z-index: 1500;
+      display: none;
+    }
+
+    .search-panel.active {
+      display: block;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 700px;
+      display: block;
+      margin: auto;
+      background: #111;
+      color: #fff;
+      border: 1px solid #333;
+      padding: 15px 17px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-results {
+      width: 100%;
+      max-width: 700px;
+      margin: 10px auto 0;
+    }
+
+    .search-result {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 10px;
+      border-bottom: 1px solid #222;
+      cursor: pointer;
+    }
+
+    .search-result img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+
+    .search-result-info strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .search-result-info span {
+      color: #aaa;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      width: 100%;
+      position: relative;
+      background: #111;
+      overflow: hidden;
+    }
+
+    .hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 620px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .hero-dot {
+      position: absolute;
+      bottom: 23px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================= */
+
+    .products-section {
+      padding: 45px 28px 80px;
+      background: #000;
+    }
+
+    .section-title {
+      font-size: 40px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    .category-title {
+      font-size: 25px;
+      font-weight: 400;
+      margin: 0 0 28px 15px;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 35px;
+    }
+
+    .product-card {
+      cursor: pointer;
+      max-width: 280px;
+    }
+
+    .product-image-box {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #111;
+    }
+
+    .product-image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .3s ease;
+    }
+
+    .product-card:hover .product-image-box img {
+      transform: scale(1.03);
+    }
+
+    .product-name {
+      font-size: 18px;
+      line-height: 1.35;
+      font-weight: 600;
+      margin-top: 18px;
+    }
+
+    .product-price {
+      font-size: 19px;
+      margin-top: 15px;
+      color: #ddd;
+      text-align: center;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      border-top: 1px solid #252525;
+      padding: 60px 45px 45px;
+      background: #000;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .footer-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+    }
+
+    .footer-text {
+      color: #999;
+      font-size: 17px;
+      line-height: 2.1;
+    }
+
+    .footer-text a {
+      color: #999;
+      text-decoration: none;
+    }
+
+    .footer-logo {
+      text-align: center;
+      margin-top: 50px;
+      color: #666;
+      font-family: Georgia, serif;
+      letter-spacing: 7px;
+      font-size: 20px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        height: 66px;
+      }
+
+      .logo {
+        font-size: 28px;
+        letter-spacing: 6px;
+      }
+
+      .menu-btn {
+        left: 27px;
+      }
+
+      .header-right {
+        right: 27px;
+        gap: 22px;
+      }
+
+      .hero img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      .products-section {
+        padding: 43px 27px 80px;
+      }
+
+      .section-title {
+        font-size: 37px;
+        margin-bottom: 31px;
+      }
+
+      .category-title {
+        font-size: 24px;
+        margin-left: 15px;
+        margin-bottom: 27px;
+      }
+
+      .products-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .product-card {
+        max-width: 245px;
+      }
+
+      .product-image-box {
+        border-radius: 13px;
+      }
+
+      .product-name {
+        font-size: 18px;
+      }
+
+      .product-price {
+        font-size: 19px;
+        text-align: center;
+      }
+
+      footer {
+        padding: 60px 46px 45px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+      }
+
+      .footer-title {
+        font-size: 18px;
+        margin-bottom: 27px;
+      }
+
+      .footer-text {
+        font-size: 16px;
+      }
+
+      .footer-logo {
+        font-size: 19px;
+      }
+    }
+
+    @media (max-width: 420px) {
+
+      .logo {
+        font-size: 25px;
+        letter-spacing: 5px;
+      }
+
+      .menu-btn {
+        left: 27px;
+      }
+
+      .header-right {
+        right: 27px;
+      }
+
+      .products-section {
+        padding-left: 27px;
+        padding-right: 27px;
+      }
+
+      .product-card {
+        max-width: 245px;
+      }
+
+      footer {
+        padding-left: 46px;
+        padding-right: 46px;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <!-- =========================
+       HEADER
+  ========================= -->
 
-<!-- =========================
-     HEADER
-========================= -->
+  <header>
 
-<header class="header">
-
-    <button
-        class="menu-button"
-        id="menuButton"
-        type="button"
-        aria-label="Menü"
-    >
-
-        <span></span>
-        <span></span>
-        <span></span>
-
-    </button>
-
-
-    <div class="logo">
-        VAREXON
+    <div class="menu-btn" id="menuBtn">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
 
+    <a href="index.html" class="logo">VAREXON</a>
 
-    <div class="icons">
+    <div class="header-right">
 
-        <button
-            class="icon"
-            id="searchButton"
-            type="button"
-            aria-label="Ara"
-        >
+      <button class="search-btn" id="searchBtn">
+        <span class="search-icon"></span>
+      </button>
 
-            <svg viewBox="0 0 24 24">
-
-                <circle
-                    cx="10.8"
-                    cy="10.8"
-                    r="6.5"
-                ></circle>
-
-                <line
-                    x1="16"
-                    y1="16"
-                    x2="21"
-                    y2="21"
-                ></line>
-
-            </svg>
-
-        </button>
-
-
-        <button
-            class="icon"
-            id="cartButton"
-            type="button"
-            aria-label="Sepet"
-        >
-
-            <svg viewBox="0 0 24 24">
-
-                <path
-                    d="M5 8h14l-1 12H6L5 8z"
-                ></path>
-
-                <path
-                    d="M9 8V6a3 3 0 0 1 6 0v2"
-                ></path>
-
-            </svg>
-
-        </button>
+      <button class="cart-btn" id="cartBtn">
+        <span class="cart-icon"></span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
 
     </div>
 
-</header>
+  </header>
 
 
-<!-- =========================
-     SEARCH
-========================= -->
+  <!-- =========================
+       SIDE MENU
+  ========================= -->
 
-<div
-    class="search"
-    id="search"
->
+  <div class="overlay" id="overlay"></div>
 
-    <button
-        class="search-close"
-        id="searchClose"
-        type="button"
-    >
-        ×
-    </button>
+  <aside class="side-menu" id="sideMenu">
 
+    <button class="close-menu" id="closeMenu">×</button>
+
+    <a href="index.html">Ana Sayfa</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+    <a href="sepet.html">Sepet</a>
+    <a href="iletisim.html">İletişim</a>
+
+    <div class="login-area">
+      <button id="authButton">Giriş Yap</button>
+    </div>
+
+  </aside>
+
+
+  <!-- =========================
+       SEARCH PANEL
+  ========================= -->
+
+  <div class="search-panel" id="searchPanel">
 
     <input
-        id="searchInput"
-        type="text"
-        placeholder="Ürün ara..."
-        autocomplete="off"
+      type="text"
+      id="searchInput"
+      class="search-input"
+      placeholder="Ürün ara..."
     >
 
-</div>
+    <div class="search-results" id="searchResults"></div>
 
+  </div>
 
-<div
-    class="search-results"
-    id="searchResults"
->
 
-    <div
-        class="search-title"
-        id="searchTitle"
-    >
-        Tüm ürünler
-    </div>
+  <!-- =========================
+       HERO
+  ========================= -->
 
+  <section class="hero">
 
-    <div
-        class="search-grid"
-        id="searchGrid"
-    ></div>
-
-</div>
-
-
-<!-- =========================
-     SIDE MENU
-========================= -->
-
-<div
-    class="overlay"
-    id="menuOverlay"
-></div>
-
-
-<nav
-    class="side-menu"
-    id="sideMenu"
->
-
-    <div
-        class="user-name"
-        id="userName"
-    ></div>
-
-
-    <div class="menu-section">
-
-        <a
-            href="giris.html"
-            id="loginLink"
-        >
-            Giriş Yap / Kaydol
-        </a>
-
-
-        <a
-            href="hesabim.html"
-            id="accountLink"
-            style="display:none;"
-        >
-            Hesabım
-        </a>
-
-
-        <a
-            href="siparislerim.html"
-            id="ordersLink"
-            style="display:none;"
-        >
-            Siparişlerim
-        </a>
-
-
-        <a
-            href="#"
-            id="logoutLink"
-            style="display:none;"
-        >
-            Çıkış Yap
-        </a>
-
-    </div>
-
-
-    <div class="menu-section">
-
-        <a href="#tisort">
-            Tişört
-        </a>
-
-        <a href="#">
-            Şapka
-        </a>
-
-        <a href="#">
-            Atkı
-        </a>
-
-        <a href="#">
-            Sweatshirt
-        </a>
-
-    </div>
-
-
-    <div>
-
-        <a href="favoriler.html">
-            Favoriler
-        </a>
-
-
-        <a href="#iletisim">
-            İletişim
-        </a>
-
-
-        <a href="#">
-            Hakkımızda
-        </a>
-
-    </div>
-
-</nav>
-
-
-<!-- =========================
-     CART
-========================= -->
-
-<div
-    class="overlay"
-    id="cartOverlay"
-></div>
-
-
-<aside
-    class="cart"
-    id="cart"
->
-
-    <div class="cart-head">
-
-        <span>
-            SEPET
-        </span>
-
-
-        <button
-            class="cart-close"
-            id="cartClose"
-            type="button"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <div
-        class="cart-list"
-        id="cartList"
-    ></div>
-
-
-    <div class="cart-footer">
-
-        <div class="line">
-
-            <span>
-                Ara toplam
-            </span>
-
-            <span id="subtotal">
-                0 TL
-            </span>
-
-        </div>
-
-
-        <div class="line">
-
-            <span>
-                Kargo
-            </span>
-
-            <span id="shipping">
-                0 TL
-            </span>
-
-        </div>
-
-
-        <div class="total">
-
-            <span>
-                TOPLAM
-            </span>
-
-            <span id="total">
-                0 TL
-            </span>
-
-        </div>
-
-
-        <button
-            class="checkout"
-            id="checkoutButton"
-            type="button"
-        >
-            SİPARİŞ VER
-        </button>
-
-    </div>
-
-</aside>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-    <div
-        class="slider"
-        id="slider"
+    <img
+      id="heroImage"
+      src="WhatsApp Image 2026-09-30 at 18.32.19.jpeg"
+      alt="VAREXON"
     >
 
-        <img
-            class="slide"
-            id="heroImage"
-            src="WhatsApp Image 2026-09-30 at 18.32.19.jpeg"
+    <div class="hero-dot"></div>
+
+  </section>
+
+
+  <!-- =========================
+       PRODUCTS
+  ========================= -->
+
+  <main class="products-section">
+
+    <h1 class="section-title">TİŞÖRT</h1>
+
+    <h2 class="category-title">Siyah</h2>
+
+    <div class="products-grid" id="productsGrid">
+
+      <div
+        class="product-card"
+        data-page="urun-detay.html"
+      >
+
+        <div class="product-image-box">
+
+          <img
+            src="WhatsApp Image 2026-09-30 at 17.22.44.jpeg"
             alt="Tiger Tasarımlı Siyah Tişört"
-            data-page="urun-detay.html"
-            fetchpriority="high"
-            decoding="async"
-        >
+          >
+
+        </div>
+
+        <div class="product-name">
+          Tiger Tasarımlı Siyah<br>
+          Tişört
+        </div>
+
+        <div class="product-price">
+          499 TL
+        </div>
+
+      </div>
 
     </div>
 
-
-    <div class="hero-text">
-
-        <h1>
-            VAREXON
-        </h1>
-
-        <p>
-            Sıradanlıktan uzak
-        </p>
-
-    </div>
+  </main>
 
 
-    <div class="dots">
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
-        <span class="dot"></span>
+  <footer>
 
-    </div>
+    <div class="footer-grid">
 
-</section>
+      <div>
 
+        <div class="footer-title">
+          İLETİŞİM
+        </div>
 
-<!-- =========================
-     PRODUCTS
-========================= -->
+        <div class="footer-text">
+          <a href="mailto:varexonwearr@gmail.com">
+            varexonwearr@gmail.com
+          </a>
+        </div>
 
-<section
-    class="products"
-    id="tisort"
->
-
-    <div class="main-title">
-        TİŞÖRT
-    </div>
-
-
-    <div class="category-title">
-        Siyah
-    </div>
+      </div>
 
 
-    <div class="product-scroll">
+      <div>
 
-        <div
-            class="product"
-            data-page="urun-detay.html"
-        >
+        <div class="footer-title">
+          SOSYAL MEDYA
+        </div>
 
-            <img
-                src="WhatsApp Image 2026-09-30 at 18.32.19.jpeg"
-                alt="Tiger Tasarımlı Siyah Tişört"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
+        <div class="footer-text">
+
+          <div>
+            <a
+              href="https://instagram.com/varexonwearr"
+              target="_blank"
             >
+              Instagram: varexonwearr
+            </a>
+          </div>
 
-
-            <h3>
-                Tiger Tasarımlı Siyah Tişört
-            </h3>
-
-
-            <p>
-                499 TL
-            </p>
+          <div>
+            <a
+              href="https://www.tiktok.com/@varexonwearr"
+              target="_blank"
+            >
+              TikTok: varexonwearr
+            </a>
+          </div>
 
         </div>
+
+      </div>
 
     </div>
 
-</section>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer id="iletisim">
-
-    <div class="footer">
-
-        <div class="footer-column">
-
-            <div class="footer-title">
-                İLETİŞİM
-            </div>
-
-
-            <div class="footer-item">
-
-                <a
-                    href="mailto:varexonwearr@gmail.com"
-                >
-                    varexonwearr@gmail.com
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <div class="footer-title">
-                SOSYAL MEDYA
-            </div>
-
-
-            <div class="footer-item">
-
-                <a
-                    href="https://instagram.com/varexonwearr"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Instagram: varexonwearr
-                </a>
-
-            </div>
-
-
-            <div class="footer-item">
-
-                <a
-                    href="https://www.tiktok.com/@varexonwearr"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    TikTok: varexonwearr
-                </a>
-
-            </div>
-
-        </div>
-
+    <div class="footer-logo">
+      V A R E X O N
     </div>
 
+  </footer>
 
-    <div class="footer-bottom">
 
-        <div class="footer-logo">
-            VAREXON
-        </div>
+  <!-- =========================
+       FIREBASE
+  ========================= -->
 
-    </div>
+  <script type="module">
 
-</footer>
+    import {
+      initializeApp
+    } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
+    import {
+      getAuth,
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-auth.js";
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+    import {
+      getFirestore,
+      collection,
+      query,
+      where,
+      getDocs
+    } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-<script type="module">
 
+    const firebaseConfig = {
+      apiKey: "AIzaSyD8osmrzNWj32T-1kNx-jmHlWcAm5_7xeg",
+      authDomain: "velron-831db.firebaseapp.com",
+      projectId: "velron-831db",
+      storageBucket: "velron-831db.firebasestorage.app",
+      messagingSenderId: "622435814773",
+      appId: "1:622435814773:web:bd94aff51e78ba2a7c573c",
+      measurementId: "G-74XHVN6V22"
+    };
 
-/* =========================
-   FIREBASE
-========================= */
 
-import {
-    initializeApp
-}
-from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    const app = initializeApp(firebaseConfig);
 
+    const auth = getAuth(app);
 
-import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-}
-from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    const db = getFirestore(app);
 
 
-const firebaseConfig = {
+    /* =========================
+       MENU
+    ========================= */
 
-    apiKey:
-    "AIzaSyD8osmrzNWj32T-1kNx-jmHlWcAm5_7xeg",
+    const menuBtn = document.getElementById("menuBtn");
+    const sideMenu = document.getElementById("sideMenu");
+    const closeMenu = document.getElementById("closeMenu");
+    const overlay = document.getElementById("overlay");
 
-    authDomain:
-    "velron-831db.firebaseapp.com",
+    function openMenu() {
+      sideMenu.classList.add("active");
+      overlay.classList.add("active");
+    }
 
-    projectId:
-    "velron-831db",
+    function closeSideMenu() {
+      sideMenu.classList.remove("active");
+      overlay.classList.remove("active");
+    }
 
-    storageBucket:
-    "velron-831db.firebasestorage.app",
+    menuBtn.addEventListener("click", openMenu);
 
-    messagingSenderId:
-    "622435814773",
+    closeMenu.addEventListener("click", closeSideMenu);
 
-    appId:
-    "1:622435814773:web:bd94aff51e78ba2a7c573c",
+    overlay.addEventListener("click", closeSideMenu);
 
-    measurementId:
-    "G-74XHVN6V22"
 
-};
+    /* =========================
+       SEARCH
+    ========================= */
 
+    const searchBtn = document.getElementById("searchBtn");
+    const searchPanel = document.getElementById("searchPanel");
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
 
-const app =
-initializeApp(firebaseConfig);
+    searchBtn.addEventListener("click", () => {
 
+      searchPanel.classList.toggle("active");
 
-const auth =
-getAuth(app);
+      if (searchPanel.classList.contains("active")) {
+        searchInput.focus();
+      }
 
+    });
 
-/* =========================
-   ACCOUNT
-========================= */
 
-const userName =
-document.getElementById("userName");
+    const products = [
 
+      {
+        id: "tiger",
+        name: "Tiger Tasarımlı Siyah Tişört",
+        price: 499,
+        image: "WhatsApp Image 2026-09-30 at 17.22.44.jpeg",
+        page: "urun-detay.html",
+        category: "tisort"
+      }
 
-const loginLink =
-document.getElementById("loginLink");
+    ];
 
 
-const accountLink =
-document.getElementById("accountLink");
+    function showSearchResults(value) {
 
+      const text = value.toLowerCase().trim();
 
-const ordersLink =
-document.getElementById("ordersLink");
+      searchResults.innerHTML = "";
 
+      if (!text) {
+        return;
+      }
 
-const logoutLink =
-document.getElementById("logoutLink");
+      const filtered = products.filter(product =>
+        product.name.toLowerCase().includes(text)
+      );
 
+      if (filtered.length === 0) {
 
-let currentUser = null;
+        searchResults.innerHTML = `
+          <div style="
+            color:#888;
+            padding:15px 5px;
+          ">
+            Ürün bulunamadı.
+          </div>
+        `;
 
+        return;
+      }
 
-onAuthStateChanged(
-    auth,
-    function(user){
 
-        currentUser = user;
+      filtered.forEach(product => {
 
+        const result = document.createElement("div");
 
-        if(user){
+        result.className = "search-result";
 
-            userName.textContent =
-                user.displayName ||
-                user.email ||
-                "Hesabım";
+        result.innerHTML = `
 
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+          >
 
-            userName.style.display =
-                "block";
+          <div class="search-result-info">
 
+            <strong>
+              ${product.name}
+            </strong>
 
-            loginLink.style.display =
-                "none";
+            <span>
+              ${product.price} TL
+            </span>
 
+          </div>
 
-            accountLink.style.display =
-                "block";
+        `;
 
 
-            ordersLink.style.display =
-                "block";
+        result.addEventListener("click", () => {
 
+          window.location.href = product.page;
 
-            logoutLink.style.display =
-                "block";
+        });
 
-        }
 
-        else{
+        searchResults.appendChild(result);
 
-            userName.style.display =
-                "none";
-
-
-            loginLink.style.display =
-                "block";
-
-
-            accountLink.style.display =
-                "none";
-
-
-            ordersLink.style.display =
-                "none";
-
-
-            logoutLink.style.display =
-                "none";
-
-        }
+      });
 
     }
-);
 
 
-/* LOGOUT */
+    searchInput.addEventListener("input", () => {
 
-logoutLink.addEventListener(
-    "click",
-    async function(event){
+      showSearchResults(searchInput.value);
 
-        event.preventDefault();
+    });
 
 
-        try{
+    /* =========================
+       HERO CLICK
+    ========================= */
+
+    const heroImage = document.getElementById("heroImage");
+
+    heroImage.addEventListener("click", () => {
+
+      window.location.href = "urun-detay.html";
+
+    });
+
+
+    /* =========================
+       PRODUCT CLICK
+    ========================= */
+
+    const productCards =
+      document.querySelectorAll(".product-card");
+
+    productCards.forEach(card => {
+
+      card.addEventListener("click", () => {
+
+        const page = card.dataset.page;
+
+        if (page) {
+          window.location.href = page;
+        }
+
+      });
+
+    });
+
+
+    /* =========================
+       CART
+    ========================= */
+
+    const cartBtn = document.getElementById("cartBtn");
+    const cartCount = document.getElementById("cartCount");
+
+    cartBtn.addEventListener("click", () => {
+
+      window.location.href = "sepet.html";
+
+    });
+
+
+    function updateCartCount() {
+
+      try {
+
+        const cart =
+          JSON.parse(localStorage.getItem("velron_cart")) || [];
+
+        const count = cart.reduce(
+          (total, item) => total + (item.quantity || 1),
+          0
+        );
+
+        if (count > 0) {
+
+          cartCount.textContent = count;
+          cartCount.style.display = "flex";
+
+        } else {
+
+          cartCount.style.display = "none";
+
+        }
+
+      } catch (error) {
+
+        cartCount.style.display = "none";
+
+      }
+
+    }
+
+    updateCartCount();
+
+
+    /* =========================
+       AUTH
+    ========================= */
+
+    const authButton =
+      document.getElementById("authButton");
+
+
+    onAuthStateChanged(auth, user => {
+
+      if (user) {
+
+        authButton.textContent = "Çıkış Yap";
+
+        authButton.onclick = async () => {
+
+          try {
 
             await signOut(auth);
 
             window.location.reload();
 
-        }
-
-        catch(error){
+          } catch (error) {
 
             console.error(error);
 
-            alert(
-                "Çıkış yapılırken hata oluştu."
-            );
+          }
 
-        }
+        };
 
-    }
-);
+      } else {
 
+        authButton.textContent = "Giriş Yap";
 
-/* =========================
-   MENU
-========================= */
+        authButton.onclick = () => {
 
-const menuButton =
-document.getElementById("menuButton");
+          window.location.href = "giris.html";
 
+        };
 
-const sideMenu =
-document.getElementById("sideMenu");
+      }
 
+    });
 
-const menuOverlay =
-document.getElementById("menuOverlay");
 
-
-function openMenu(){
-
-    closeCart();
-
-    closeSearch();
-
-    sideMenu.classList.add(
-        "active"
-    );
-
-    menuOverlay.classList.add(
-        "active"
-    );
-
-    document.body.classList.add(
-        "lock"
-    );
-
-}
-
-
-function closeMenu(){
-
-    sideMenu.classList.remove(
-        "active"
-    );
-
-    menuOverlay.classList.remove(
-        "active"
-    );
-
-    document.body.classList.remove(
-        "lock"
-    );
-
-}
-
-
-menuButton.addEventListener(
-    "click",
-    function(){
-
-        if(
-            sideMenu.classList.contains(
-                "active"
-            )
-        ){
-
-            closeMenu();
-
-        }
-
-        else{
-
-            openMenu();
-
-        }
-
-    }
-);
-
-
-menuOverlay.addEventListener(
-    "click",
-    closeMenu
-);
-
-
-document
-.querySelectorAll(".side-menu a")
-.forEach(
-    function(link){
-
-        link.addEventListener(
-            "click",
-            closeMenu
-        );
-
-    }
-);
-
-
-/* =========================
-   PRODUCTS
-========================= */
-
-const products = [
-
-    {
-        name:
-        "Tiger Tasarımlı Siyah Tişört",
-
-        price:
-        499,
-
-        image:
-        "WhatsApp Image 2026-09-30 at 18.32.19.jpeg",
-
-        page:
-        "urun-detay.html",
-
-        category:
-        "tisort"
-
-    }
-
-];
-
-
-/* =========================
-   SEARCH
-========================= */
-
-const searchButton =
-document.getElementById("searchButton");
-
-
-const searchClose =
-document.getElementById("searchClose");
-
-
-const search =
-document.getElementById("search");
-
-
-const searchInput =
-document.getElementById("searchInput");
-
-
-const searchResults =
-document.getElementById("searchResults");
-
-
-const searchGrid =
-document.getElementById("searchGrid");
-
-
-const searchTitle =
-document.getElementById("searchTitle");
-
-
-function normalize(text){
-
-    return text
-        .toLocaleLowerCase("tr-TR")
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        );
-
-}
-
-
-function openSearch(){
-
-    closeMenu();
-
-    closeCart();
-
-
-    search.classList.add(
-        "active"
-    );
-
-
-    searchResults.classList.add(
-        "active"
-    );
-
-
-    searchInput.value = "";
-
-
-    renderSearch("");
-
-
-    searchInput.focus();
-
-}
-
-
-function closeSearch(){
-
-    search.classList.remove(
-        "active"
-    );
-
-
-    searchResults.classList.remove(
-        "active"
-    );
-
-}
-
-
-function renderSearch(query){
-
-    const q =
-        normalize(
-            query.trim()
-        );
-
-
-    const result =
-        q === ""
-        ? products
-        : products.filter(
-            function(product){
-
-                return normalize(
-                    product.name
-                ).includes(q);
-
-            }
-        );
-
-
-    searchTitle.textContent =
-        q === ""
-        ? "Tüm ürünler"
-        : "Arama sonuçları";
-
-
-    searchGrid.innerHTML = "";
-
-
-    result.forEach(
-        function(product){
-
-            const item =
-                document.createElement(
-                    "div"
-                );
-
-
-            item.className =
-                "search-product";
-
-
-            item.innerHTML = `
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
-                    decoding="async"
-                >
-
-                <h3>
-                    ${product.name}
-                </h3>
-
-                <p>
-                    ${product.price} TL
-                </p>
-
-            `;
-
-
-            item.addEventListener(
-                "click",
-                function(){
-
-                    window.location.href =
-                        product.page;
-
-                }
-            );
-
-
-            searchGrid.appendChild(
-                item
-            );
-
-        }
-    );
-
-}
-
-
-searchButton.addEventListener(
-    "click",
-    openSearch
-);
-
-
-searchClose.addEventListener(
-    "click",
-    closeSearch
-);
-
-
-searchInput.addEventListener(
-    "input",
-    function(){
-
-        renderSearch(
-            this.value
-        );
-
-    }
-);
-
-
-/* =========================
-   CART
-========================= */
-
-const CART_KEY =
-    "velron_cart";
-
-
-const cartButton =
-document.getElementById("cartButton");
-
-
-const cartClose =
-document.getElementById("cartClose");
-
-
-const cart =
-document.getElementById("cart");
-
-
-const cartOverlay =
-document.getElementById("cartOverlay");
-
-
-const cartList =
-document.getElementById("cartList");
-
-
-const subtotal =
-document.getElementById("subtotal");
-
-
-const shipping =
-document.getElementById("shipping");
-
-
-const total =
-document.getElementById("total");
-
-
-const checkoutButton =
-document.getElementById(
-    "checkoutButton"
-);
-
-
-function getCart(){
-
-    try{
-
-        return JSON.parse(
-            localStorage.getItem(
-                CART_KEY
-            )
-        ) || [];
-
-    }
-
-    catch(error){
-
-        return [];
-
-    }
-
-}
-
-
-function saveCart(items){
-
-    localStorage.setItem(
-        CART_KEY,
-        JSON.stringify(items)
-    );
-
-}
-
-
-function openCart(){
-
-    closeMenu();
-
-    closeSearch();
-
-
-    cart.classList.add(
-        "active"
-    );
-
-
-    cartOverlay.classList.add(
-        "active"
-    );
-
-
-    document.body.classList.add(
-        "lock"
-    );
-
-
-    renderCart();
-
-}
-
-
-function closeCart(){
-
-    cart.classList.remove(
-        "active"
-    );
-
-
-    cartOverlay.classList.remove(
-        "active"
-    );
-
-
-    document.body.classList.remove(
-        "lock"
-    );
-
-}
-
-
-cartButton.addEventListener(
-    "click",
-    openCart
-);
-
-
-cartClose.addEventListener(
-    "click",
-    closeCart
-);
-
-
-cartOverlay.addEventListener(
-    "click",
-    closeCart
-);
-
-
-function calculateShipping(
-    items,
-    quantity
-){
-
-    let allTshirts = true;
-
-
-    items.forEach(
-        function(item){
-
-            if(
-                item.category &&
-                item.category !== "tisort"
-            ){
-
-                allTshirts = false;
-
-            }
-
-        }
-    );
-
-
-    if(
-        allTshirts &&
-        quantity >= 2
-    ){
-
-        return 0;
-
-    }
-
-
-    return 50;
-
-}
-
-
-function renderCart(){
-
-    const items =
-        getCart();
-
-
-    cartList.innerHTML = "";
-
-
-    if(
-        items.length === 0
-    ){
-
-        cartList.innerHTML = `
-
-            <div class="empty">
-                Sepetin şu anda boş.
-            </div>
-
-        `;
-
-
-        subtotal.textContent =
-            "0 TL";
-
-
-        shipping.textContent =
-            "0 TL";
-
-
-        total.textContent =
-            "0 TL";
-
-
-        return;
-
-    }
-
-
-    let sum = 0;
-
-    let quantity = 0;
-
-
-    items.forEach(
-        function(item,index){
-
-            const price =
-                Number(item.price) || 0;
-
-
-            const count =
-                Number(item.quantity) || 1;
-
-
-            sum +=
-                price * count;
-
-
-            quantity +=
-                count;
-
-
-            const element =
-                document.createElement(
-                    "div"
-                );
-
-
-            element.className =
-                "cart-item";
-
-
-            element.innerHTML = `
-
-                <img
-                    class="cart-image"
-                    src="${item.image || ""}"
-                    alt=""
-                    loading="eager"
-                    decoding="async"
-                >
-
-                <div class="cart-info">
-
-                    <div class="cart-name">
-                        ${item.name || "Ürün"}
-                    </div>
-
-                    <div class="cart-size">
-                        Beden: ${item.size || "-"}
-                    </div>
-
-                    <div class="cart-price">
-                        ${price} TL
-                    </div>
-
-                    <div class="cart-bottom">
-
-                        <div class="quantity">
-
-                            <button
-                                class="minus"
-                                type="button"
-                            >
-                                −
-                            </button>
-
-                            <span>
-                                ${count}
-                            </span>
-
-                            <button
-                                class="plus"
-                                type="button"
-                            >
-                                +
-                            </button>
-
-                        </div>
-
-
-                        <button
-                            class="remove"
-                            type="button"
-                        >
-                            Kaldır
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `;
-
-
-            element
-            .querySelector(".minus")
-            .addEventListener(
-                "click",
-                function(){
-
-                    changeQuantity(
-                        index,
-                        -1
-                    );
-
-                }
-            );
-
-
-            element
-            .querySelector(".plus")
-            .addEventListener(
-                "click",
-                function(){
-
-                    changeQuantity(
-                        index,
-                        1
-                    );
-
-                }
-            );
-
-
-            element
-            .querySelector(".remove")
-            .addEventListener(
-                "click",
-                function(){
-
-                    removeItem(index);
-
-                }
-            );
-
-
-            cartList.appendChild(
-                element
-            );
-
-        }
-    );
-
-
-    const shippingPrice =
-        calculateShipping(
-            items,
-            quantity
-        );
-
-
-    subtotal.textContent =
-        sum + " TL";
-
-
-    shipping.textContent =
-        shippingPrice === 0
-        ? "Kargo Bedava"
-        : shippingPrice + " TL";
-
-
-    total.textContent =
-        (
-            sum +
-            shippingPrice
-        ) + " TL";
-
-}
-
-
-function changeQuantity(
-    index,
-    amount
-){
-
-    const items =
-        getCart();
-
-
-    if(
-        !items[index]
-    ){
-
-        return;
-
-    }
-
-
-    items[index].quantity =
-        (
-            Number(
-                items[index].quantity
-            ) || 1
-        ) + amount;
-
-
-    if(
-        items[index].quantity <= 0
-    ){
-
-        items.splice(
-            index,
-            1
-        );
-
-    }
-
-
-    saveCart(items);
-
-    renderCart();
-
-}
-
-
-function removeItem(index){
-
-    const items =
-        getCart();
-
-
-    items.splice(
-        index,
-        1
-    );
-
-
-    saveCart(items);
-
-    renderCart();
-
-}
-
-
-/* CHECKOUT */
-
-checkoutButton.addEventListener(
-    "click",
-    function(){
-
-        const items =
-            getCart();
-
-
-        if(
-            items.length === 0
-        ){
-
-            alert(
-                "Sepetin boş."
-            );
-
-            return;
-
-        }
-
-
-        if(!currentUser){
-
-            window.location.href =
-                "giris.html";
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "odeme.html";
-
-    }
-);
-
-
-/* =========================
-   PRODUCT CARD
-========================= */
-
-document
-.querySelectorAll(".product")
-.forEach(
-    function(productElement){
-
-        productElement.addEventListener(
-            "click",
-            function(){
-
-                window.location.href =
-                    "urun-detay.html";
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================
-   HERO IMAGE CLICK
-========================= */
-
-const heroImage =
-document.getElementById(
-    "heroImage"
-);
-
-
-heroImage.addEventListener(
-    "click",
-    function(){
-
-        window.location.href =
-            "urun-detay.html";
-
-    }
-);
-
-
-/* =========================
-   ESC
-========================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Escape"
-        ){
-
-            closeMenu();
-
-            closeCart();
-
-            closeSearch();
-
-        }
-
-    }
-);
-
-
-/* =========================
-   START
-========================= */
-
-renderSearch("");
-
-renderCart();
-
-
-</script>
+  </script>
 
 </body>
-
 </html>
