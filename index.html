@@ -16,6 +16,10 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <style>
 
+/* =========================
+   GENEL
+========================= */
+
 *{
     margin:0;
     padding:0;
@@ -52,7 +56,10 @@ input{
     font:inherit;
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 .header{
     width:100%;
@@ -117,7 +124,10 @@ input{
     stroke-width:1.4;
 }
 
-/* SEARCH */
+
+/* =========================
+   SEARCH
+========================= */
 
 .search{
     display:none;
@@ -151,6 +161,7 @@ input{
     color:#fff;
     outline:none;
     padding:0 12px;
+    border-radius:6px;
 }
 
 .search input::placeholder{
@@ -201,7 +212,10 @@ input{
     margin-top:5px;
 }
 
-/* OVERLAY */
+
+/* =========================
+   OVERLAY
+========================= */
 
 .overlay{
     position:fixed;
@@ -220,7 +234,10 @@ input{
     visibility:visible;
 }
 
-/* SIDE MENU */
+
+/* =========================
+   SIDE MENU
+========================= */
 
 .side-menu{
     position:fixed;
@@ -263,7 +280,10 @@ input{
     border-bottom:1px solid #292929;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
     position:relative;
@@ -336,7 +356,10 @@ input{
     opacity:1;
 }
 
-/* PRODUCTS */
+
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
     padding:28px 15px 45px;
@@ -403,7 +426,10 @@ input{
     margin:12px 0;
 }
 
-/* CART */
+
+/* =========================
+   CART
+========================= */
 
 .cart{
     position:fixed;
@@ -611,9 +637,13 @@ input{
     opacity:1;
     position:relative;
     z-index:20;
+    border-radius:6px;
 }
 
-/* FOOTER */
+
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
     border-top:1px solid #222;
@@ -659,7 +689,10 @@ input{
     letter-spacing:4px;
 }
 
-/* MOBILE */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -716,7 +749,10 @@ input{
 
 <body>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="header">
 
@@ -733,9 +769,11 @@ input{
 
 </button>
 
+
 <div class="logo">
     VAREXON
 </div>
+
 
 <div class="icons">
 
@@ -765,6 +803,7 @@ input{
 
 </button>
 
+
 <button
     class="icon"
     id="cartButton"
@@ -790,7 +829,10 @@ input{
 
 </header>
 
-<!-- SEARCH -->
+
+<!-- =========================
+     SEARCH
+========================= -->
 
 <div
     class="search"
@@ -814,6 +856,7 @@ input{
 
 </div>
 
+
 <div
     class="search-results"
     id="searchResults"
@@ -833,12 +876,16 @@ input{
 
 </div>
 
-<!-- MENU -->
+
+<!-- =========================
+     MENU
+========================= -->
 
 <div
     class="overlay"
     id="menuOverlay"
 ></div>
+
 
 <nav
     class="side-menu"
@@ -850,6 +897,7 @@ input{
     id="userName"
 ></div>
 
+
 <div class="menu-section">
 
 <a
@@ -859,6 +907,7 @@ input{
     Giriş Yap / Kaydol
 </a>
 
+
 <a
     href="hesabim.html"
     id="accountLink"
@@ -867,6 +916,7 @@ input{
     Hesabım
 </a>
 
+
 <a
     href="siparislerim.html"
     id="ordersLink"
@@ -874,6 +924,7 @@ input{
 >
     Siparişlerim
 </a>
+
 
 <a
     href="#"
@@ -884,6 +935,7 @@ input{
 </a>
 
 </div>
+
 
 <div class="menu-section">
 
@@ -905,6 +957,7 @@ input{
 
 </div>
 
+
 <div>
 
 <a href="favoriler.html">
@@ -923,12 +976,16 @@ input{
 
 </nav>
 
-<!-- CART -->
+
+<!-- =========================
+     CART
+========================= -->
 
 <div
     class="overlay"
     id="cartOverlay"
 ></div>
+
 
 <aside
     class="cart"
@@ -951,10 +1008,12 @@ input{
 
 </div>
 
+
 <div
     class="cart-list"
     id="cartList"
 ></div>
+
 
 <div class="cart-footer">
 
@@ -970,6 +1029,7 @@ input{
 
 </div>
 
+
 <div class="line">
 
 <span>
@@ -981,6 +1041,7 @@ input{
 </span>
 
 </div>
+
 
 <div class="total">
 
@@ -994,6 +1055,7 @@ input{
 
 </div>
 
+
 <button
     class="checkout"
     id="checkoutButton"
@@ -1006,7 +1068,11 @@ input{
 
 </aside>
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+     SADECE PORSCHE
+========================= -->
 
 <section class="hero">
 
@@ -1017,32 +1083,15 @@ input{
 
 <img
     class="slide"
-    src="manken.jpg"
-    alt="Çizgili Kaplan Tasarımlı Siyah Tişört"
-    data-page="tiger-cizgili.html"
+    src="WhatsApp Image 2026-09-30 at 17.22.44.jpeg"
+    alt="Porsche Tasarımlı Siyah Tişört"
+    data-page="urun-detay.html"
     fetchpriority="high"
     decoding="async"
 >
 
-<img
-    class="slide"
-    src="manken2.png"
-    alt="Monza Tasarımlı Beyaz Tişört"
-    data-page="urun-monza.html"
-    loading="lazy"
-    decoding="async"
->
-
-<img
-    class="slide"
-    src="manken3.png"
-    alt="Çizgili Kaplan Tasarımlı Beyaz Tişört"
-    data-page="tiger-cizgili2.html"
-    loading="lazy"
-    decoding="async"
->
-
 </div>
+
 
 <div class="hero-text">
 
@@ -1056,17 +1105,20 @@ input{
 
 </div>
 
+
 <div class="dots">
 
 <span class="dot active"></span>
-<span class="dot"></span>
-<span class="dot"></span>
 
 </div>
 
 </section>
 
-<!-- PRODUCTS -->
+
+<!-- =========================
+     PRODUCTS
+     SADECE PORSCHE
+========================= -->
 
 <section
     class="products"
@@ -1077,131 +1129,14 @@ input{
     TİŞÖRT
 </div>
 
-<!-- SİYAH -->
 
 <div class="category-title">
     Siyah
 </div>
 
+
 <div class="product-scroll">
 
-<div
-    class="product"
-    data-page="urun-detay.html"
->
-
-<img
-    src="tiger.png"
-    alt="Tiger Tasarımlı Siyah Tişört"
-    loading="eager"
-    fetchpriority="high"
-    decoding="async"
->
-
-<h3>
-    Tiger Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="tiger-cizgili.html"
->
-
-<img
-    src="tiger-cizgili.png"
-    alt="Çizgili Kaplan Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Çizgili Kaplan Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-aslan.html"
->
-
-<img
-    src="aslan.png"
-    alt="Aslan Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Aslan Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-darkdevil.html"
->
-
-<img
-    src="darkdevil.png"
-    alt="Dark Devil Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Dark Devil Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-kurukafa.html"
->
-
-<img
-    src="kurukafa.png"
-    alt="Kurukafa Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Kurukafa Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<!-- YENİ SİYAH PORSCHE -->
 
 <div
     class="product"
@@ -1211,7 +1146,8 @@ input{
 <img
     src="WhatsApp Image 2026-09-30 at 17.22.44.jpeg"
     alt="Porsche Tasarımlı Siyah Tişört"
-    loading="lazy"
+    loading="eager"
+    fetchpriority="high"
     decoding="async"
 >
 
@@ -1225,147 +1161,27 @@ input{
 
 </div>
 
-</div>
-
-<div class="divider"></div>
-
-<!-- BEYAZ -->
-
-<div class="category-title">
-    Beyaz
-</div>
-
-<div class="product-scroll">
-
-<div
-    class="product"
-    data-page="urun-monza.html"
->
-
-<img
-    src="monza.png"
-    alt="Monza Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Monza Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-voltage.html"
->
-
-<img
-    src="voltage.png"
-    alt="Voltage Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Voltage Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-porsche.html"
->
-
-<img
-    src="porsche.png"
-    alt="Porsche Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Porsche Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-velron.html"
->
-
-<img
-    src="velron.png"
-    alt="Velron Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Velron Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="tiger-cizgili2.html"
->
-
-<img
-    src="tiger-cizgili2.png"
-    alt="Çizgili Kaplan Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Çizgili Kaplan Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
 
 </div>
 
 </section>
 
-<!-- FOOTER -->
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer id="iletisim">
 
 <div class="footer">
+
 
 <div class="footer-column">
 
 <div class="footer-title">
     İLETİŞİM
 </div>
+
 
 <div class="footer-item">
 
@@ -1377,11 +1193,13 @@ input{
 
 </div>
 
+
 <div class="footer-column">
 
 <div class="footer-title">
     SOSYAL MEDYA
 </div>
+
 
 <div class="footer-item">
 
@@ -1394,6 +1212,7 @@ input{
 </a>
 
 </div>
+
 
 <div class="footer-item">
 
@@ -1411,6 +1230,7 @@ input{
 
 </div>
 
+
 <div class="footer-bottom">
 
 <div class="footer-logo">
@@ -1421,13 +1241,19 @@ input{
 
 </footer>
 
+
 <script type="module">
+
+/* =========================
+   FIREBASE
+========================= */
 
 import {
     initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
     getAuth,
@@ -1437,8 +1263,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
-/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -1465,14 +1289,18 @@ const firebaseConfig = {
 
 };
 
+
 const app =
 initializeApp(firebaseConfig);
+
 
 const auth =
 getAuth(app);
 
 
-/* ACCOUNT */
+/* =========================
+   ACCOUNT
+========================= */
 
 const userName =
 document.getElementById("userName");
@@ -1489,6 +1317,7 @@ document.getElementById("ordersLink");
 const logoutLink =
 document.getElementById("logoutLink");
 
+
 let currentUser = null;
 
 
@@ -1498,6 +1327,7 @@ onAuthStateChanged(
 
         currentUser = user;
 
+
         if(user){
 
             userName.textContent =
@@ -1505,17 +1335,22 @@ onAuthStateChanged(
                 user.email ||
                 "Hesabım";
 
+
             userName.style.display =
                 "block";
+
 
             loginLink.style.display =
                 "none";
 
+
             accountLink.style.display =
                 "block";
 
+
             ordersLink.style.display =
                 "block";
+
 
             logoutLink.style.display =
                 "block";
@@ -1525,14 +1360,18 @@ onAuthStateChanged(
             userName.style.display =
                 "none";
 
+
             loginLink.style.display =
                 "block";
+
 
             accountLink.style.display =
                 "none";
 
+
             ordersLink.style.display =
                 "none";
+
 
             logoutLink.style.display =
                 "none";
@@ -1549,15 +1388,18 @@ logoutLink.addEventListener(
 
         event.preventDefault();
 
+
         try{
 
             await signOut(auth);
+
 
             window.location.reload();
 
         }catch(error){
 
             console.error(error);
+
 
             alert(
                 "Çıkış yapılırken hata oluştu."
@@ -1569,7 +1411,9 @@ logoutLink.addEventListener(
 );
 
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 const menuButton =
 document.getElementById("menuButton");
@@ -1584,24 +1428,42 @@ document.getElementById("menuOverlay");
 function openMenu(){
 
     closeCart();
+
     closeSearch();
 
-    sideMenu.classList.add("active");
 
-    menuOverlay.classList.add("active");
+    sideMenu.classList.add(
+        "active"
+    );
 
-    document.body.classList.add("lock");
+
+    menuOverlay.classList.add(
+        "active"
+    );
+
+
+    document.body.classList.add(
+        "lock"
+    );
 
 }
 
 
 function closeMenu(){
 
-    sideMenu.classList.remove("active");
+    sideMenu.classList.remove(
+        "active"
+    );
 
-    menuOverlay.classList.remove("active");
 
-    document.body.classList.remove("lock");
+    menuOverlay.classList.remove(
+        "active"
+    );
+
+
+    document.body.classList.remove(
+        "lock"
+    );
 
 }
 
@@ -1611,7 +1473,9 @@ menuButton.addEventListener(
     function(){
 
         if(
-            sideMenu.classList.contains("active")
+            sideMenu.classList.contains(
+                "active"
+            )
         ){
 
             closeMenu();
@@ -1633,7 +1497,9 @@ menuOverlay.addEventListener(
 
 
 document
-.querySelectorAll(".side-menu a")
+.querySelectorAll(
+    ".side-menu a"
+)
 .forEach(
     function(link){
 
@@ -1646,91 +1512,35 @@ document
 );
 
 
-/* PRODUCTS */
+/* =========================
+   SADECE PORSCHE ÜRÜNÜ
+========================= */
 
 const products = [
 
     {
-        name:"Tiger Tasarımlı Siyah Tişört",
-        price:499,
-        image:"tiger.png",
-        page:"urun-detay.html"
-    },
+        name:
+        "Porsche Tasarımlı Siyah Tişört",
 
-    {
-        name:"Çizgili Kaplan Tasarımlı Siyah Tişört",
-        price:499,
-        image:"tiger-cizgili.png",
-        page:"tiger-cizgili.html"
-    },
+        price:
+        499,
 
-    {
-        name:"Aslan Tasarımlı Siyah Tişört",
-        price:499,
-        image:"aslan.png",
-        page:"urun-aslan.html"
-    },
+        image:
+        "WhatsApp Image 2026-09-30 at 17.22.44.jpeg",
 
-    {
-        name:"Dark Devil Tasarımlı Siyah Tişört",
-        price:499,
-        image:"darkdevil.png",
-        page:"urun-darkdevil.html"
-    },
+        category:
+        "tisort",
 
-    {
-        name:"Kurukafa Tasarımlı Siyah Tişört",
-        price:499,
-        image:"kurukafa.png",
-        page:"urun-kurukafa.html"
-    },
-
-    {
-        name:"Porsche Tasarımlı Siyah Tişört",
-        price:499,
-        image:"WhatsApp Image 2026-09-30 at 17.22.44.jpeg",
-        page:"urun-detay.html"
-    },
-
-    {
-        name:"Monza Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"monza.png",
-        page:"urun-monza.html"
-    },
-
-    {
-        name:"Voltage Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"voltage.png",
-        page:"urun-voltage.html"
-    },
-
-    {
-        name:"Porsche Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"porsche.png",
-        page:"urun-porsche.html"
-    },
-
-    {
-        name:"Varexon Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"velron.png",
-        page:"urun-velron.html"
-    },
-
-    {
-        name:"Çizgili Kaplan Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"tiger-cizgili2.png",
-        page:"tiger-cizgili2.html"
+        page:
+        "urun-detay.html"
     }
 
 ];
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 const searchButton =
 document.getElementById("searchButton");
@@ -1770,15 +1580,25 @@ function normalize(text){
 function openSearch(){
 
     closeMenu();
+
     closeCart();
 
-    search.classList.add("active");
 
-    searchResults.classList.add("active");
+    search.classList.add(
+        "active"
+    );
+
+
+    searchResults.classList.add(
+        "active"
+    );
+
 
     searchInput.value = "";
 
+
     renderSearch("");
+
 
     searchInput.focus();
 
@@ -1787,9 +1607,14 @@ function openSearch(){
 
 function closeSearch(){
 
-    search.classList.remove("active");
+    search.classList.remove(
+        "active"
+    );
 
-    searchResults.classList.remove("active");
+
+    searchResults.classList.remove(
+        "active"
+    );
 
 }
 
@@ -1829,7 +1654,10 @@ function renderSearch(query){
         function(product){
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             item.className =
                 "search-product";
@@ -1900,34 +1728,45 @@ searchInput.addEventListener(
 );
 
 
-/* CART */
+/* =========================
+   CART
+========================= */
 
 const CART_KEY =
     "velron_cart";
 
+
 const cartButton =
 document.getElementById("cartButton");
+
 
 const cartClose =
 document.getElementById("cartClose");
 
+
 const cart =
 document.getElementById("cart");
+
 
 const cartOverlay =
 document.getElementById("cartOverlay");
 
+
 const cartList =
 document.getElementById("cartList");
+
 
 const subtotal =
 document.getElementById("subtotal");
 
+
 const shipping =
 document.getElementById("shipping");
 
+
 const total =
 document.getElementById("total");
+
 
 const checkoutButton =
 document.getElementById("checkoutButton");
@@ -1965,13 +1804,24 @@ function saveCart(items){
 function openCart(){
 
     closeMenu();
+
     closeSearch();
 
-    cart.classList.add("active");
 
-    cartOverlay.classList.add("active");
+    cart.classList.add(
+        "active"
+    );
 
-    document.body.classList.add("lock");
+
+    cartOverlay.classList.add(
+        "active"
+    );
+
+
+    document.body.classList.add(
+        "lock"
+    );
+
 
     renderCart();
 
@@ -1980,11 +1830,19 @@ function openCart(){
 
 function closeCart(){
 
-    cart.classList.remove("active");
+    cart.classList.remove(
+        "active"
+    );
 
-    cartOverlay.classList.remove("active");
 
-    document.body.classList.remove("lock");
+    cartOverlay.classList.remove(
+        "active"
+    );
+
+
+    document.body.classList.remove(
+        "lock"
+    );
 
 }
 
@@ -2051,6 +1909,7 @@ function renderCart(){
     const items =
         getCart();
 
+
     cartList.innerHTML = "";
 
 
@@ -2066,14 +1925,18 @@ function renderCart(){
 
         `;
 
+
         subtotal.textContent =
             "0 TL";
+
 
         shipping.textContent =
             "0 TL";
 
+
         total.textContent =
             "0 TL";
+
 
         return;
 
@@ -2091,6 +1954,7 @@ function renderCart(){
             const price =
                 Number(item.price) || 0;
 
+
             const count =
                 Number(item.quantity) || 1;
 
@@ -2098,12 +1962,16 @@ function renderCart(){
             sum +=
                 price * count;
 
+
             quantity +=
                 count;
 
 
             const element =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             element.className =
                 "cart-item";
@@ -2157,6 +2025,7 @@ function renderCart(){
 
                         </div>
 
+
                         <button
                             class="remove"
                             type="button"
@@ -2172,7 +2041,9 @@ function renderCart(){
 
 
             element
-                .querySelector(".minus")
+                .querySelector(
+                    ".minus"
+                )
                 .addEventListener(
                     "click",
                     function(){
@@ -2187,7 +2058,9 @@ function renderCart(){
 
 
             element
-                .querySelector(".plus")
+                .querySelector(
+                    ".plus"
+                )
                 .addEventListener(
                     "click",
                     function(){
@@ -2202,12 +2075,16 @@ function renderCart(){
 
 
             element
-                .querySelector(".remove")
+                .querySelector(
+                    ".remove"
+                )
                 .addEventListener(
                     "click",
                     function(){
 
-                        removeItem(index);
+                        removeItem(
+                            index
+                        );
 
                     }
                 );
@@ -2349,10 +2226,14 @@ checkoutButton.addEventListener(
 );
 
 
-/* PRODUCT LINKS */
+/* =========================
+   PRODUCT LINK
+========================= */
 
 document
-.querySelectorAll(".product")
+.querySelectorAll(
+    ".product"
+)
 .forEach(
     function(productElement){
 
@@ -2370,37 +2251,32 @@ document
 );
 
 
-/* SLIDER */
+/* =========================
+   SLIDER
+========================= */
 
 const slider =
-    document.getElementById("slider");
+    document.getElementById(
+        "slider"
+    );
+
 
 const dots =
-    document.querySelectorAll(".dot");
+    document.querySelectorAll(
+        ".dot"
+    );
 
 
 let currentSlide = 0;
 
-let touchStartX = 0;
-
-let touchStartY = 0;
-
-let touchEndX = 0;
-
-let touchMoved = false;
-
-let autoSlideTimer;
-
 
 function goToSlide(index){
 
-    currentSlide = index;
+    currentSlide = 0;
 
 
     slider.style.transform =
-        "translateX(-" +
-        currentSlide * 100 +
-        "%)";
+        "translateX(0%)";
 
 
     dots.forEach(
@@ -2415,239 +2291,21 @@ function goToSlide(index){
 
 
     if(
-        dots[currentSlide]
+        dots[0]
     ){
 
-        dots[currentSlide]
-            .classList.add("active");
+        dots[0].classList.add(
+            "active"
+        );
 
     }
 
 }
 
 
-function nextSlide(){
-
-    currentSlide++;
-
-
-    if(
-        currentSlide >= 3
-    ){
-
-        currentSlide = 0;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function previousSlide(){
-
-    currentSlide--;
-
-
-    if(
-        currentSlide < 0
-    ){
-
-        currentSlide = 2;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function startAutoSlide(){
-
-    clearInterval(
-        autoSlideTimer
-    );
-
-
-    autoSlideTimer =
-        setInterval(
-            nextSlide,
-            5000
-        );
-
-}
-
-
-startAutoSlide();
-
-
-slider.addEventListener(
-    "touchstart",
-    function(event){
-
-        touchStartX =
-            event.touches[0].clientX;
-
-        touchStartY =
-            event.touches[0].clientY;
-
-        touchMoved = false;
-
-        clearInterval(
-            autoSlideTimer
-        );
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchmove",
-    function(event){
-
-        const currentX =
-            event.touches[0].clientX;
-
-        const currentY =
-            event.touches[0].clientY;
-
-
-        const differenceX =
-            currentX -
-            touchStartX;
-
-
-        const differenceY =
-            currentY -
-            touchStartY;
-
-
-        if(
-            Math.abs(differenceX) > 10 &&
-            Math.abs(differenceX) >
-            Math.abs(differenceY)
-        ){
-
-            touchMoved = true;
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchend",
-    function(event){
-
-        touchEndX =
-            event.changedTouches[0].clientX;
-
-
-        const difference =
-            touchStartX -
-            touchEndX;
-
-
-        if(
-            Math.abs(difference) >= 50
-        ){
-
-            if(
-                difference > 0
-            ){
-
-                nextSlide();
-
-            }else{
-
-                previousSlide();
-
-            }
-
-        }
-
-
-        startAutoSlide();
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider
-.querySelectorAll(".slide")
-.forEach(
-    function(slide){
-
-        slide.addEventListener(
-            "click",
-            function(){
-
-                if(touchMoved){
-
-                    return;
-
-                }
-
-
-                const page =
-                    slide.dataset.page;
-
-
-                if(page){
-
-                    window.location.href =
-                        page;
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* DOTS */
-
-dots.forEach(
-    function(dot,index){
-
-        dot.addEventListener(
-            "click",
-            function(event){
-
-                event.stopPropagation();
-
-                goToSlide(
-                    index
-                );
-
-                startAutoSlide();
-
-            }
-        );
-
-    }
-);
-
-
-/* ESC */
+/* =========================
+   ESC
+========================= */
 
 document.addEventListener(
     "keydown",
@@ -2669,9 +2327,13 @@ document.addEventListener(
 );
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 renderCart();
+
+goToSlide(0);
 
 </script>
 
