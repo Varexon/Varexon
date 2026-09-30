@@ -6,13 +6,9 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+content="width=device-width, initial-scale=1.0">
 
-<meta name="color-scheme" content="dark">
-
-<meta name="theme-color" content="#000000">
-
-<title>VAREXON</title>
+<title>Siparişlerim - VAREXON</title>
 
 <style>
 
@@ -22,1334 +18,265 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     box-sizing:border-box;
 }
 
-html{
-    background:#000;
-    color-scheme:dark;
-    scroll-behavior:smooth;
-    -webkit-text-size-adjust:100%;
-}
-
 body{
+    min-height:100vh;
     background:#000;
     color:#fff;
     font-family:Arial,sans-serif;
-    overflow-x:hidden;
-    -webkit-font-smoothing:antialiased;
 }
 
-body.lock{
-    overflow:hidden;
-}
-
-img{
-    display:block;
-    max-width:100%;
-    height:auto;
-}
-
-button,
-input{
-    font:inherit;
-}
-
-.header{
+.container{
     width:100%;
-    height:55px;
-    background:#000;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 15px;
-    position:relative;
-    z-index:100;
+    max-width:650px;
+    margin:auto;
+    padding:20px 15px 50px;
 }
 
-.menu-button{
-    width:25px;
-    height:25px;
-    background:none;
-    border:none;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:4px;
-    cursor:pointer;
-}
-
-.menu-button span{
-    width:19px;
-    height:1px;
-    background:#fff;
+.back{
+    display:inline-block;
+    color:#fff;
+    text-decoration:none;
+    font-size:28px;
+    margin-bottom:20px;
 }
 
 .logo{
-    position:absolute;
-    left:50%;
-    transform:translateX(-50%);
+    text-align:center;
     font-family:Georgia,"Times New Roman",serif;
-    font-size:18px;
+    font-size:21px;
     font-weight:bold;
-    letter-spacing:5px;
-    color:#fff;
+    letter-spacing:6px;
+    margin-bottom:35px;
 }
 
-.icons{
-    display:flex;
-    gap:13px;
+.title{
+    font-size:22px;
+    margin-bottom:8px;
 }
 
-.icon{
-    width:25px;
-    height:25px;
-    background:none;
-    border:none;
-    color:#fff;
-    cursor:pointer;
-}
-
-.icon svg{
-    width:21px;
-    height:21px;
-    stroke:#fff;
-    fill:none;
-    stroke-width:1.4;
-}
-
-.search{
-    display:none;
-    width:100%;
-    height:55px;
-    background:#000;
-    align-items:center;
-    padding:0 15px;
-    gap:10px;
-    position:relative;
-    z-index:110;
-}
-
-.search.active{
-    display:flex;
-}
-
-.search-close{
-    background:none;
-    border:none;
-    color:#fff;
-    font-size:26px;
-    cursor:pointer;
-}
-
-.search input{
-    flex:1;
-    height:38px;
-    background:#111;
-    border:1px solid #333;
-    color:#fff;
-    outline:none;
-    padding:0 12px;
-}
-
-.search input::placeholder{
+.subtitle{
     color:#777;
-}
-
-.search-results{
-    display:none;
-    padding:20px 15px 40px;
-    background:#000;
-}
-
-.search-results.active{
-    display:block;
-}
-
-.search-title{
-    color:#888;
-    font-size:12px;
-    margin-bottom:15px;
-}
-
-.search-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:20px 10px;
-}
-
-.search-product{
-    cursor:pointer;
-}
-
-.search-product img{
-    width:100%;
-}
-
-.search-product h3{
-    color:#fff;
     font-size:11px;
-    font-weight:500;
-    margin-top:7px;
+    margin-bottom:25px;
 }
 
-.search-product p{
-    color:#ccc;
+.orders{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.order{
+    background:#080808;
+    border:1px solid #292929;
+    padding:16px;
+}
+
+.order-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    border-bottom:1px solid #292929;
+    padding-bottom:12px;
+    margin-bottom:13px;
+}
+
+.order-number{
     font-size:11px;
+    font-weight:bold;
+    letter-spacing:.5px;
+}
+
+.order-date{
+    color:#777;
+    font-size:9px;
     margin-top:5px;
 }
 
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.5);
-    backdrop-filter:blur(5px);
-    -webkit-backdrop-filter:blur(5px);
-    opacity:0;
-    visibility:hidden;
-    transition:.25s;
-    z-index:999;
-}
-
-.overlay.active{
-    opacity:1;
-    visibility:visible;
-}
-
-.side-menu{
-    position:fixed;
-    top:0;
-    left:0;
-    width:40vw;
-    height:100dvh;
-    background:#080808;
-    transform:translateX(-100%);
-    transition:.25s ease;
-    z-index:1000;
-    padding:70px 20px 30px;
-    overflow-y:auto;
-}
-
-.side-menu.active{
-    transform:translateX(0);
-}
-
-.user-name{
-    display:none;
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:16px;
-    font-weight:bold;
-    margin-bottom:25px;
-    word-break:break-word;
-}
-
-.side-menu a{
-    display:block;
-    color:#fff;
-    text-decoration:none;
-    font-size:13px;
-    padding:10px 0;
-}
-
-.menu-section{
-    padding-bottom:18px;
-    margin-bottom:18px;
-    border-bottom:1px solid #292929;
-}
-
-.hero{
-    position:relative;
-    width:100%;
-    overflow:hidden;
-    touch-action:pan-y;
-    background:#000;
-}
-
-.slider{
-    display:flex;
-    width:100%;
-    transition:transform .6s ease;
-    user-select:none;
-    -webkit-user-select:none;
-}
-
-.slide{
-    flex:0 0 100%;
-    width:100%;
-    height:auto;
-    display:block;
-    pointer-events:auto;
-    object-fit:cover;
-    cursor:pointer;
-    touch-action:pan-y;
-    -webkit-user-drag:none;
-}
-
-.hero-text{
-    position:absolute;
-    left:6%;
-    top:50%;
-    transform:translateY(-50%);
-    pointer-events:none;
-}
-
-.hero-text h1{
-    font-family:"Trebuchet MS",Arial,sans-serif;
-    font-size:27px;
-    font-style:italic;
-    letter-spacing:6px;
-}
-
-.hero-text p{
-    font-size:11px;
-    margin-top:8px;
-    letter-spacing:1px;
-}
-
-.dots{
-    position:absolute;
-    bottom:13px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:5px;
-}
-
-.dot{
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#fff;
-    opacity:.35;
-    cursor:pointer;
-}
-
-.dot.active{
-    opacity:1;
+.status{
+    font-size:9px;
+    padding:5px 8px;
+    border:1px solid #444;
+    color:#aaa;
+    white-space:nowrap;
 }
 
 .products{
-    padding:28px 15px 45px;
-    background:#000;
-}
-
-.main-title{
-    color:#fff;
-    font-size:22px;
-    font-weight:800;
-}
-
-.category-title{
-    color:#fff;
-    font-size:15px;
-    margin:14px 0;
-    margin-left:8px;
-}
-
-.product-scroll{
     display:flex;
+    flex-direction:column;
     gap:10px;
-    overflow-x:auto;
-    scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
-}
-
-.product-scroll::-webkit-scrollbar{
-    display:none;
 }
 
 .product{
-    flex:0 0 37%;
+    display:flex;
+    gap:10px;
+    padding-bottom:10px;
+    border-bottom:1px solid #1d1d1d;
+}
+
+.product:last-child{
+    border-bottom:none;
+    padding-bottom:0;
+}
+
+.product-image{
+    width:55px;
+    height:68px;
+    object-fit:contain;
+    background:#111;
+    flex-shrink:0;
+}
+
+.product-info{
+    flex:1;
     min-width:0;
-    cursor:pointer;
 }
 
-.product img{
-    width:100%;
-    filter:
-        saturate(1.20)
-        contrast(1.05);
-}
-
-.product h3{
-    color:#fff;
+.product-name{
     font-size:11px;
-    font-weight:500;
-    line-height:1.35;
-    margin-top:7px;
+    line-height:1.4;
 }
 
-.product p{
-    text-align:center;
-    font-size:11px;
-    color:#ddd;
+.product-details{
+    color:#777;
+    font-size:9px;
+    line-height:1.7;
     margin-top:5px;
 }
 
-.divider{
-    height:1px;
-    background:#444;
-    margin:12px 0;
+.product-price{
+    color:#ddd;
+    font-size:10px;
+    margin-top:5px;
 }
 
-.cart{
-    position:fixed;
-    top:0;
-    right:0;
-    width:40vw;
-    min-width:300px;
-    max-width:430px;
-    height:100dvh;
-    background:#080808;
-    transform:translateX(100%);
-    transition:.3s ease;
-    z-index:2000;
-    display:grid;
-    grid-template-rows:58px minmax(0,1fr) auto;
-    overflow:hidden;
-    padding-bottom:env(safe-area-inset-bottom);
+.order-bottom{
+    border-top:1px solid #292929;
+    margin-top:14px;
+    padding-top:12px;
 }
 
-.cart.active{
-    transform:translateX(0);
-}
-
-.cart-head{
-    height:58px;
-    min-height:58px;
-    border-bottom:1px solid #292929;
+.info-row{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:0 17px;
+    font-size:10px;
+    margin-bottom:7px;
 }
 
-.cart-head span{
-    color:#fff;
-    font-size:13px;
+.info-row span:first-child{
+    color:#777;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid #292929;
+    padding-top:10px;
+    margin-top:8px;
+    font-size:12px;
     font-weight:bold;
-    letter-spacing:1px;
 }
 
-.cart-close{
-    border:none;
-    background:none;
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.cart-list{
-    min-height:0;
-    overflow-y:auto;
-    overflow-x:hidden;
-    padding:12px;
-    -webkit-overflow-scrolling:touch;
+.address{
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px solid #1d1d1d;
+    color:#777;
+    font-size:9px;
+    line-height:1.6;
 }
 
 .empty{
     text-align:center;
     color:#777;
     font-size:12px;
-    padding-top:50px;
-}
-
-.cart-item{
-    display:flex;
-    gap:8px;
-    min-width:0;
-    border-bottom:1px solid #252525;
-    padding-bottom:12px;
-    margin-bottom:12px;
-}
-
-.cart-image{
-    width:44px;
-    height:63px;
-    object-fit:contain;
-    object-position:center;
-    background:#111;
-    display:block;
-    flex-shrink:0;
-    filter:
-        saturate(1.18)
-        contrast(1.06)
-        brightness(.90);
-}
-
-.cart-info{
-    flex:1;
-    min-width:0;
-}
-
-.cart-name{
-    color:#fff;
-    font-size:10px;
-    line-height:1.35;
-}
-
-.cart-size{
-    color:#888;
-    font-size:9px;
-    margin-top:4px;
-}
-
-.cart-price{
-    color:#ddd;
-    font-size:10px;
-    margin-top:4px;
-}
-
-.cart-bottom{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-top:7px;
-}
-
-.quantity{
-    display:flex;
-    border:1px solid #333;
-}
-
-.quantity button{
-    width:21px;
-    height:21px;
-    border:none;
-    background:#111;
-    color:#fff;
-    cursor:pointer;
-}
-
-.quantity span{
-    width:22px;
-    text-align:center;
-    line-height:21px;
-    font-size:9px;
-    color:#fff;
-}
-
-.remove{
-    border:none;
-    background:none;
-    color:#777;
-    font-size:9px;
-    cursor:pointer;
-}
-
-.cart-footer{
-    width:100%;
-    border-top:1px solid #292929;
-    padding:
-        13px
-        13px
-        calc(13px + env(safe-area-inset-bottom));
+    padding:45px 15px;
+    border:1px solid #222;
     background:#080808;
-    position:relative;
-    z-index:10;
 }
 
-.line{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:10px;
-    margin-bottom:8px;
-    color:#fff;
+.loading{
+    text-align:center;
+    color:#777;
+    font-size:11px;
+    padding:40px 0;
 }
 
-.line span:first-child{
-    color:#888;
+.error{
+    text-align:center;
+    color:#ff5555;
+    font-size:11px;
+    line-height:1.6;
+    padding:30px 15px;
 }
 
-.line span:last-child{
-    color:#fff;
-}
-
-.total{
-    border-top:1px solid #292929;
-    padding-top:10px;
-    margin-top:5px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.total span{
-    color:#fff;
-}
-
-.checkout{
+.login-button{
+    display:block;
     width:100%;
-    height:42px;
-    margin-top:12px;
-    border:none;
+    height:45px;
+    line-height:45px;
+    text-align:center;
     background:#fff;
     color:#000;
+    text-decoration:none;
     font-size:10px;
     font-weight:bold;
     letter-spacing:1px;
-    cursor:pointer;
-    display:block;
-    visibility:visible;
-    opacity:1;
-    position:relative;
-    z-index:20;
-}
-
-.footer{
-    border-top:1px solid #222;
-    padding:35px 25px 25px;
-    display:flex;
-    justify-content:space-between;
-    background:#000;
-}
-
-.footer-column{
-    width:48%;
-}
-
-.footer-title{
-    color:#fff;
-    font-size:12px;
-    font-weight:bold;
-    letter-spacing:1px;
-    margin-bottom:12px;
-}
-
-.footer-item{
-    color:#aaa;
-    font-size:11px;
-    line-height:1.8;
-}
-
-.footer-item a{
-    color:#aaa;
-    text-decoration:none;
-}
-
-.footer-bottom{
-    text-align:center;
-    padding:0 20px 25px;
-    background:#000;
-}
-
-.footer-logo{
-    color:#555;
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:11px;
-    letter-spacing:4px;
-}
-
-@media(max-width:700px){
-
-    .side-menu{
-        width:40vw;
-        padding:65px 13px 25px;
-    }
-
-    .cart{
-        width:40vw;
-        min-width:0;
-        max-width:none;
-    }
-
-    .user-name{
-        font-size:12px;
-    }
-
-    .side-menu a{
-        font-size:10px;
-    }
-
-    .cart-image{
-        width:44px;
-        height:63px;
-    }
-
-}
-
-@media(max-width:360px){
-
-    .cart{
-        width:45vw;
-    }
-
-    .cart-head{
-        padding:0 12px;
-    }
-
-    .cart-list{
-        padding:10px;
-    }
-
-    .cart-footer{
-        padding-left:10px;
-        padding-right:10px;
-    }
-
+    margin-top:15px;
 }
 
 </style>
 
 </head>
 
+
 <body>
 
-<header class="header">
+<main class="container">
 
-<button
-    class="menu-button"
-    id="menuButton"
-    type="button"
-    aria-label="Menü"
->
 
-<span></span>
-<span></span>
-<span></span>
+<a href="index.html" class="back">
+    ‹
+</a>
 
-</button>
 
 <div class="logo">
     VAREXON
 </div>
 
-<div class="icons">
 
-<button
-    class="icon"
-    id="searchButton"
-    type="button"
-    aria-label="Ara"
->
-
-<svg viewBox="0 0 24 24">
-
-<circle
-    cx="10.8"
-    cy="10.8"
-    r="6.5"
-></circle>
-
-<line
-    x1="16"
-    y1="16"
-    x2="21"
-    y2="21"
-></line>
-
-</svg>
-
-</button>
-
-<button
-    class="icon"
-    id="cartButton"
-    type="button"
-    aria-label="Sepet"
->
-
-<svg viewBox="0 0 24 24">
-
-<path
-    d="M5 8h14l-1 12H6L5 8z"
-></path>
-
-<path
-    d="M9 8V6a3 3 0 0 1 6 0v2"
-></path>
-
-</svg>
-
-</button>
-
-</div>
-
-</header>
-
-<div
-    class="search"
-    id="search"
->
-
-<button
-    class="search-close"
-    id="searchClose"
-    type="button"
->
-    ×
-</button>
-
-<input
-    id="searchInput"
-    type="text"
-    placeholder="Ürün ara..."
-    autocomplete="off"
->
-
-</div>
-
-<div
-    class="search-results"
-    id="searchResults"
->
-
-<div
-    class="search-title"
-    id="searchTitle"
->
-    Tüm ürünler
-</div>
-
-<div
-    class="search-grid"
-    id="searchGrid"
-></div>
-
-</div>
-
-<div
-    class="overlay"
-    id="menuOverlay"
-></div>
-
-<nav
-    class="side-menu"
-    id="sideMenu"
->
-
-<div
-    class="user-name"
-    id="userName"
-></div>
-
-<div class="menu-section">
-
-<a
-    href="giris.html"
-    id="loginLink"
->
-    Giriş Yap / Kaydol
-</a>
-
-<a
-    href="hesabim.html"
-    id="accountLink"
-    style="display:none;"
->
-    Hesabım
-</a>
-
-<a
-    href="siparislerim.html"
-    id="ordersLink"
-    style="display:none;"
->
+<h1 class="title">
     Siparişlerim
-</a>
-
-<a
-    href="#"
-    id="logoutLink"
-    style="display:none;"
->
-    Çıkış Yap
-</a>
-
-</div>
-
-<div class="menu-section">
-
-<a href="#tisort">
-    Tişört
-</a>
-
-<a href="#">
-    Şapka
-</a>
-
-<a href="#">
-    Atkı
-</a>
-
-<a href="#">
-    Sweatshirt
-</a>
-
-</div>
-
-<div>
-
-<a href="favoriler.html">
-    Favoriler
-</a>
-
-<a href="#iletisim">
-    İletişim
-</a>
-
-<a href="#">
-    Hakkımızda
-</a>
-
-</div>
-
-</nav>
-
-<div
-    class="overlay"
-    id="cartOverlay"
-></div>
-
-<aside
-    class="cart"
-    id="cart"
->
-
-<div class="cart-head">
-
-<span>
-    SEPET
-</span>
-
-<button
-    class="cart-close"
-    id="cartClose"
-    type="button"
->
-    ×
-</button>
-
-</div>
-
-<div
-    class="cart-list"
-    id="cartList"
-></div>
-
-<div class="cart-footer">
-
-<div class="line">
-
-<span>
-    Ara toplam
-</span>
-
-<span id="subtotal">
-    0 TL
-</span>
-
-</div>
-
-<div class="line">
-
-<span>
-    Kargo
-</span>
-
-<span id="shipping">
-    0 TL
-</span>
-
-</div>
-
-<div class="total">
-
-<span>
-    TOPLAM
-</span>
-
-<span id="total">
-    0 TL
-</span>
-
-</div>
-
-<button
-    class="checkout"
-    id="checkoutButton"
-    type="button"
->
-    SİPARİŞ VER
-</button>
-
-</div>
-
-</aside>
-
-<section class="hero">
-
-<div
-    class="slider"
-    id="slider"
->
-
-<img
-    class="slide"
-    src="manken.jpg"
-    alt="Çizgili Kaplan Tasarımlı Siyah Tişört"
-    data-page="tiger-cizgili.html"
-    fetchpriority="high"
-    decoding="async"
->
-
-<img
-    class="slide"
-    src="manken2.png"
-    alt="Monza Tasarımlı Beyaz Tişört"
-    data-page="urun-monza.html"
-    loading="lazy"
-    decoding="async"
->
-
-<img
-    class="slide"
-    src="manken3.png"
-    alt="Çizgili Kaplan Tasarımlı Beyaz Tişört"
-    data-page="tiger-cizgili2.html"
-    loading="lazy"
-    decoding="async"
->
-
-</div>
-
-<div class="hero-text">
-
-<h1>
-    VAREXON
 </h1>
 
-<p>
-    Sıradanlıktan uzak
+
+<p class="subtitle">
+    Verdiğin siparişleri buradan takip edebilirsin.
 </p>
 
-</div>
-
-<div class="dots">
-
-<span class="dot active"></span>
-<span class="dot"></span>
-<span class="dot"></span>
-
-</div>
-
-</section>
-
-<section
-    class="products"
-    id="tisort"
->
-
-<div class="main-title">
-    TİŞÖRT
-</div>
-
-<div class="category-title">
-    Siyah
-</div>
-
-<div class="product-scroll">
 
 <div
-    class="product"
-    data-page="urun-detay.html"
+class="orders"
+id="orders"
 >
 
-<img
-    src="tiger.png"
-    alt="Tiger Tasarımlı Siyah Tişört"
-    loading="eager"
-    fetchpriority="high"
-    decoding="async"
->
-
-<h3>
-    Tiger Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
+    <div class="loading">
+        Siparişlerin yükleniyor...
+    </div>
 
 </div>
 
-<div
-    class="product"
-    data-page="tiger-cizgili.html"
->
 
-<img
-    src="tiger-cizgili.png"
-    alt="Çizgili Kaplan Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
+</main>
 
-<h3>
-    Çizgili Kaplan Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="urun-aslan.html"
->
-
-<img
-    src="aslan.png"
-    alt="Aslan Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Aslan Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="urun-darkdevil.html"
->
-
-<img
-    src="darkdevil.png"
-    alt="Dark Devil Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Dark Devil Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="urun-kurukafa.html"
->
-
-<img
-    src="kurukafa.png"
-    alt="Kurukafa Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Kurukafa Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-</div>
-
-<div class="divider"></div>
-
-<div class="category-title">
-    Beyaz
-</div>
-
-<div class="product-scroll">
-
-<div
-    class="product"
-    data-page="urun-monza.html"
->
-
-<img
-    src="monza.png"
-    alt="Monza Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Monza Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="urun-voltage.html"
->
-
-<img
-    src="voltage.png"
-    alt="Voltage Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Voltage Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="urun-porsche.html"
->
-
-<img
-    src="porsche.png"
-    alt="Porsche Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Porsche Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="urun-velron.html"
->
-
-<img
-    src="velron.png"
-    alt="Velron Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Velron Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-<div
-    class="product"
-    data-page="tiger-cizgili2.html"
->
-
-<img
-    src="tiger-cizgili2.png"
-    alt="Çizgili Kaplan Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Çizgili Kaplan Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<footer id="iletisim">
-
-<div class="footer">
-
-<div class="footer-column">
-
-<div class="footer-title">
-    İLETİŞİM
-</div>
-
-<div class="footer-item">
-
-<a href="mailto:storevelron@gmail.com">
-    storevelron@gmail.com
-</a>
-
-</div>
-
-</div>
-
-<div class="footer-column">
-
-<div class="footer-title">
-    SOSYAL MEDYA
-</div>
-
-<div class="footer-item">
-
-<a
-    href="https://instagram.com/velron_store"
-    target="_blank"
-    rel="noopener"
->
-    Instagram: velron_store
-</a>
-
-</div>
-
-<div class="footer-item">
-
-<a
-    href="https://www.tiktok.com/@velron.store"
-    target="_blank"
-    rel="noopener"
->
-    TikTok: velron.store
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-
-<div class="footer-logo">
-    VAREXON
-</div>
-
-</div>
-
-</footer>
 
 <script type="module">
+
+
+/* =====================================
+   FIREBASE
+===================================== */
 
 import {
     initializeApp
@@ -1357,726 +284,296 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
+
 import {
     getAuth,
-    onAuthStateChanged,
-    signOut
+    onAuthStateChanged
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs
+}
+from
+"https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
 const firebaseConfig = {
 
     apiKey:
-    "AIzaSyD8osmrzNWj32T-1kNx-jmHlWcAm5_7xeg",
+        "AIzaSyD8osmrzNWj32T-1kNx-jmHlWcAm5_7xeg",
 
     authDomain:
-    "velron-831db.firebaseapp.com",
+        "velron-831db.firebaseapp.com",
 
     projectId:
-    "velron-831db",
+        "velron-831db",
 
     storageBucket:
-    "velron-831db.firebasestorage.app",
+        "velron-831db.firebasestorage.app",
 
     messagingSenderId:
-    "622435814773",
+        "622435814773",
 
     appId:
-    "1:622435814773:web:bd94aff51e78ba2a7c573c",
+        "1:622435814773:web:bd94aff51e78ba2a7c573c",
 
     measurementId:
-    "G-74XHVN6V22"
+        "G-74XHVN6V22"
 
 };
 
 
 const app =
-initializeApp(firebaseConfig);
-
-const auth =
-getAuth(app);
-
-
-const userName =
-document.getElementById("userName");
-
-const loginLink =
-document.getElementById("loginLink");
-
-const accountLink =
-document.getElementById("accountLink");
-
-const ordersLink =
-document.getElementById("ordersLink");
-
-const logoutLink =
-document.getElementById("logoutLink");
-
-
-let currentUser = null;
-
-
-onAuthStateChanged(
-    auth,
-    function(user){
-
-        currentUser = user;
-
-        if(user){
-
-            userName.textContent =
-                user.displayName ||
-                user.email ||
-                "Hesabım";
-
-            userName.style.display =
-                "block";
-
-            loginLink.style.display =
-                "none";
-
-            accountLink.style.display =
-                "block";
-
-            ordersLink.style.display =
-                "block";
-
-            logoutLink.style.display =
-                "block";
-
-        }else{
-
-            userName.style.display =
-                "none";
-
-            loginLink.style.display =
-                "block";
-
-            accountLink.style.display =
-                "none";
-
-            ordersLink.style.display =
-                "none";
-
-            logoutLink.style.display =
-                "none";
-
-        }
-
-    }
-);
-
-
-logoutLink.addEventListener(
-    "click",
-    async function(event){
-
-        event.preventDefault();
-
-        try{
-
-            await signOut(auth);
-
-            window.location.reload();
-
-        }catch(error){
-
-            console.error(error);
-
-            alert(
-                "Çıkış yapılırken hata oluştu."
-            );
-
-        }
-
-    }
-);
-
-
-const menuButton =
-document.getElementById("menuButton");
-
-const sideMenu =
-document.getElementById("sideMenu");
-
-const menuOverlay =
-document.getElementById("menuOverlay");
-
-
-function openMenu(){
-
-    closeCart();
-    closeSearch();
-
-    sideMenu.classList.add("active");
-
-    menuOverlay.classList.add("active");
-
-    document.body.classList.add("lock");
-
-}
-
-
-function closeMenu(){
-
-    sideMenu.classList.remove("active");
-
-    menuOverlay.classList.remove("active");
-
-    document.body.classList.remove("lock");
-
-}
-
-
-menuButton.addEventListener(
-    "click",
-    function(){
-
-        if(
-            sideMenu.classList.contains("active")
-        ){
-
-            closeMenu();
-
-        }else{
-
-            openMenu();
-
-        }
-
-    }
-);
-
-
-menuOverlay.addEventListener(
-    "click",
-    closeMenu
-);
-
-
-document
-.querySelectorAll(".side-menu a")
-.forEach(
-    function(link){
-
-        link.addEventListener(
-            "click",
-            closeMenu
-        );
-
-    }
-);
-
-
-const searchButton =
-document.getElementById("searchButton");
-
-const searchClose =
-document.getElementById("searchClose");
-
-const search =
-document.getElementById("search");
-
-const searchInput =
-document.getElementById("searchInput");
-
-const searchResults =
-document.getElementById("searchResults");
-
-const searchGrid =
-document.getElementById("searchGrid");
-
-const searchTitle =
-document.getElementById("searchTitle");
-
-
-const products = [
-
-    {
-        name:"Tiger Tasarımlı Siyah Tişört",
-        price:499,
-        image:"tiger.png",
-        page:"urun-detay.html"
-    },
-
-    {
-        name:"Çizgili Kaplan Tasarımlı Siyah Tişört",
-        price:499,
-        image:"tiger-cizgili.png",
-        page:"tiger-cizgili.html"
-    },
-
-    {
-        name:"Aslan Tasarımlı Siyah Tişört",
-        price:499,
-        image:"aslan.png",
-        page:"urun-aslan.html"
-    },
-
-    {
-        name:"Dark Devil Tasarımlı Siyah Tişört",
-        price:499,
-        image:"darkdevil.png",
-        page:"urun-darkdevil.html"
-    },
-
-    {
-        name:"Kurukafa Tasarımlı Siyah Tişört",
-        price:499,
-        image:"kurukafa.png",
-        page:"urun-kurukafa.html"
-    },
-
-    {
-        name:"Monza Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"monza.png",
-        page:"urun-monza.html"
-    },
-
-    {
-        name:"Voltage Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"voltage.png",
-        page:"urun-voltage.html"
-    },
-
-    {
-        name:"Porsche Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"porsche.png",
-        page:"urun-porsche.html"
-    },
-
-    {
-        name:"Varexon Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"velron.png",
-        page:"urun-velron.html"
-    },
-
-    {
-        name:"Çizgili Kaplan Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"tiger-cizgili2.png",
-        page:"tiger-cizgili2.html"
-    }
-
-];
-
-
-function normalize(text){
-
-    return text
-        .toLocaleLowerCase("tr-TR")
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        );
-
-}
-
-
-function openSearch(){
-
-    closeMenu();
-    closeCart();
-
-    search.classList.add("active");
-
-    searchResults.classList.add("active");
-
-    searchInput.value = "";
-
-    renderSearch("");
-
-    searchInput.focus();
-
-}
-
-
-function closeSearch(){
-
-    search.classList.remove("active");
-
-    searchResults.classList.remove("active");
-
-}
-
-
-function renderSearch(query){
-
-    const q =
-        normalize(
-            query.trim()
-        );
-
-
-    const result =
-        q === ""
-        ? products
-        : products.filter(
-            function(product){
-
-                return normalize(
-                    product.name
-                ).includes(q);
-
-            }
-        );
-
-
-    searchTitle.textContent =
-        q === ""
-        ? "Tüm ürünler"
-        : "Arama sonuçları";
-
-
-    searchGrid.innerHTML = "";
-
-
-    result.forEach(
-        function(product){
-
-            const item =
-                document.createElement("div");
-
-
-            item.className =
-                "search-product";
-
-
-            item.innerHTML = `
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
-                    decoding="async"
-                >
-
-                <h3>
-                    ${product.name}
-                </h3>
-
-                <p>
-                    ${product.price} TL
-                </p>
-
-            `;
-
-
-            item.addEventListener(
-                "click",
-                function(){
-
-                    window.location.href =
-                        product.page;
-
-                }
-            );
-
-
-            searchGrid.appendChild(item);
-
-        }
+    initializeApp(
+        firebaseConfig
     );
 
-}
+
+const auth =
+    getAuth(app);
 
 
-searchButton.addEventListener(
-    "click",
-    openSearch
-);
+const db =
+    getFirestore(app);
 
 
-searchClose.addEventListener(
-    "click",
-    closeSearch
-);
+/* =====================================
+   ELEMENTLER
+===================================== */
+
+const ordersElement =
+    document.getElementById(
+        "orders"
+    );
 
 
-searchInput.addEventListener(
-    "input",
-    function(){
+/* =====================================
+   SİPARİŞLERİ GETİR
+===================================== */
 
-        renderSearch(
-            this.value
-        );
+async function loadOrders(user){
 
-    }
-);
+    ordersElement.innerHTML = `
 
+        <div class="loading">
+            Siparişlerin yükleniyor...
+        </div>
 
-const CART_KEY =
-    "velron_cart";
+    `;
 
-
-const cartButton =
-document.getElementById("cartButton");
-
-const cartClose =
-document.getElementById("cartClose");
-
-const cart =
-document.getElementById("cart");
-
-const cartOverlay =
-document.getElementById("cartOverlay");
-
-const cartList =
-document.getElementById("cartList");
-
-const subtotal =
-document.getElementById("subtotal");
-
-const shipping =
-document.getElementById("shipping");
-
-const total =
-document.getElementById("total");
-
-const checkoutButton =
-document.getElementById("checkoutButton");
-
-
-function getCart(){
 
     try{
 
-        return JSON.parse(
-            localStorage.getItem(
-                CART_KEY
-            )
-        ) || [];
+        const ordersQuery =
+            query(
+
+                collection(
+                    db,
+                    "siparisler"
+                ),
+
+                where(
+                    "kullaniciId",
+                    "==",
+                    user.uid
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(
+                ordersQuery
+            );
+
+
+        const orders = [];
+
+
+        snapshot.forEach(
+            function(doc){
+
+                orders.push({
+
+                    id:
+                        doc.id,
+
+                    data:
+                        doc.data()
+
+                });
+
+            }
+        );
+
+
+        /* =====================================
+           YENİ SİPARİŞLER ÜSTTE
+        ===================================== */
+
+        orders.sort(
+            function(a,b){
+
+                const dateA =
+                    new Date(
+                        a.data.tarih || 0
+                    ).getTime();
+
+
+                const dateB =
+                    new Date(
+                        b.data.tarih || 0
+                    ).getTime();
+
+
+                return dateB - dateA;
+
+            }
+        );
+
+
+        if(orders.length === 0){
+
+            ordersElement.innerHTML = `
+
+                <div class="empty">
+
+                    Henüz bir siparişin bulunmuyor.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        ordersElement.innerHTML = "";
+
+
+        orders.forEach(
+            function(order){
+
+                renderOrder(
+                    order.data
+                );
+
+            }
+        );
+
 
     }catch(error){
 
-        return [];
-
-    }
-
-}
-
-
-function saveCart(items){
-
-    localStorage.setItem(
-        CART_KEY,
-        JSON.stringify(items)
-    );
-
-}
+        console.error(
+            "Siparişler alınamadı:",
+            error
+        );
 
 
-function openCart(){
+        ordersElement.innerHTML = `
 
-    closeMenu();
-    closeSearch();
+            <div class="error">
 
-    cart.classList.add("active");
+                Siparişler yüklenirken bir hata oluştu.<br><br>
 
-    cartOverlay.classList.add("active");
+                Firebase güvenlik kurallarını kontrol et.
 
-    document.body.classList.add("lock");
-
-    renderCart();
-
-}
-
-
-function closeCart(){
-
-    cart.classList.remove("active");
-
-    cartOverlay.classList.remove("active");
-
-    document.body.classList.remove("lock");
-
-}
-
-
-cartButton.addEventListener(
-    "click",
-    openCart
-);
-
-
-cartClose.addEventListener(
-    "click",
-    closeCart
-);
-
-
-cartOverlay.addEventListener(
-    "click",
-    closeCart
-);
-
-
-function calculateShipping(
-    items,
-    quantity
-){
-
-    let allTshirts = true;
-
-
-    items.forEach(
-        function(item){
-
-            if(
-                item.category &&
-                item.category !== "tisort"
-            ){
-
-                allTshirts = false;
-
-            }
-
-        }
-    );
-
-
-    if(
-        allTshirts &&
-        quantity >= 2
-    ){
-
-        return 0;
-
-    }
-
-
-    return 50;
-
-}
-
-
-function renderCart(){
-
-    const items =
-        getCart();
-
-
-    cartList.innerHTML = "";
-
-
-    if(
-        items.length === 0
-    ){
-
-        cartList.innerHTML = `
-
-            <div class="empty">
-                Sepetin şu anda boş.
             </div>
 
         `;
 
-
-        subtotal.textContent =
-            "0 TL";
-
-        shipping.textContent =
-            "0 TL";
-
-        total.textContent =
-            "0 TL";
-
-        return;
-
     }
 
-
-    let sum = 0;
-
-    let quantity = 0;
+}
 
 
-    items.forEach(
-        function(item,index){
+/* =====================================
+   SİPARİŞİ EKRANA YAZ
+===================================== */
+
+function renderOrder(order){
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+
+    element.className =
+        "order";
+
+
+    const products =
+        Array.isArray(
+            order.urunler
+        )
+        ? order.urunler
+        : [];
+
+
+    let productsHTML = "";
+
+
+    products.forEach(
+        function(item){
+
+            const quantity =
+                Number(
+                    item.adet
+                ) || 1;
+
 
             const price =
-                Number(item.price) || 0;
-
-            const count =
-                Number(item.quantity) || 1;
-
-
-            sum +=
-                price * count;
-
-            quantity +=
-                count;
+                Number(
+                    item.fiyat
+                ) || 0;
 
 
-            const element =
-                document.createElement("div");
+            productsHTML += `
 
+                <div class="product">
 
-            element.className =
-                "cart-item";
+                    <img
+                        class="product-image"
+                        src="${item.resim || ""}"
+                        alt=""
+                    >
 
+                    <div class="product-info">
 
-            element.innerHTML = `
+                        <div class="product-name">
+                            ${escapeHTML(
+                                item.isim || "Ürün"
+                            )}
+                        </div>
 
-                <img
-                    class="cart-image"
-                    src="${item.image || ""}"
-                    alt=""
-                    loading="eager"
-                    decoding="async"
-                >
+                        <div class="product-details">
 
-                <div class="cart-info">
+                            Beden:
+                            ${escapeHTML(
+                                item.beden || "-"
+                            )}
 
-                    <div class="cart-name">
-                        ${item.name || "Ürün"}
-                    </div>
+                            <br>
 
-                    <div class="cart-size">
-                        Beden: ${item.size || "-"}
-                    </div>
-
-                    <div class="cart-price">
-                        ${price} TL
-                    </div>
-
-                    <div class="cart-bottom">
-
-                        <div class="quantity">
-
-                            <button
-                                class="minus"
-                                type="button"
-                            >
-                                −
-                            </button>
-
-                            <span>
-                                ${count}
-                            </span>
-
-                            <button
-                                class="plus"
-                                type="button"
-                            >
-                                +
-                            </button>
+                            Adet:
+                            ${quantity}
 
                         </div>
 
-                        <button
-                            class="remove"
-                            type="button"
-                        >
-                            Kaldır
-                        </button>
+                        <div class="product-price">
+
+                            ${price * quantity} TL
+
+                        </div>
 
                     </div>
 
@@ -2084,497 +581,256 @@ function renderCart(){
 
             `;
 
-
-            element
-                .querySelector(".minus")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        changeQuantity(
-                            index,
-                            -1
-                        );
-
-                    }
-                );
-
-
-            element
-                .querySelector(".plus")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        changeQuantity(
-                            index,
-                            1
-                        );
-
-                    }
-                );
-
-
-            element
-                .querySelector(".remove")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        removeItem(index);
-
-                    }
-                );
-
-
-            cartList.appendChild(
-                element
-            );
-
         }
     );
 
 
-    const shippingPrice =
-        calculateShipping(
-            items,
-            quantity
+    const date =
+        formatDate(
+            order.tarih
         );
 
 
-    subtotal.textContent =
-        sum + " TL";
+    const status =
+        order.durum ||
+        "Yeni";
 
 
-    shipping.textContent =
-        shippingPrice === 0
-        ? "Kargo Bedava"
-        : shippingPrice + " TL";
+    element.innerHTML = `
+
+        <div class="order-head">
+
+            <div>
+
+                <div class="order-number">
+
+                    ${escapeHTML(
+                        order.siparisHayır ||
+                        order.siparisNo ||
+                        "Sipariş"
+                    )}
+
+                </div>
+
+                <div class="order-date">
+
+                    ${date}
+
+                </div>
+
+            </div>
 
 
-    total.textContent =
-        (
-            sum +
-            shippingPrice
-        ) + " TL";
+            <div class="status">
 
-}
+                ${escapeHTML(
+                    status
+                )}
 
+            </div>
 
-function changeQuantity(
-    index,
-    amount
-){
-
-    const items =
-        getCart();
+        </div>
 
 
-    if(
-        !items[index]
-    ){
+        <div class="products">
 
-        return;
+            ${productsHTML}
 
-    }
+        </div>
 
 
-    items[index].quantity =
-        (
-            Number(
-                items[index].quantity
-            ) || 1
-        ) + amount;
+        <div class="order-bottom">
+
+            <div class="info-row">
+
+                <span>
+                    Ara toplam
+                </span>
+
+                <span>
+                    ${Number(
+                        order.araToplam
+                    ) || 0} TL
+                </span>
+
+            </div>
 
 
-    if(
-        items[index].quantity <= 0
-    ){
+            <div class="info-row">
 
-        items.splice(
-            index,
-            1
-        );
+                <span>
+                    Kargo
+                </span>
 
-    }
+                <span>
 
+                    ${
+                        Number(order.kargo) === 0
+                        ? "Kargo Bedava"
+                        : (Number(order.kargo) || 0) + " TL"
+                    }
 
-    saveCart(items);
+                </span>
 
-    renderCart();
-
-}
-
-
-function removeItem(index){
-
-    const items =
-        getCart();
+            </div>
 
 
-    items.splice(
-        index,
-        1
+            <div class="total-row">
+
+                <span>
+                    TOPLAM
+                </span>
+
+                <span>
+                    ${Number(
+                        order.toplam
+                    ) || 0} TL
+                </span>
+
+            </div>
+
+
+            <div class="address">
+
+                Teslimat adresi:<br>
+
+                ${escapeHTML(
+                    order.adres || "-"
+                )}
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    ordersElement.appendChild(
+        element
     );
 
+}
 
-    saveCart(items);
 
-    renderCart();
+/* =====================================
+   TARİH
+===================================== */
+
+function formatDate(value){
+
+    if(!value){
+
+        return "-";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return "-";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "tr-TR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    ) + " " +
+
+    date.toLocaleTimeString(
+        "tr-TR",
+        {
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
 
 }
 
 
-checkoutButton.addEventListener(
-    "click",
-    function(){
+/* =====================================
+   GÜVENLİ METİN
+===================================== */
 
-        const items =
-            getCart();
+function escapeHTML(value){
+
+    return String(value)
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
 
 
-        if(
-            items.length === 0
-        ){
+/* =====================================
+   GİRİŞ KONTROLÜ
+===================================== */
 
-            alert(
-                "Sepetin boş."
-            );
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            ordersElement.innerHTML = `
+
+                <div class="empty">
+
+                    Siparişlerini görmek için
+                    önce hesabına giriş yapmalısın.
+
+                    <a
+                        href="giris.html"
+                        class="login-button"
+                    >
+                        GİRİŞ YAP
+                    </a>
+
+                </div>
+
+            `;
 
             return;
 
         }
 
 
-        if(!currentUser){
-
-            window.location.href =
-                "giris.html";
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "odeme.html";
+        loadOrders(user);
 
     }
 );
-
-
-document
-.querySelectorAll(".product")
-.forEach(
-    function(productElement){
-
-        productElement.addEventListener(
-            "click",
-            function(){
-
-                window.location.href =
-                    productElement.dataset.page;
-
-            }
-        );
-
-    }
-);
-
-
-const slider =
-    document.getElementById("slider");
-
-const dots =
-    document.querySelectorAll(".dot");
-
-
-let currentSlide = 0;
-
-let touchStartX = 0;
-
-let touchStartY = 0;
-
-let touchEndX = 0;
-
-let touchMoved = false;
-
-let autoSlideTimer;
-
-
-function goToSlide(index){
-
-    currentSlide = index;
-
-
-    slider.style.transform =
-        "translateX(-" +
-        currentSlide * 100 +
-        "%)";
-
-
-    dots.forEach(
-        function(dot){
-
-            dot.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    if(
-        dots[currentSlide]
-    ){
-
-        dots[currentSlide]
-            .classList.add("active");
-
-    }
-
-}
-
-
-function nextSlide(){
-
-    currentSlide++;
-
-
-    if(
-        currentSlide >= 3
-    ){
-
-        currentSlide = 0;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function previousSlide(){
-
-    currentSlide--;
-
-
-    if(
-        currentSlide < 0
-    ){
-
-        currentSlide = 2;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function startAutoSlide(){
-
-    clearInterval(
-        autoSlideTimer
-    );
-
-
-    autoSlideTimer =
-        setInterval(
-            nextSlide,
-            5000
-        );
-
-}
-
-
-startAutoSlide();
-
-
-slider.addEventListener(
-    "touchstart",
-    function(event){
-
-        touchStartX =
-            event.touches[0].clientX;
-
-        touchStartY =
-            event.touches[0].clientY;
-
-        touchMoved = false;
-
-        clearInterval(
-            autoSlideTimer
-        );
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchmove",
-    function(event){
-
-        const currentX =
-            event.touches[0].clientX;
-
-        const currentY =
-            event.touches[0].clientY;
-
-
-        const differenceX =
-            currentX -
-            touchStartX;
-
-
-        const differenceY =
-            currentY -
-            touchStartY;
-
-
-        if(
-            Math.abs(differenceX) > 10 &&
-            Math.abs(differenceX) >
-            Math.abs(differenceY)
-        ){
-
-            touchMoved = true;
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchend",
-    function(event){
-
-        touchEndX =
-            event.changedTouches[0].clientX;
-
-
-        const difference =
-            touchStartX -
-            touchEndX;
-
-
-        if(
-            Math.abs(difference) >= 50
-        ){
-
-            if(
-                difference > 0
-            ){
-
-                nextSlide();
-
-            }else{
-
-                previousSlide();
-
-            }
-
-        }
-
-
-        startAutoSlide();
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider
-.querySelectorAll(".slide")
-.forEach(
-    function(slide){
-
-        slide.addEventListener(
-            "click",
-            function(){
-
-                if(touchMoved){
-
-                    return;
-
-                }
-
-
-                const page =
-                    slide.dataset.page;
-
-
-                if(page){
-
-                    window.location.href =
-                        page;
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-dots.forEach(
-    function(dot,index){
-
-        dot.addEventListener(
-            "click",
-            function(event){
-
-                event.stopPropagation();
-
-                goToSlide(
-                    index
-                );
-
-                startAutoSlide();
-
-            }
-        );
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key === "Escape"
-        ){
-
-            closeMenu();
-
-            closeCart();
-
-            closeSearch();
-
-        }
-
-    }
-);
-
-
-renderCart();
 
 </script>
+
+</body>
+
+</html>
