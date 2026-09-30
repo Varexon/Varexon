@@ -4,10 +4,9 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tiger - VAREXON</title>
+<title>Porsche - VAREXON</title>
 
 <style>
 
@@ -23,357 +22,191 @@ body{
     font-family:Arial,sans-serif;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 .header{
     height:52px;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     border-bottom:1px solid #222;
-
     position:relative;
 }
 
 .back-button{
     position:absolute;
-
     left:15px;
-
     width:30px;
     height:30px;
-
     background:none;
     border:0;
-
     color:#fff;
-
     font-size:24px;
-
     cursor:pointer;
 }
 
 .logo{
     font-family:Georgia,"Times New Roman",serif;
-
     font-size:17px;
-
     font-weight:bold;
-
     letter-spacing:5px;
 }
 
-
-/* =========================
-   FAVORİ KALBİ
-========================= */
-
 .favorite-button{
-
     position:absolute;
-
     right:15px;
     top:50%;
-
     transform:translateY(-50%);
-
     width:32px;
     height:32px;
-
     background:none;
     border:0;
-
     padding:0;
-
     display:flex;
     align-items:center;
     justify-content:center;
-
     cursor:pointer;
-
     z-index:5;
 }
 
 .favorite-heart{
-
     font-size:25px;
-
     line-height:1;
-
     color:#fff;
-
     font-family:Arial,sans-serif;
-
-    transition:
-        color .2s ease,
-        transform .2s ease;
-
+    transition:color .2s ease, transform .2s ease;
 }
 
 .favorite-button.active .favorite-heart{
-
     color:#ff1744;
-
     transform:scale(1.18);
-
 }
 
 .favorite-button.animate .favorite-heart{
-
     animation:heartPop .35s ease;
-
 }
 
 @keyframes heartPop{
 
-    0%{
-        transform:scale(1);
-    }
-
-    45%{
-        transform:scale(1.45);
-    }
-
-    70%{
-        transform:scale(.92);
-    }
-
-    100%{
-        transform:scale(1.18);
-    }
+    0%{transform:scale(1);}
+    45%{transform:scale(1.45);}
+    70%{transform:scale(.92);}
+    100%{transform:scale(1.18);}
 
 }
 
-
-/* =========================
-   ÜRÜN
-========================= */
-
 .product-page{
-
     width:100%;
-
     max-width:700px;
-
     margin:auto;
-
     padding-bottom:40px;
-
 }
 
 .product-image{
-
     width:100%;
-
     display:block;
-
     background:#000;
-
 }
 
 .product-image img{
-
     width:100%;
-
     height:auto;
-
     display:block;
-
 }
 
-
-/* =========================
-   BİLGİ
-========================= */
-
 .product-info{
-
     padding:20px 18px 0;
-
 }
 
 .product-name{
-
     font-size:20px;
-
     font-weight:600;
-
     margin-bottom:8px;
-
 }
 
 .product-price{
-
     font-size:15px;
-
     color:#ddd;
-
     margin-bottom:25px;
-
 }
 
-
-/* =========================
-   BEDEN
-========================= */
-
 .size-title{
-
     font-size:12px;
-
     color:#aaa;
-
     margin-bottom:10px;
-
     letter-spacing:1px;
-
 }
 
 .sizes{
-
     display:flex;
-
     gap:8px;
-
     margin-bottom:25px;
-
 }
 
 .size{
-
     width:52px;
     height:42px;
-
     background:#080808;
-
     color:#fff;
-
     border:1px solid #444;
-
     cursor:pointer;
-
     font-size:12px;
-
 }
 
 .size.active{
-
     background:#fff;
-
     color:#000;
-
     border-color:#fff;
-
 }
 
-
-/* =========================
-   SEPET
-========================= */
-
 .add-cart{
-
     width:100%;
-
     height:50px;
-
     background:#fff;
-
     color:#000;
-
     border:0;
-
     font-size:12px;
-
     font-weight:bold;
-
     letter-spacing:1.5px;
-
     cursor:pointer;
-
 }
 
 .add-cart:active{
-
     opacity:.75;
-
 }
-
-
-/* =========================
-   MESAJ
-========================= */
 
 .message{
-
     display:none;
-
     text-align:center;
-
     color:#aaa;
-
     font-size:11px;
-
     margin-top:13px;
-
 }
 
-
-/* =========================
-   AÇIKLAMA
-========================= */
-
 .description{
-
     margin-top:35px;
-
     padding-top:25px;
-
     border-top:1px solid #292929;
-
 }
 
 .description-title{
-
     font-size:12px;
-
     font-weight:bold;
-
     letter-spacing:1px;
-
     margin-bottom:12px;
-
 }
 
 .description p{
-
     color:#aaa;
-
     font-size:12px;
-
     line-height:1.7;
-
 }
 
 </style>
 
 </head>
 
-
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
-
 
     <button
         class="back-button"
@@ -382,13 +215,9 @@ body{
         ‹
     </button>
 
-
     <div class="logo">
         VAREXON
     </div>
-
-
-    <!-- FAVORİ -->
 
     <button
         class="favorite-button"
@@ -406,22 +235,16 @@ body{
 
     </button>
 
-
 </header>
 
 
-<!-- =========================
-     ÜRÜN
-========================= -->
-
 <main class="product-page">
-
 
     <div class="product-image">
 
         <img
-            src="tiger.png"
-            alt="Tiger Tasarımlı Siyah Tişört"
+            src="WhatsApp Image 2026-09-30 at 17.22.44.jpeg"
+            alt="Porsche Tasarımlı Siyah Tişört"
         >
 
     </div>
@@ -429,9 +252,8 @@ body{
 
     <div class="product-info">
 
-
         <div class="product-name">
-            Tiger Tasarımlı Siyah Tişört
+            Porsche Tasarımlı Siyah Tişört
         </div>
 
 
@@ -440,15 +262,12 @@ body{
         </div>
 
 
-        <!-- BEDEN -->
-
         <div class="size-title">
             BEDEN
         </div>
 
 
         <div class="sizes">
-
 
             <button
                 class="size"
@@ -457,14 +276,12 @@ body{
                 S
             </button>
 
-
             <button
                 class="size"
                 onclick="selectSize('M',this)"
             >
                 M
             </button>
-
 
             <button
                 class="size"
@@ -473,11 +290,8 @@ body{
                 L
             </button>
 
-
         </div>
 
-
-        <!-- SEPET -->
 
         <button
             class="add-cart"
@@ -495,55 +309,43 @@ body{
         </div>
 
 
-        <!-- AÇIKLAMA -->
-
         <div class="description">
-
 
             <div class="description-title">
                 ÜRÜN DETAYI
             </div>
 
-
             <p>
-                Tiger tasarımlı siyah tişört.
+                Porsche tasarımlı siyah tişört.
                 Normal kesimdir.
                 S, M ve L beden seçenekleri bulunmaktadır.
             </p>
 
-
         </div>
 
-
     </div>
-
 
 </main>
 
 
 <script>
 
-
-/* =========================
-   ÜRÜN
-========================= */
-
 const product = {
 
     name:
-        "Tiger Tasarımlı Siyah Tişört",
+        "Porsche Tasarımlı Siyah Tişört",
 
     price:
         499,
 
     image:
-        "tiger.png",
+        "WhatsApp Image 2026-09-30 at 17.22.44.jpeg",
 
     category:
         "tisort",
 
     page:
-        "urun-detay.html"
+        "porsche-urun.html"
 
 };
 
@@ -551,51 +353,29 @@ const product = {
 const CART_KEY =
     "velron_cart";
 
-
 const FAVORITES_KEY =
     "velron_favorites";
-
 
 let selectedSize =
     null;
 
 
-/* =========================
-   BEDEN SEÇ
-========================= */
+function selectSize(size,button){
 
-function selectSize(
-    size,
-    button
-){
-
-    selectedSize =
-        size;
-
+    selectedSize = size;
 
     document
         .querySelectorAll(".size")
-        .forEach(
-            function(item){
+        .forEach(function(item){
 
-                item.classList.remove(
-                    "active"
-                );
+            item.classList.remove("active");
 
-            }
-        );
+        });
 
-
-    button.classList.add(
-        "active"
-    );
+    button.classList.add("active");
 
 }
 
-
-/* =========================
-   FAVORİLERİ AL
-========================= */
 
 function getFavorites(){
 
@@ -608,55 +388,27 @@ function getFavorites(){
                 )
             );
 
-
-        if(
-            !Array.isArray(data)
-        ){
-
+        if(!Array.isArray(data)){
             return [];
-
         }
 
+        return data.map(function(item){
 
-        /*
-         Eski kayıtlar obje olarak kaldıysa
-         sadece isimlerini alıyoruz.
-        */
-
-        return data.map(
-            function(item){
-
-                if(
-                    typeof item ===
-                    "string"
-                ){
-
-                    return item;
-
-                }
-
-
-                if(
-                    item &&
-                    item.name
-                ){
-
-                    return item.name;
-
-                }
-
-
-                return null;
-
-            }
-        ).filter(
-            function(item){
-
-                return item !== null;
-
+            if(typeof item === "string"){
+                return item;
             }
 
-        );
+            if(item && item.name){
+                return item.name;
+            }
+
+            return null;
+
+        }).filter(function(item){
+
+            return item !== null;
+
+        });
 
     }catch(error){
 
@@ -667,105 +419,68 @@ function getFavorites(){
 }
 
 
-/* =========================
-   FAVORİLERİ KAYDET
-========================= */
-
-function saveFavorites(
-    favorites
-){
+function saveFavorites(favorites){
 
     localStorage.setItem(
-
         FAVORITES_KEY,
-
-        JSON.stringify(
-            favorites
-        )
-
+        JSON.stringify(favorites)
     );
 
 }
 
-
-/* =========================
-   KALBİ GÜNCELLE
-========================= */
 
 function updateFavorite(){
 
     const favorites =
         getFavorites();
 
-
     const isFavorite =
         favorites.includes(
             product.name
         );
-
 
     const button =
         document.getElementById(
             "favoriteButton"
         );
 
-
     const heart =
         document.getElementById(
             "favoriteHeart"
         );
 
-
     if(isFavorite){
 
-        button.classList.add(
-            "active"
-        );
-
-        heart.textContent =
-            "♥";
+        button.classList.add("active");
+        heart.textContent = "♥";
 
     }else{
 
-        button.classList.remove(
-            "active"
-        );
-
-        heart.textContent =
-            "♡";
+        button.classList.remove("active");
+        heart.textContent = "♡";
 
     }
 
 }
 
 
-/* =========================
-   FAVORİYE EKLE / ÇIKAR
-========================= */
-
 function toggleFavorite(){
 
     let favorites =
         getFavorites();
-
 
     const index =
         favorites.indexOf(
             product.name
         );
 
-
     if(index === -1){
-
-        /* EKLE */
 
         favorites.push(
             product.name
         );
 
     }else{
-
-        /* ÇIKAR */
 
         favorites.splice(
             index,
@@ -774,60 +489,32 @@ function toggleFavorite(){
 
     }
 
-
-    saveFavorites(
-        favorites
-    );
-
-
-    /* KALP ANİMASYONU */
+    saveFavorites(favorites);
 
     const button =
         document.getElementById(
             "favoriteButton"
         );
 
-
-    button.classList.remove(
-        "animate"
-    );
-
+    button.classList.remove("animate");
 
     void button.offsetWidth;
 
+    button.classList.add("animate");
 
-    button.classList.add(
-        "animate"
-    );
+    setTimeout(function(){
 
+        button.classList.remove("animate");
 
-    setTimeout(
-        function(){
-
-            button.classList.remove(
-                "animate"
-            );
-
-        },
-        350
-    );
-
+    },350);
 
     updateFavorite();
 
 }
 
 
-/* =========================
-   SAYFA AÇILINCA FAVORİ DURUMU
-========================= */
-
 updateFavorite();
 
-
-/* =========================
-   SEPETE EKLE
-========================= */
 
 function addToCart(){
 
@@ -841,9 +528,7 @@ function addToCart(){
 
     }
 
-
     let cart = [];
-
 
     try{
 
@@ -860,21 +545,18 @@ function addToCart(){
 
     }
 
-
     const existing =
-        cart.find(
-            function(item){
+        cart.find(function(item){
 
-                return(
-                    item.name ===
-                        product.name
-                    &&
-                    item.size ===
-                        selectedSize
-                );
+            return(
+                item.name ===
+                    product.name
+                &&
+                item.size ===
+                    selectedSize
+            );
 
-            }
-        );
+        });
 
 
     if(existing){
@@ -912,9 +594,7 @@ function addToCart(){
 
         CART_KEY,
 
-        JSON.stringify(
-            cart
-        )
+        JSON.stringify(cart)
 
     );
 
@@ -924,25 +604,20 @@ function addToCart(){
             "message"
         );
 
-
     message.style.display =
         "block";
 
 
-    setTimeout(
-        function(){
+    setTimeout(function(){
 
-            message.style.display =
-                "none";
+        message.style.display =
+            "none";
 
-        },
-        2000
-    );
+    },2000);
 
 }
 
 </script>
-
 
 </body>
 
