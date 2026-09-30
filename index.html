@@ -52,6 +52,8 @@ input{
     font:inherit;
 }
 
+/* HEADER */
+
 .header{
     width:100%;
     height:55px;
@@ -114,6 +116,8 @@ input{
     fill:none;
     stroke-width:1.4;
 }
+
+/* SEARCH */
 
 .search{
     display:none;
@@ -181,6 +185,7 @@ input{
 
 .search-product img{
     width:100%;
+    border-radius:8px;
 }
 
 .search-product h3{
@@ -195,6 +200,8 @@ input{
     font-size:11px;
     margin-top:5px;
 }
+
+/* OVERLAY */
 
 .overlay{
     position:fixed;
@@ -212,6 +219,8 @@ input{
     opacity:1;
     visibility:visible;
 }
+
+/* SIDE MENU */
 
 .side-menu{
     position:fixed;
@@ -253,6 +262,8 @@ input{
     margin-bottom:18px;
     border-bottom:1px solid #292929;
 }
+
+/* HERO */
 
 .hero{
     position:relative;
@@ -325,6 +336,8 @@ input{
     opacity:1;
 }
 
+/* PRODUCTS */
+
 .products{
     padding:28px 15px 45px;
     background:#000;
@@ -363,6 +376,7 @@ input{
 
 .product img{
     width:100%;
+    border-radius:8px;
     filter:
         saturate(1.20)
         contrast(1.05);
@@ -388,6 +402,8 @@ input{
     background:#444;
     margin:12px 0;
 }
+
+/* CART */
 
 .cart{
     position:fixed;
@@ -468,6 +484,7 @@ input{
     background:#111;
     display:block;
     flex-shrink:0;
+    border-radius:6px;
     filter:
         saturate(1.18)
         contrast(1.06)
@@ -596,6 +613,8 @@ input{
     z-index:20;
 }
 
+/* FOOTER */
+
 .footer{
     border-top:1px solid #222;
     padding:35px 25px 25px;
@@ -639,6 +658,8 @@ input{
     font-size:11px;
     letter-spacing:4px;
 }
+
+/* MOBILE */
 
 @media(max-width:700px){
 
@@ -694,6 +715,8 @@ input{
 </head>
 
 <body>
+
+<!-- HEADER -->
 
 <header class="header">
 
@@ -767,6 +790,8 @@ input{
 
 </header>
 
+<!-- SEARCH -->
+
 <div
     class="search"
     id="search"
@@ -807,6 +832,8 @@ input{
 ></div>
 
 </div>
+
+<!-- MENU -->
 
 <div
     class="overlay"
@@ -896,6 +923,8 @@ input{
 
 </nav>
 
+<!-- CART -->
+
 <div
     class="overlay"
     id="cartOverlay"
@@ -977,6 +1006,8 @@ input{
 
 </aside>
 
+<!-- HERO -->
+
 <section class="hero">
 
 <div
@@ -1035,6 +1066,8 @@ input{
 
 </section>
 
+<!-- PRODUCTS -->
+
 <section
     class="products"
     id="tisort"
@@ -1043,6 +1076,8 @@ input{
 <div class="main-title">
     TİŞÖRT
 </div>
+
+<!-- SİYAH -->
 
 <div class="category-title">
     Siyah
@@ -1073,6 +1108,7 @@ input{
 
 </div>
 
+
 <div
     class="product"
     data-page="tiger-cizgili.html"
@@ -1094,6 +1130,7 @@ input{
 </p>
 
 </div>
+
 
 <div
     class="product"
@@ -1117,6 +1154,7 @@ input{
 
 </div>
 
+
 <div
     class="product"
     data-page="urun-darkdevil.html"
@@ -1138,6 +1176,7 @@ input{
 </p>
 
 </div>
+
 
 <div
     class="product"
@@ -1161,9 +1200,36 @@ input{
 
 </div>
 
+
+<!-- YENİ SİYAH PORSCHE -->
+
+<div
+    class="product"
+    data-page="urun-detay.html"
+>
+
+<img
+    src="WhatsApp Image 2026-09-30 at 17.22.44.jpeg"
+    alt="Porsche Tasarımlı Siyah Tişört"
+    loading="lazy"
+    decoding="async"
+>
+
+<h3>
+    Porsche Tasarımlı Siyah Tişört
+</h3>
+
+<p>
+    499 TL
+</p>
+
+</div>
+
 </div>
 
 <div class="divider"></div>
+
+<!-- BEYAZ -->
 
 <div class="category-title">
     Beyaz
@@ -1193,6 +1259,7 @@ input{
 
 </div>
 
+
 <div
     class="product"
     data-page="urun-voltage.html"
@@ -1214,6 +1281,7 @@ input{
 </p>
 
 </div>
+
 
 <div
     class="product"
@@ -1237,6 +1305,7 @@ input{
 
 </div>
 
+
 <div
     class="product"
     data-page="urun-velron.html"
@@ -1258,6 +1327,7 @@ input{
 </p>
 
 </div>
+
 
 <div
     class="product"
@@ -1284,6 +1354,8 @@ input{
 </div>
 
 </section>
+
+<!-- FOOTER -->
 
 <footer id="iletisim">
 
@@ -1366,6 +1438,8 @@ from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
+/* FIREBASE */
+
 const firebaseConfig = {
 
     apiKey:
@@ -1391,13 +1465,14 @@ const firebaseConfig = {
 
 };
 
-
 const app =
 initializeApp(firebaseConfig);
 
 const auth =
 getAuth(app);
 
+
+/* ACCOUNT */
 
 const userName =
 document.getElementById("userName");
@@ -1413,7 +1488,6 @@ document.getElementById("ordersLink");
 
 const logoutLink =
 document.getElementById("logoutLink");
-
 
 let currentUser = null;
 
@@ -1495,6 +1569,8 @@ logoutLink.addEventListener(
 );
 
 
+/* MENU */
+
 const menuButton =
 document.getElementById("menuButton");
 
@@ -1570,27 +1646,7 @@ document
 );
 
 
-const searchButton =
-document.getElementById("searchButton");
-
-const searchClose =
-document.getElementById("searchClose");
-
-const search =
-document.getElementById("search");
-
-const searchInput =
-document.getElementById("searchInput");
-
-const searchResults =
-document.getElementById("searchResults");
-
-const searchGrid =
-document.getElementById("searchGrid");
-
-const searchTitle =
-document.getElementById("searchTitle");
-
+/* PRODUCTS */
 
 const products = [
 
@@ -1630,6 +1686,13 @@ const products = [
     },
 
     {
+        name:"Porsche Tasarımlı Siyah Tişört",
+        price:499,
+        image:"WhatsApp Image 2026-09-30 at 17.22.44.jpeg",
+        page:"urun-detay.html"
+    },
+
+    {
         name:"Monza Tasarımlı Beyaz Tişört",
         price:499,
         image:"monza.png",
@@ -1665,6 +1728,30 @@ const products = [
     }
 
 ];
+
+
+/* SEARCH */
+
+const searchButton =
+document.getElementById("searchButton");
+
+const searchClose =
+document.getElementById("searchClose");
+
+const search =
+document.getElementById("search");
+
+const searchInput =
+document.getElementById("searchInput");
+
+const searchResults =
+document.getElementById("searchResults");
+
+const searchGrid =
+document.getElementById("searchGrid");
+
+const searchTitle =
+document.getElementById("searchTitle");
 
 
 function normalize(text){
@@ -1744,7 +1831,6 @@ function renderSearch(query){
             const item =
                 document.createElement("div");
 
-
             item.className =
                 "search-product";
 
@@ -1780,7 +1866,9 @@ function renderSearch(query){
             );
 
 
-            searchGrid.appendChild(item);
+            searchGrid.appendChild(
+                item
+            );
 
         }
     );
@@ -1812,9 +1900,10 @@ searchInput.addEventListener(
 );
 
 
+/* CART */
+
 const CART_KEY =
     "velron_cart";
-
 
 const cartButton =
 document.getElementById("cartButton");
@@ -1962,7 +2051,6 @@ function renderCart(){
     const items =
         getCart();
 
-
     cartList.innerHTML = "";
 
 
@@ -1977,7 +2065,6 @@ function renderCart(){
             </div>
 
         `;
-
 
         subtotal.textContent =
             "0 TL";
@@ -2017,7 +2104,6 @@ function renderCart(){
 
             const element =
                 document.createElement("div");
-
 
             element.className =
                 "cart-item";
@@ -2263,6 +2349,8 @@ checkoutButton.addEventListener(
 );
 
 
+/* PRODUCT LINKS */
+
 document
 .querySelectorAll(".product")
 .forEach(
@@ -2281,6 +2369,8 @@ document
     }
 );
 
+
+/* SLIDER */
 
 const slider =
     document.getElementById("slider");
@@ -2533,6 +2623,8 @@ slider
 );
 
 
+/* DOTS */
+
 dots.forEach(
     function(dot,index){
 
@@ -2555,6 +2647,8 @@ dots.forEach(
 );
 
 
+/* ESC */
+
 document.addEventListener(
     "keydown",
     function(event){
@@ -2574,6 +2668,8 @@ document.addEventListener(
     }
 );
 
+
+/* START */
 
 renderCart();
 
