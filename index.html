@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <meta name="color-scheme" content="dark">
 
@@ -52,7 +52,9 @@ input{
     font:inherit;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header{
     width:100%;
@@ -117,7 +119,9 @@ input{
     stroke-width:1.4;
 }
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 .search{
     display:none;
@@ -201,7 +205,9 @@ input{
     margin-top:5px;
 }
 
-/* OVERLAY */
+/* =========================
+   OVERLAY
+========================= */
 
 .overlay{
     position:fixed;
@@ -220,7 +226,9 @@ input{
     visibility:visible;
 }
 
-/* SIDE MENU */
+/* =========================
+   SIDE MENU
+========================= */
 
 .side-menu{
     position:fixed;
@@ -263,33 +271,28 @@ input{
     border-bottom:1px solid #292929;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
     position:relative;
     width:100%;
     overflow:hidden;
-    touch-action:pan-y;
     background:#000;
 }
 
 .slider{
-    display:flex;
     width:100%;
-    transition:transform .6s ease;
-    user-select:none;
-    -webkit-user-select:none;
 }
 
 .slide{
-    flex:0 0 100%;
     width:100%;
     height:auto;
     display:block;
+    cursor:pointer;
     pointer-events:auto;
     object-fit:cover;
-    cursor:pointer;
-    touch-action:pan-y;
     -webkit-user-drag:none;
 }
 
@@ -328,15 +331,11 @@ input{
     height:5px;
     border-radius:50%;
     background:#fff;
-    opacity:.35;
-    cursor:pointer;
 }
 
-.dot.active{
-    opacity:1;
-}
-
-/* PRODUCTS */
+/* =========================
+   PRODUCTS
+========================= */
 
 .products{
     padding:28px 15px 45px;
@@ -397,13 +396,9 @@ input{
     margin-top:5px;
 }
 
-.divider{
-    height:1px;
-    background:#444;
-    margin:12px 0;
-}
-
-/* CART */
+/* =========================
+   CART
+========================= */
 
 .cart{
     position:fixed;
@@ -609,11 +604,11 @@ input{
     display:block;
     visibility:visible;
     opacity:1;
-    position:relative;
-    z-index:20;
 }
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 .footer{
     border-top:1px solid #222;
@@ -659,7 +654,9 @@ input{
     letter-spacing:4px;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px){
 
@@ -714,720 +711,524 @@ input{
 
 </head>
 
+
 <body>
 
-<!-- HEADER -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="header">
 
-<button
-    class="menu-button"
-    id="menuButton"
-    type="button"
-    aria-label="Menü"
->
+    <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="Menü"
+    >
 
-<span></span>
-<span></span>
-<span></span>
+        <span></span>
+        <span></span>
+        <span></span>
 
-</button>
+    </button>
 
-<div class="logo">
-    VAREXON
-</div>
 
-<div class="icons">
+    <div class="logo">
+        VAREXON
+    </div>
 
-<button
-    class="icon"
-    id="searchButton"
-    type="button"
-    aria-label="Ara"
->
 
-<svg viewBox="0 0 24 24">
+    <div class="icons">
 
-<circle
-    cx="10.8"
-    cy="10.8"
-    r="6.5"
-></circle>
+        <button
+            class="icon"
+            id="searchButton"
+            type="button"
+            aria-label="Ara"
+        >
 
-<line
-    x1="16"
-    y1="16"
-    x2="21"
-    y2="21"
-></line>
+            <svg viewBox="0 0 24 24">
 
-</svg>
+                <circle
+                    cx="10.8"
+                    cy="10.8"
+                    r="6.5"
+                ></circle>
 
-</button>
+                <line
+                    x1="16"
+                    y1="16"
+                    x2="21"
+                    y2="21"
+                ></line>
 
-<button
-    class="icon"
-    id="cartButton"
-    type="button"
-    aria-label="Sepet"
->
+            </svg>
 
-<svg viewBox="0 0 24 24">
+        </button>
 
-<path
-    d="M5 8h14l-1 12H6L5 8z"
-></path>
 
-<path
-    d="M9 8V6a3 3 0 0 1 6 0v2"
-></path>
+        <button
+            class="icon"
+            id="cartButton"
+            type="button"
+            aria-label="Sepet"
+        >
 
-</svg>
+            <svg viewBox="0 0 24 24">
 
-</button>
+                <path
+                    d="M5 8h14l-1 12H6L5 8z"
+                ></path>
 
-</div>
+                <path
+                    d="M9 8V6a3 3 0 0 1 6 0v2"
+                ></path>
+
+            </svg>
+
+        </button>
+
+    </div>
 
 </header>
 
-<!-- SEARCH -->
+
+<!-- =========================
+     SEARCH
+========================= -->
 
 <div
     class="search"
     id="search"
 >
 
-<button
-    class="search-close"
-    id="searchClose"
-    type="button"
->
-    ×
-</button>
+    <button
+        class="search-close"
+        id="searchClose"
+        type="button"
+    >
+        ×
+    </button>
 
-<input
-    id="searchInput"
-    type="text"
-    placeholder="Ürün ara..."
-    autocomplete="off"
->
+
+    <input
+        id="searchInput"
+        type="text"
+        placeholder="Ürün ara..."
+        autocomplete="off"
+    >
 
 </div>
+
 
 <div
     class="search-results"
     id="searchResults"
 >
 
-<div
-    class="search-title"
-    id="searchTitle"
->
-    Tüm ürünler
+    <div
+        class="search-title"
+        id="searchTitle"
+    >
+        Tüm ürünler
+    </div>
+
+
+    <div
+        class="search-grid"
+        id="searchGrid"
+    ></div>
+
 </div>
 
-<div
-    class="search-grid"
-    id="searchGrid"
-></div>
 
-</div>
-
-<!-- MENU -->
+<!-- =========================
+     SIDE MENU
+========================= -->
 
 <div
     class="overlay"
     id="menuOverlay"
 ></div>
 
+
 <nav
     class="side-menu"
     id="sideMenu"
 >
 
-<div
-    class="user-name"
-    id="userName"
-></div>
+    <div
+        class="user-name"
+        id="userName"
+    ></div>
 
-<div class="menu-section">
 
-<a
-    href="giris.html"
-    id="loginLink"
->
-    Giriş Yap / Kaydol
-</a>
+    <div class="menu-section">
 
-<a
-    href="hesabim.html"
-    id="accountLink"
-    style="display:none;"
->
-    Hesabım
-</a>
+        <a
+            href="giris.html"
+            id="loginLink"
+        >
+            Giriş Yap / Kaydol
+        </a>
 
-<a
-    href="siparislerim.html"
-    id="ordersLink"
-    style="display:none;"
->
-    Siparişlerim
-</a>
 
-<a
-    href="#"
-    id="logoutLink"
-    style="display:none;"
->
-    Çıkış Yap
-</a>
+        <a
+            href="hesabim.html"
+            id="accountLink"
+            style="display:none;"
+        >
+            Hesabım
+        </a>
 
-</div>
 
-<div class="menu-section">
+        <a
+            href="siparislerim.html"
+            id="ordersLink"
+            style="display:none;"
+        >
+            Siparişlerim
+        </a>
 
-<a href="#tisort">
-    Tişört
-</a>
 
-<a href="#">
-    Şapka
-</a>
+        <a
+            href="#"
+            id="logoutLink"
+            style="display:none;"
+        >
+            Çıkış Yap
+        </a>
 
-<a href="#">
-    Atkı
-</a>
+    </div>
 
-<a href="#">
-    Sweatshirt
-</a>
 
-</div>
+    <div class="menu-section">
 
-<div>
+        <a href="#tisort">
+            Tişört
+        </a>
 
-<a href="favoriler.html">
-    Favoriler
-</a>
+        <a href="#">
+            Şapka
+        </a>
 
-<a href="#iletisim">
-    İletişim
-</a>
+        <a href="#">
+            Atkı
+        </a>
 
-<a href="#">
-    Hakkımızda
-</a>
+        <a href="#">
+            Sweatshirt
+        </a>
 
-</div>
+    </div>
+
+
+    <div>
+
+        <a href="favoriler.html">
+            Favoriler
+        </a>
+
+
+        <a href="#iletisim">
+            İletişim
+        </a>
+
+
+        <a href="#">
+            Hakkımızda
+        </a>
+
+    </div>
 
 </nav>
 
-<!-- CART -->
+
+<!-- =========================
+     CART
+========================= -->
 
 <div
     class="overlay"
     id="cartOverlay"
 ></div>
 
+
 <aside
     class="cart"
     id="cart"
 >
 
-<div class="cart-head">
+    <div class="cart-head">
 
-<span>
-    SEPET
-</span>
+        <span>
+            SEPET
+        </span>
 
-<button
-    class="cart-close"
-    id="cartClose"
-    type="button"
->
-    ×
-</button>
 
-</div>
+        <button
+            class="cart-close"
+            id="cartClose"
+            type="button"
+        >
+            ×
+        </button>
 
-<div
-    class="cart-list"
-    id="cartList"
-></div>
+    </div>
 
-<div class="cart-footer">
 
-<div class="line">
+    <div
+        class="cart-list"
+        id="cartList"
+    ></div>
 
-<span>
-    Ara toplam
-</span>
 
-<span id="subtotal">
-    0 TL
-</span>
+    <div class="cart-footer">
 
-</div>
+        <div class="line">
 
-<div class="line">
+            <span>
+                Ara toplam
+            </span>
 
-<span>
-    Kargo
-</span>
+            <span id="subtotal">
+                0 TL
+            </span>
 
-<span id="shipping">
-    0 TL
-</span>
+        </div>
 
-</div>
 
-<div class="total">
+        <div class="line">
 
-<span>
-    TOPLAM
-</span>
+            <span>
+                Kargo
+            </span>
 
-<span id="total">
-    0 TL
-</span>
+            <span id="shipping">
+                0 TL
+            </span>
 
-</div>
+        </div>
 
-<button
-    class="checkout"
-    id="checkoutButton"
-    type="button"
->
-    SİPARİŞ VER
-</button>
 
-</div>
+        <div class="total">
+
+            <span>
+                TOPLAM
+            </span>
+
+            <span id="total">
+                0 TL
+            </span>
+
+        </div>
+
+
+        <button
+            class="checkout"
+            id="checkoutButton"
+            type="button"
+        >
+            SİPARİŞ VER
+        </button>
+
+    </div>
 
 </aside>
 
-<!-- HERO -->
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<div
-    class="slider"
-    id="slider"
->
+    <div
+        class="slider"
+        id="slider"
+    >
 
-<img
-    class="slide"
-    src="WhatsApp Image 2026-09-30 at 18.15.09.jpeg"
-    alt="Çizgili Kaplan Tasarımlı Siyah Tişört"
-    data-page="tiger-cizgili.html"
-    fetchpriority="high"
-    decoding="async"
->
+        <img
+            class="slide"
+            id="heroImage"
+            src="WhatsApp Image 2026-09-30 at 18.32.19.jpeg"
+            alt="Tiger Tasarımlı Siyah Tişört"
+            data-page="urun-detay.html"
+            fetchpriority="high"
+            decoding="async"
+        >
 
-<img
-    class="slide"
-    src="manken2.png"
-    alt="Monza Tasarımlı Beyaz Tişört"
-    data-page="urun-monza.html"
-    loading="lazy"
-    decoding="async"
->
+    </div>
 
-<img
-    class="slide"
-    src="manken3.png"
-    alt="Çizgili Kaplan Tasarımlı Beyaz Tişört"
-    data-page="tiger-cizgili2.html"
-    loading="lazy"
-    decoding="async"
->
 
-</div>
+    <div class="hero-text">
 
-<div class="hero-text">
+        <h1>
+            VAREXON
+        </h1>
 
-<h1>
-    VAREXON
-</h1>
+        <p>
+            Sıradanlıktan uzak
+        </p>
 
-<p>
-    Sıradanlıktan uzak
-</p>
+    </div>
 
-</div>
 
-<div class="dots">
+    <div class="dots">
 
-<span class="dot active"></span>
-<span class="dot"></span>
-<span class="dot"></span>
+        <span class="dot"></span>
 
-</div>
+    </div>
 
 </section>
 
-<!-- PRODUCTS -->
+
+<!-- =========================
+     PRODUCTS
+========================= -->
 
 <section
     class="products"
     id="tisort"
 >
 
-<div class="main-title">
-    TİŞÖRT
-</div>
+    <div class="main-title">
+        TİŞÖRT
+    </div>
 
-<!-- SİYAH -->
 
-<div class="category-title">
-    Siyah
-</div>
+    <div class="category-title">
+        Siyah
+    </div>
 
-<div class="product-scroll">
 
-<div
-    class="product"
-    data-page="urun-detay.html"
->
+    <div class="product-scroll">
 
-<img
-    src="tiger.png"
-    alt="Tiger Tasarımlı Siyah Tişört"
-    loading="eager"
-    fetchpriority="high"
-    decoding="async"
->
+        <div
+            class="product"
+            data-page="urun-detay.html"
+        >
 
-<h3>
-    Tiger Tasarımlı Siyah Tişört
-</h3>
+            <img
+                src="WhatsApp Image 2026-09-30 at 18.32.19.jpeg"
+                alt="Tiger Tasarımlı Siyah Tişört"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+            >
 
-<p>
-    499 TL
-</p>
 
-</div>
+            <h3>
+                Tiger Tasarımlı Siyah Tişört
+            </h3>
 
 
-<div
-    class="product"
-    data-page="tiger-cizgili.html"
->
+            <p>
+                499 TL
+            </p>
 
-<img
-    src="tiger-cizgili.png"
-    alt="Çizgili Kaplan Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
+        </div>
 
-<h3>
-    Çizgili Kaplan Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-aslan.html"
->
-
-<img
-    src="aslan.png"
-    alt="Aslan Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Aslan Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-darkdevil.html"
->
-
-<img
-    src="darkdevil.png"
-    alt="Dark Devil Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Dark Devil Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-kurukafa.html"
->
-
-<img
-    src="kurukafa.png"
-    alt="Kurukafa Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Kurukafa Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<!-- YENİ SİYAH PORSCHE -->
-
-<div
-    class="product"
-    data-page="urun-detay.html"
->
-
-<img
-    src="WhatsApp Image 2026-09-30 at 17.22.44.jpeg"
-    alt="Porsche Tasarımlı Siyah Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Porsche Tasarımlı Siyah Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-</div>
-
-<div class="divider"></div>
-
-<!-- BEYAZ -->
-
-<div class="category-title">
-    Beyaz
-</div>
-
-<div class="product-scroll">
-
-<div
-    class="product"
-    data-page="urun-monza.html"
->
-
-<img
-    src="monza.png"
-    alt="Monza Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Monza Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-voltage.html"
->
-
-<img
-    src="voltage.png"
-    alt="Voltage Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Voltage Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-porsche.html"
->
-
-<img
-    src="porsche.png"
-    alt="Porsche Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Porsche Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="urun-velron.html"
->
-
-<img
-    src="velron.png"
-    alt="Velron Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Velron Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-
-<div
-    class="product"
-    data-page="tiger-cizgili2.html"
->
-
-<img
-    src="tiger-cizgili2.png"
-    alt="Çizgili Kaplan Tasarımlı Beyaz Tişört"
-    loading="lazy"
-    decoding="async"
->
-
-<h3>
-    Çizgili Kaplan Tasarımlı Beyaz Tişört
-</h3>
-
-<p>
-    499 TL
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
-<!-- FOOTER -->
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer id="iletisim">
 
-<div class="footer">
+    <div class="footer">
 
-<div class="footer-column">
+        <div class="footer-column">
 
-<div class="footer-title">
-    İLETİŞİM
-</div>
+            <div class="footer-title">
+                İLETİŞİM
+            </div>
 
-<div class="footer-item">
 
-<a href="mailto:storevelron@gmail.com">
-    storevelron@gmail.com
-</a>
+            <div class="footer-item">
 
-</div>
+                <a
+                    href="mailto:varexonwearr@gmail.com"
+                >
+                    varexonwearr@gmail.com
+                </a>
 
-</div>
+            </div>
 
-<div class="footer-column">
+        </div>
 
-<div class="footer-title">
-    SOSYAL MEDYA
-</div>
 
-<div class="footer-item">
+        <div class="footer-column">
 
-<a
-    href="https://instagram.com/velron_store"
-    target="_blank"
-    rel="noopener"
->
-    Instagram: velron_store
-</a>
+            <div class="footer-title">
+                SOSYAL MEDYA
+            </div>
 
-</div>
 
-<div class="footer-item">
+            <div class="footer-item">
 
-<a
-    href="https://www.tiktok.com/@velron.store"
-    target="_blank"
-    rel="noopener"
->
-    TikTok: velron.store
-</a>
+                <a
+                    href="https://instagram.com/varexonwearr"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    Instagram: varexonwearr
+                </a>
 
-</div>
+            </div>
 
-</div>
 
-</div>
+            <div class="footer-item">
 
-<div class="footer-bottom">
+                <a
+                    href="https://www.tiktok.com/@varexonwearr"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    TikTok: varexonwearr
+                </a>
 
-<div class="footer-logo">
-    VAREXON
-</div>
+            </div>
 
-</div>
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <div class="footer-logo">
+            VAREXON
+        </div>
+
+    </div>
 
 </footer>
 
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script type="module">
+
+
+/* =========================
+   FIREBASE
+========================= */
 
 import {
     initializeApp
 }
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
 import {
     getAuth,
@@ -1437,8 +1238,6 @@ import {
 from
 "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-
-/* FIREBASE */
 
 const firebaseConfig = {
 
@@ -1465,29 +1264,38 @@ const firebaseConfig = {
 
 };
 
+
 const app =
 initializeApp(firebaseConfig);
+
 
 const auth =
 getAuth(app);
 
 
-/* ACCOUNT */
+/* =========================
+   ACCOUNT
+========================= */
 
 const userName =
 document.getElementById("userName");
 
+
 const loginLink =
 document.getElementById("loginLink");
+
 
 const accountLink =
 document.getElementById("accountLink");
 
+
 const ordersLink =
 document.getElementById("ordersLink");
 
+
 const logoutLink =
 document.getElementById("logoutLink");
+
 
 let currentUser = null;
 
@@ -1498,6 +1306,7 @@ onAuthStateChanged(
 
         currentUser = user;
 
+
         if(user){
 
             userName.textContent =
@@ -1505,34 +1314,45 @@ onAuthStateChanged(
                 user.email ||
                 "Hesabım";
 
+
             userName.style.display =
                 "block";
+
 
             loginLink.style.display =
                 "none";
 
+
             accountLink.style.display =
                 "block";
 
+
             ordersLink.style.display =
                 "block";
+
 
             logoutLink.style.display =
                 "block";
 
-        }else{
+        }
+
+        else{
 
             userName.style.display =
                 "none";
 
+
             loginLink.style.display =
                 "block";
+
 
             accountLink.style.display =
                 "none";
 
+
             ordersLink.style.display =
                 "none";
+
 
             logoutLink.style.display =
                 "none";
@@ -1543,11 +1363,14 @@ onAuthStateChanged(
 );
 
 
+/* LOGOUT */
+
 logoutLink.addEventListener(
     "click",
     async function(event){
 
         event.preventDefault();
+
 
         try{
 
@@ -1555,7 +1378,9 @@ logoutLink.addEventListener(
 
             window.location.reload();
 
-        }catch(error){
+        }
+
+        catch(error){
 
             console.error(error);
 
@@ -1569,13 +1394,17 @@ logoutLink.addEventListener(
 );
 
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 const menuButton =
 document.getElementById("menuButton");
 
+
 const sideMenu =
 document.getElementById("sideMenu");
+
 
 const menuOverlay =
 document.getElementById("menuOverlay");
@@ -1584,24 +1413,37 @@ document.getElementById("menuOverlay");
 function openMenu(){
 
     closeCart();
+
     closeSearch();
 
-    sideMenu.classList.add("active");
+    sideMenu.classList.add(
+        "active"
+    );
 
-    menuOverlay.classList.add("active");
+    menuOverlay.classList.add(
+        "active"
+    );
 
-    document.body.classList.add("lock");
+    document.body.classList.add(
+        "lock"
+    );
 
 }
 
 
 function closeMenu(){
 
-    sideMenu.classList.remove("active");
+    sideMenu.classList.remove(
+        "active"
+    );
 
-    menuOverlay.classList.remove("active");
+    menuOverlay.classList.remove(
+        "active"
+    );
 
-    document.body.classList.remove("lock");
+    document.body.classList.remove(
+        "lock"
+    );
 
 }
 
@@ -1611,12 +1453,16 @@ menuButton.addEventListener(
     function(){
 
         if(
-            sideMenu.classList.contains("active")
+            sideMenu.classList.contains(
+                "active"
+            )
         ){
 
             closeMenu();
 
-        }else{
+        }
+
+        else{
 
             openMenu();
 
@@ -1646,109 +1492,60 @@ document
 );
 
 
-/* PRODUCTS */
+/* =========================
+   PRODUCTS
+========================= */
 
 const products = [
 
     {
-        name:"Tiger Tasarımlı Siyah Tişört",
-        price:499,
-        image:"tiger.png",
-        page:"urun-detay.html"
-    },
+        name:
+        "Tiger Tasarımlı Siyah Tişört",
 
-    {
-        name:"Çizgili Kaplan Tasarımlı Siyah Tişört",
-        price:499,
-        image:"tiger-cizgili.png",
-        page:"tiger-cizgili.html"
-    },
+        price:
+        499,
 
-    {
-        name:"Aslan Tasarımlı Siyah Tişört",
-        price:499,
-        image:"aslan.png",
-        page:"urun-aslan.html"
-    },
+        image:
+        "WhatsApp Image 2026-09-30 at 18.32.19.jpeg",
 
-    {
-        name:"Dark Devil Tasarımlı Siyah Tişört",
-        price:499,
-        image:"darkdevil.png",
-        page:"urun-darkdevil.html"
-    },
+        page:
+        "urun-detay.html",
 
-    {
-        name:"Kurukafa Tasarımlı Siyah Tişört",
-        price:499,
-        image:"kurukafa.png",
-        page:"urun-kurukafa.html"
-    },
+        category:
+        "tisort"
 
-    {
-        name:"Porsche Tasarımlı Siyah Tişört",
-        price:499,
-        image:"WhatsApp Image 2026-09-30 at 17.22.44.jpeg",
-        page:"urun-detay.html"
-    },
-
-    {
-        name:"Monza Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"monza.png",
-        page:"urun-monza.html"
-    },
-
-    {
-        name:"Voltage Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"voltage.png",
-        page:"urun-voltage.html"
-    },
-
-    {
-        name:"Porsche Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"porsche.png",
-        page:"urun-porsche.html"
-    },
-
-    {
-        name:"Varexon Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"velron.png",
-        page:"urun-velron.html"
-    },
-
-    {
-        name:"Çizgili Kaplan Tasarımlı Beyaz Tişört",
-        price:499,
-        image:"tiger-cizgili2.png",
-        page:"tiger-cizgili2.html"
     }
 
 ];
 
 
-/* SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 const searchButton =
 document.getElementById("searchButton");
 
+
 const searchClose =
 document.getElementById("searchClose");
+
 
 const search =
 document.getElementById("search");
 
+
 const searchInput =
 document.getElementById("searchInput");
+
 
 const searchResults =
 document.getElementById("searchResults");
 
+
 const searchGrid =
 document.getElementById("searchGrid");
+
 
 const searchTitle =
 document.getElementById("searchTitle");
@@ -1770,15 +1567,25 @@ function normalize(text){
 function openSearch(){
 
     closeMenu();
+
     closeCart();
 
-    search.classList.add("active");
 
-    searchResults.classList.add("active");
+    search.classList.add(
+        "active"
+    );
+
+
+    searchResults.classList.add(
+        "active"
+    );
+
 
     searchInput.value = "";
 
+
     renderSearch("");
+
 
     searchInput.focus();
 
@@ -1787,9 +1594,14 @@ function openSearch(){
 
 function closeSearch(){
 
-    search.classList.remove("active");
+    search.classList.remove(
+        "active"
+    );
 
-    searchResults.classList.remove("active");
+
+    searchResults.classList.remove(
+        "active"
+    );
 
 }
 
@@ -1829,7 +1641,10 @@ function renderSearch(query){
         function(product){
 
             const item =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             item.className =
                 "search-product";
@@ -1900,37 +1715,50 @@ searchInput.addEventListener(
 );
 
 
-/* CART */
+/* =========================
+   CART
+========================= */
 
 const CART_KEY =
     "velron_cart";
 
+
 const cartButton =
 document.getElementById("cartButton");
+
 
 const cartClose =
 document.getElementById("cartClose");
 
+
 const cart =
 document.getElementById("cart");
+
 
 const cartOverlay =
 document.getElementById("cartOverlay");
 
+
 const cartList =
 document.getElementById("cartList");
+
 
 const subtotal =
 document.getElementById("subtotal");
 
+
 const shipping =
 document.getElementById("shipping");
+
 
 const total =
 document.getElementById("total");
 
+
 const checkoutButton =
-document.getElementById("checkoutButton");
+document.getElementById(
+    "checkoutButton"
+);
 
 
 function getCart(){
@@ -1943,7 +1771,9 @@ function getCart(){
             )
         ) || [];
 
-    }catch(error){
+    }
+
+    catch(error){
 
         return [];
 
@@ -1965,13 +1795,24 @@ function saveCart(items){
 function openCart(){
 
     closeMenu();
+
     closeSearch();
 
-    cart.classList.add("active");
 
-    cartOverlay.classList.add("active");
+    cart.classList.add(
+        "active"
+    );
 
-    document.body.classList.add("lock");
+
+    cartOverlay.classList.add(
+        "active"
+    );
+
+
+    document.body.classList.add(
+        "lock"
+    );
+
 
     renderCart();
 
@@ -1980,11 +1821,19 @@ function openCart(){
 
 function closeCart(){
 
-    cart.classList.remove("active");
+    cart.classList.remove(
+        "active"
+    );
 
-    cartOverlay.classList.remove("active");
 
-    document.body.classList.remove("lock");
+    cartOverlay.classList.remove(
+        "active"
+    );
+
+
+    document.body.classList.remove(
+        "lock"
+    );
 
 }
 
@@ -2051,6 +1900,7 @@ function renderCart(){
     const items =
         getCart();
 
+
     cartList.innerHTML = "";
 
 
@@ -2066,14 +1916,18 @@ function renderCart(){
 
         `;
 
+
         subtotal.textContent =
             "0 TL";
+
 
         shipping.textContent =
             "0 TL";
 
+
         total.textContent =
             "0 TL";
+
 
         return;
 
@@ -2091,6 +1945,7 @@ function renderCart(){
             const price =
                 Number(item.price) || 0;
 
+
             const count =
                 Number(item.quantity) || 1;
 
@@ -2098,12 +1953,16 @@ function renderCart(){
             sum +=
                 price * count;
 
+
             quantity +=
                 count;
 
 
             const element =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
+
 
             element.className =
                 "cart-item";
@@ -2157,6 +2016,7 @@ function renderCart(){
 
                         </div>
 
+
                         <button
                             class="remove"
                             type="button"
@@ -2172,45 +2032,45 @@ function renderCart(){
 
 
             element
-                .querySelector(".minus")
-                .addEventListener(
-                    "click",
-                    function(){
+            .querySelector(".minus")
+            .addEventListener(
+                "click",
+                function(){
 
-                        changeQuantity(
-                            index,
-                            -1
-                        );
+                    changeQuantity(
+                        index,
+                        -1
+                    );
 
-                    }
-                );
-
-
-            element
-                .querySelector(".plus")
-                .addEventListener(
-                    "click",
-                    function(){
-
-                        changeQuantity(
-                            index,
-                            1
-                        );
-
-                    }
-                );
+                }
+            );
 
 
             element
-                .querySelector(".remove")
-                .addEventListener(
-                    "click",
-                    function(){
+            .querySelector(".plus")
+            .addEventListener(
+                "click",
+                function(){
 
-                        removeItem(index);
+                    changeQuantity(
+                        index,
+                        1
+                    );
 
-                    }
-                );
+                }
+            );
+
+
+            element
+            .querySelector(".remove")
+            .addEventListener(
+                "click",
+                function(){
+
+                    removeItem(index);
+
+                }
+            );
 
 
             cartList.appendChild(
@@ -2311,6 +2171,8 @@ function removeItem(index){
 }
 
 
+/* CHECKOUT */
+
 checkoutButton.addEventListener(
     "click",
     function(){
@@ -2349,7 +2211,9 @@ checkoutButton.addEventListener(
 );
 
 
-/* PRODUCT LINKS */
+/* =========================
+   PRODUCT CARD
+========================= */
 
 document
 .querySelectorAll(".product")
@@ -2361,7 +2225,7 @@ document
             function(){
 
                 window.location.href =
-                    productElement.dataset.page;
+                    "urun-detay.html";
 
             }
         );
@@ -2370,284 +2234,30 @@ document
 );
 
 
-/* SLIDER */
+/* =========================
+   HERO IMAGE CLICK
+========================= */
 
-const slider =
-    document.getElementById("slider");
-
-const dots =
-    document.querySelectorAll(".dot");
-
-
-let currentSlide = 0;
-
-let touchStartX = 0;
-
-let touchStartY = 0;
-
-let touchEndX = 0;
-
-let touchMoved = false;
-
-let autoSlideTimer;
-
-
-function goToSlide(index){
-
-    currentSlide = index;
-
-
-    slider.style.transform =
-        "translateX(-" +
-        currentSlide * 100 +
-        "%)";
-
-
-    dots.forEach(
-        function(dot){
-
-            dot.classList.remove(
-                "active"
-            );
-
-        }
-    );
-
-
-    if(
-        dots[currentSlide]
-    ){
-
-        dots[currentSlide]
-            .classList.add("active");
-
-    }
-
-}
-
-
-function nextSlide(){
-
-    currentSlide++;
-
-
-    if(
-        currentSlide >= 3
-    ){
-
-        currentSlide = 0;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function previousSlide(){
-
-    currentSlide--;
-
-
-    if(
-        currentSlide < 0
-    ){
-
-        currentSlide = 2;
-
-    }
-
-
-    goToSlide(
-        currentSlide
-    );
-
-}
-
-
-function startAutoSlide(){
-
-    clearInterval(
-        autoSlideTimer
-    );
-
-
-    autoSlideTimer =
-        setInterval(
-            nextSlide,
-            5000
-        );
-
-}
-
-
-startAutoSlide();
-
-
-slider.addEventListener(
-    "touchstart",
-    function(event){
-
-        touchStartX =
-            event.touches[0].clientX;
-
-        touchStartY =
-            event.touches[0].clientY;
-
-        touchMoved = false;
-
-        clearInterval(
-            autoSlideTimer
-        );
-
-    },
-    {
-        passive:true
-    }
+const heroImage =
+document.getElementById(
+    "heroImage"
 );
 
 
-slider.addEventListener(
-    "touchmove",
-    function(event){
+heroImage.addEventListener(
+    "click",
+    function(){
 
-        const currentX =
-            event.touches[0].clientX;
-
-        const currentY =
-            event.touches[0].clientY;
-
-
-        const differenceX =
-            currentX -
-            touchStartX;
-
-
-        const differenceY =
-            currentY -
-            touchStartY;
-
-
-        if(
-            Math.abs(differenceX) > 10 &&
-            Math.abs(differenceX) >
-            Math.abs(differenceY)
-        ){
-
-            touchMoved = true;
-
-        }
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider.addEventListener(
-    "touchend",
-    function(event){
-
-        touchEndX =
-            event.changedTouches[0].clientX;
-
-
-        const difference =
-            touchStartX -
-            touchEndX;
-
-
-        if(
-            Math.abs(difference) >= 50
-        ){
-
-            if(
-                difference > 0
-            ){
-
-                nextSlide();
-
-            }else{
-
-                previousSlide();
-
-            }
-
-        }
-
-
-        startAutoSlide();
-
-    },
-    {
-        passive:true
-    }
-);
-
-
-slider
-.querySelectorAll(".slide")
-.forEach(
-    function(slide){
-
-        slide.addEventListener(
-            "click",
-            function(){
-
-                if(touchMoved){
-
-                    return;
-
-                }
-
-
-                const page =
-                    slide.dataset.page;
-
-
-                if(page){
-
-                    window.location.href =
-                        page;
-
-                }
-
-            }
-        );
+        window.location.href =
+            "urun-detay.html";
 
     }
 );
 
 
-/* DOTS */
-
-dots.forEach(
-    function(dot,index){
-
-        dot.addEventListener(
-            "click",
-            function(event){
-
-                event.stopPropagation();
-
-                goToSlide(
-                    index
-                );
-
-                startAutoSlide();
-
-            }
-        );
-
-    }
-);
-
-
-/* ESC */
+/* =========================
+   ESC
+========================= */
 
 document.addEventListener(
     "keydown",
@@ -2669,9 +2279,14 @@ document.addEventListener(
 );
 
 
-/* START */
+/* =========================
+   START
+========================= */
+
+renderSearch("");
 
 renderCart();
+
 
 </script>
 
