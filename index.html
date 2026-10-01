@@ -9,7 +9,6 @@
       content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <meta name="color-scheme" content="dark">
-
 <meta name="theme-color" content="#000000">
 
 <title>VAREXON</title>
@@ -120,34 +119,44 @@ input{
 }
 
 /* =========================
-   SEARCH
+   HEADER SEARCH MODE
 ========================= */
 
-.search{
+.header.search-mode{
+    justify-content:flex-start;
+}
+
+.header.search-mode .menu-button,
+.header.search-mode .logo,
+.header.search-mode .icons{
+    display:none;
+}
+
+.header-search{
     display:none;
     width:100%;
     height:55px;
-    background:#000;
     align-items:center;
-    padding:0 15px;
     gap:10px;
-    position:relative;
-    z-index:110;
 }
 
-.search.active{
+.header.search-mode .header-search{
     display:flex;
 }
 
-.search-close{
-    background:none;
+.header-search-close{
+    width:25px;
+    height:25px;
     border:none;
+    background:none;
     color:#fff;
     font-size:26px;
+    line-height:25px;
     cursor:pointer;
+    flex-shrink:0;
 }
 
-.search input{
+.header-search input{
     flex:1;
     height:38px;
     background:#111;
@@ -155,11 +164,16 @@ input{
     color:#fff;
     outline:none;
     padding:0 12px;
+    font-size:13px;
 }
 
-.search input::placeholder{
+.header-search input::placeholder{
     color:#777;
 }
+
+/* =========================
+   SEARCH RESULTS
+========================= */
 
 .search-results{
     display:none;
@@ -719,7 +733,7 @@ input{
      HEADER
 ========================= -->
 
-<header class="header">
+<header class="header" id="header">
 
     <button
         class="menu-button"
@@ -792,36 +806,39 @@ input{
 
     </div>
 
+
+    <!-- SEARCH MODE -->
+
+    <div
+        class="header-search"
+        id="headerSearch"
+    >
+
+        <button
+            class="header-search-close"
+            id="headerSearchClose"
+            type="button"
+            aria-label="Aramayı kapat"
+        >
+            ×
+        </button>
+
+
+        <input
+            id="headerSearchInput"
+            type="text"
+            placeholder="Ürün ara..."
+            autocomplete="off"
+        >
+
+    </div>
+
 </header>
 
 
 <!-- =========================
-     SEARCH
+     SEARCH RESULTS
 ========================= -->
-
-<div
-    class="search"
-    id="search"
->
-
-    <button
-        class="search-close"
-        id="searchClose"
-        type="button"
-    >
-        ×
-    </button>
-
-
-    <input
-        id="searchInput"
-        type="text"
-        placeholder="Ürün ara..."
-        autocomplete="off"
-    >
-
-</div>
-
 
 <div
     class="search-results"
@@ -1082,7 +1099,7 @@ input{
 
 
 <!-- =========================
-     T-SHIRT PRODUCTS
+     T-SHIRT
 ========================= -->
 
 <section
@@ -1153,11 +1170,7 @@ input{
 
     <div class="product-scroll">
 
-        <!--
-            Sweatshirt ürünleri
-            fotoğraflar hazır olduğunda
-            buraya eklenecek.
-        -->
+        <!-- Sweatshirt ürünleri buraya eklenecek -->
 
     </div>
 
@@ -1321,18 +1334,14 @@ getAuth(app);
 const userName =
 document.getElementById("userName");
 
-
 const loginLink =
 document.getElementById("loginLink");
-
 
 const accountLink =
 document.getElementById("accountLink");
 
-
 const ordersLink =
 document.getElementById("ordersLink");
-
 
 const logoutLink =
 document.getElementById("logoutLink");
@@ -1355,22 +1364,17 @@ onAuthStateChanged(
                 user.email ||
                 "Hesabım";
 
-
             userName.style.display =
                 "block";
-
 
             loginLink.style.display =
                 "none";
 
-
             accountLink.style.display =
                 "block";
 
-
             ordersLink.style.display =
                 "block";
-
 
             logoutLink.style.display =
                 "block";
@@ -1382,18 +1386,14 @@ onAuthStateChanged(
             userName.style.display =
                 "none";
 
-
             loginLink.style.display =
                 "block";
-
 
             accountLink.style.display =
                 "none";
 
-
             ordersLink.style.display =
                 "none";
-
 
             logoutLink.style.display =
                 "none";
@@ -1442,10 +1442,8 @@ logoutLink.addEventListener(
 const menuButton =
 document.getElementById("menuButton");
 
-
 const sideMenu =
 document.getElementById("sideMenu");
-
 
 const menuOverlay =
 document.getElementById("menuOverlay");
@@ -1554,7 +1552,6 @@ const products = [
 
         category:
         "tisort"
-
     }
 
 ];
@@ -1564,32 +1561,36 @@ const products = [
    SEARCH
 ========================= */
 
+const header =
+document.getElementById("header");
+
 const searchButton =
 document.getElementById("searchButton");
 
+const headerSearchClose =
+document.getElementById(
+    "headerSearchClose"
+);
 
-const searchClose =
-document.getElementById("searchClose");
-
-
-const search =
-document.getElementById("search");
-
-
-const searchInput =
-document.getElementById("searchInput");
-
+const headerSearchInput =
+document.getElementById(
+    "headerSearchInput"
+);
 
 const searchResults =
-document.getElementById("searchResults");
-
+document.getElementById(
+    "searchResults"
+);
 
 const searchGrid =
-document.getElementById("searchGrid");
-
+document.getElementById(
+    "searchGrid"
+);
 
 const searchTitle =
-document.getElementById("searchTitle");
+document.getElementById(
+    "searchTitle"
+);
 
 
 function normalize(text){
@@ -1612,8 +1613,8 @@ function openSearch(){
     closeCart();
 
 
-    search.classList.add(
-        "active"
+    header.classList.add(
+        "search-mode"
     );
 
 
@@ -1622,27 +1623,37 @@ function openSearch(){
     );
 
 
-    searchInput.value = "";
+    headerSearchInput.value = "";
 
 
     renderSearch("");
 
 
-    searchInput.focus();
+    setTimeout(
+        function(){
+
+            headerSearchInput.focus();
+
+        },
+        50
+    );
 
 }
 
 
 function closeSearch(){
 
-    search.classList.remove(
-        "active"
+    header.classList.remove(
+        "search-mode"
     );
 
 
     searchResults.classList.remove(
         "active"
     );
+
+
+    headerSearchInput.value = "";
 
 }
 
@@ -1738,13 +1749,13 @@ searchButton.addEventListener(
 );
 
 
-searchClose.addEventListener(
+headerSearchClose.addEventListener(
     "click",
     closeSearch
 );
 
 
-searchInput.addEventListener(
+headerSearchInput.addEventListener(
     "input",
     function(){
 
@@ -1765,36 +1776,44 @@ const CART_KEY =
 
 
 const cartButton =
-document.getElementById("cartButton");
-
+document.getElementById(
+    "cartButton"
+);
 
 const cartClose =
-document.getElementById("cartClose");
-
+document.getElementById(
+    "cartClose"
+);
 
 const cart =
-document.getElementById("cart");
-
+document.getElementById(
+    "cart"
+);
 
 const cartOverlay =
-document.getElementById("cartOverlay");
-
+document.getElementById(
+    "cartOverlay"
+);
 
 const cartList =
-document.getElementById("cartList");
-
+document.getElementById(
+    "cartList"
+);
 
 const subtotal =
-document.getElementById("subtotal");
-
+document.getElementById(
+    "subtotal"
+);
 
 const shipping =
-document.getElementById("shipping");
-
+document.getElementById(
+    "shipping"
+);
 
 const total =
-document.getElementById("total");
-
+document.getElementById(
+    "total"
+);
 
 const checkoutButton =
 document.getElementById(
@@ -1961,10 +1980,8 @@ function renderCart(){
         subtotal.textContent =
             "0 TL";
 
-
         shipping.textContent =
             "0 TL";
-
 
         total.textContent =
             "0 TL";
@@ -2212,7 +2229,9 @@ function removeItem(index){
 }
 
 
-/* CHECKOUT */
+/* =========================
+   CHECKOUT
+========================= */
 
 checkoutButton.addEventListener(
     "click",
@@ -2327,7 +2346,6 @@ document.addEventListener(
 renderSearch("");
 
 renderCart();
-
 
 </script>
 
