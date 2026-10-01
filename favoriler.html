@@ -4,21 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <meta name="color-scheme" content="dark">
-
 <meta name="theme-color" content="#000000">
 
 <title>Favoriler - VAREXON</title>
 
 <style>
-
-/* =========================
-   GENEL
-========================= */
 
 *{
     margin:0;
@@ -43,7 +36,6 @@ button{
     font:inherit;
 }
 
-
 /* =========================
    HEADER
 ========================= */
@@ -65,7 +57,6 @@ button{
 
 .back-button{
     position:absolute;
-
     left:15px;
 
     width:30px;
@@ -84,7 +75,6 @@ button{
     font-weight:300;
 
     cursor:pointer;
-
     padding:0;
 }
 
@@ -98,7 +88,6 @@ button{
 
     color:#fff;
 }
-
 
 /* =========================
    BAŞLIK
@@ -116,7 +105,6 @@ button{
 
     letter-spacing:1px;
 }
-
 
 /* =========================
    FAVORİLER
@@ -137,23 +125,19 @@ button{
     gap:28px 10px;
 }
 
-
 /* =========================
    ÜRÜN
 ========================= */
 
 .favorite-product{
     width:100%;
-
     cursor:pointer;
 
-    -webkit-tap-highlight-color:
-        transparent;
+    -webkit-tap-highlight-color:transparent;
 }
 
 .favorite-product img{
     width:100%;
-
     display:block;
 
     border-radius:8px;
@@ -184,7 +168,6 @@ button{
     margin-top:5px;
 }
 
-
 /* =========================
    FAVORİDEN KALDIR
 ========================= */
@@ -193,7 +176,6 @@ button{
     width:100%;
 
     margin-top:8px;
-
     padding:7px 0;
 
     background:#111;
@@ -211,7 +193,6 @@ button{
     color:#fff;
     border-color:#444;
 }
-
 
 /* =========================
    BOŞ FAVORİ
@@ -243,7 +224,6 @@ button{
     font-size:11px;
 }
 
-
 /* =========================
    MOBİL
 ========================= */
@@ -255,10 +235,7 @@ button{
     }
 
     .title{
-        padding:
-            25px
-            15px
-            20px;
+        padding:25px 15px 20px;
     }
 
     .favorite-grid{
@@ -274,11 +251,6 @@ button{
     }
 
 }
-
-
-/* =========================
-   ÇOK KÜÇÜK EKRAN
-========================= */
 
 @media(max-width:360px){
 
@@ -297,9 +269,7 @@ button{
 
 </head>
 
-
 <body>
-
 
 <!-- =========================
      HEADER
@@ -315,7 +285,6 @@ button{
     >
         ‹
     </button>
-
 
     <div class="logo">
         VAREXON
@@ -338,7 +307,7 @@ button{
 
 
 <!-- =========================
-     FAVORİ ÜRÜNLER
+     FAVORİLER
 ========================= -->
 
 <section class="favorites">
@@ -369,9 +338,8 @@ button{
 
 <script>
 
-
 /* =========================
-   FAVORİLER ANAHTARI
+   FAVORİ ANAHTARI
 ========================= */
 
 const FAVORITES_KEY =
@@ -386,7 +354,7 @@ const products = [
 
     {
         name:
-            "Tiger Tasarımlı Siyah Tişört",
+            "Porsche Tasarımlı Siyah Tişört",
 
         price:
             499,
@@ -531,29 +499,26 @@ const products = [
 
 
 /* =========================
-   FAVORİLERİ AL
+   FAVORİLERİ OKU
 ========================= */
 
 function getFavorites(){
 
+    const saved =
+        localStorage.getItem(
+            FAVORITES_KEY
+        );
+
+    if(!saved){
+
+        return [];
+
+    }
+
     try{
-
-        const saved =
-            localStorage.getItem(
-                FAVORITES_KEY
-            );
-
-
-        if(!saved){
-
-            return [];
-
-        }
-
 
         const parsed =
             JSON.parse(saved);
-
 
         if(!Array.isArray(parsed)){
 
@@ -561,17 +526,9 @@ function getFavorites(){
 
         }
 
-
         return parsed;
 
-    }
-
-    catch(error){
-
-        console.error(
-            "Favoriler okunamadı:",
-            error
-        );
+    }catch(error){
 
         return [];
 
@@ -581,48 +538,28 @@ function getFavorites(){
 
 
 /* =========================
-   FAVORİ ÜRÜN ADINI BUL
+   FAVORİ ADINI AL
 ========================= */
 
-function getFavoriteName(
-    favorite
-){
-
-    /*
-       Sistem eski şekilde
-       sadece ürün adını kaydetmişse:
-       "Tiger Tasarımlı Siyah Tişört"
-
-       Yeni şekilde obje kaydetmişse:
-       {
-           name: "Tiger Tasarımlı Siyah Tişört"
-       }
-
-       İki sistemi de destekliyoruz.
-    */
-
+function getFavoriteName(item){
 
     if(
-        typeof favorite ===
+        typeof item ===
         "string"
     ){
 
-        return favorite;
+        return item;
 
     }
 
 
     if(
-        favorite &&
-        typeof favorite ===
-        "object"
+        item &&
+        typeof item === "object" &&
+        typeof item.name === "string"
     ){
 
-        return (
-            favorite.name ||
-            favorite.productName ||
-            ""
-        );
+        return item.name;
 
     }
 
@@ -633,42 +570,83 @@ function getFavoriteName(
 
 
 /* =========================
-   FAVORİ ÜRÜNÜ BUL
+   GERÇEK FAVORİLERİ BUL
 ========================= */
 
-function findProduct(
-    favorite
-){
+function getFavoriteProducts(){
 
-    const favoriteName =
-        getFavoriteName(
-            favorite
-        );
+    const favorites =
+        getFavorites();
+
+    const result = [];
 
 
-    if(!favoriteName){
+    favorites.forEach(
+        function(item){
 
-        return null;
+            const favoriteName =
+                getFavoriteName(item);
 
-    }
+
+            if(!favoriteName){
+
+                return;
+
+            }
 
 
-    return products.find(
-        function(product){
+            const product =
+                products.find(
+                    function(product){
 
-            return (
-                product.name ===
-                favoriteName
-            );
+                        return (
+                            product.name ===
+                            favoriteName
+                        );
+
+                    }
+                );
+
+
+            if(!product){
+
+                return;
+
+            }
+
+
+            const alreadyExists =
+                result.some(
+                    function(existing){
+
+                        return (
+                            existing.name ===
+                            product.name
+                        );
+
+                    }
+                );
+
+
+            if(!alreadyExists){
+
+                result.push(
+                    product
+                );
+
+            }
 
         }
-    ) || null;
+    );
+
+
+    return result;
 
 }
 
 
 /* =========================
-   FAVORİDEN SİL
+   FAVORİDEN ÇIKAR
 ========================= */
 
 function removeFavorite(
@@ -681,12 +659,11 @@ function removeFavorite(
 
     const updated =
         favorites.filter(
-            function(favorite){
+            function(item){
 
                 return (
-                    getFavoriteName(
-                        favorite
-                    ) !== productName
+                    getFavoriteName(item) !==
+                    productName
                 );
 
             }
@@ -710,93 +687,31 @@ function removeFavorite(
 
 function renderFavorites(){
 
-    const favoriteGrid =
+    const grid =
         document.getElementById(
             "favoriteGrid"
         );
 
-
-    const emptyFavorites =
+    const empty =
         document.getElementById(
             "emptyFavorites"
         );
 
 
-    if(!favoriteGrid ||
-       !emptyFavorites){
-
-        return;
-
-    }
+    grid.innerHTML = "";
 
 
-    const favorites =
-        getFavorites();
+    const favoriteProducts =
+        getFavoriteProducts();
 
 
-    favoriteGrid.innerHTML = "";
-
-
-    /*
-       Gerçek ürünlere dönüşebilen
-       favorileri oluştur.
-    */
-
-    const validProducts = [];
-
-
-    favorites.forEach(
-        function(favorite){
-
-            const product =
-                findProduct(
-                    favorite
-                );
-
-
-            if(product){
-
-                /*
-                   Aynı ürün birden fazla
-                   kez kayıtlıysa tekrar gösterme.
-                */
-
-                const alreadyExists =
-                    validProducts.some(
-                        function(item){
-
-                            return (
-                                item.name ===
-                                product.name
-                            );
-
-                        }
-                    );
-
-
-                if(!alreadyExists){
-
-                    validProducts.push(
-                        product
-                    );
-
-                }
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       BOŞSA
-    ========================= */
+    /* FAVORİ YOK */
 
     if(
-        validProducts.length === 0
+        favoriteProducts.length === 0
     ){
 
-        emptyFavorites.style.display =
+        empty.style.display =
             "block";
 
         return;
@@ -804,15 +719,13 @@ function renderFavorites(){
     }
 
 
-    /* =========================
-       DOLUYSA
-    ========================= */
+    /* FAVORİ VAR */
 
-    emptyFavorites.style.display =
+    empty.style.display =
         "none";
 
 
-    validProducts.forEach(
+    favoriteProducts.forEach(
         function(product){
 
             const item =
@@ -824,11 +737,6 @@ function renderFavorites(){
             item.className =
                 "favorite-product";
 
-
-            /*
-               Ürün alanına tıklayınca
-               ürün sayfasına git.
-            */
 
             item.addEventListener(
                 "click",
@@ -868,11 +776,6 @@ function renderFavorites(){
             `;
 
 
-            /*
-               Favoriden kaldır butonu
-               ürün sayfasına gitmesini engeller.
-            */
-
             const removeButton =
                 item.querySelector(
                     ".favorite-remove"
@@ -896,7 +799,7 @@ function renderFavorites(){
             );
 
 
-            favoriteGrid.appendChild(
+            grid.appendChild(
                 item
             );
 
@@ -910,31 +813,27 @@ function renderFavorites(){
    GERİ BUTONU
 ========================= */
 
-const backButton =
-    document.getElementById(
-        "backButton"
+document
+    .getElementById("backButton")
+    .addEventListener(
+        "click",
+        function(){
+
+            history.back();
+
+        }
     );
 
 
-backButton.addEventListener(
-    "click",
-    function(){
-
-        history.back();
-
-    }
-);
-
-
 /* =========================
-   SAYFA AÇILIŞI
+   SAYFA AÇILINCA
 ========================= */
 
 renderFavorites();
 
 
 /* =========================
-   GERİ DÖNÜŞTE GÜNCELLE
+   GERİ GELİNCE
 ========================= */
 
 window.addEventListener(
@@ -960,9 +859,7 @@ window.addEventListener(
     }
 );
 
-
 </script>
-
 
 </body>
 
